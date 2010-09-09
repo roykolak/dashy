@@ -1,0 +1,33 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    envjs (0.2.0)
+      johnson (>= 2.0.0.pre3)
+    harmony (0.5.4)
+      envjs (= 0.2.0)
+      johnson (= 2.0.0.pre3)
+    jasmine (0.11.1.0)
+      rack (>= 1.0.0)
+      rspec (>= 1.1.5)
+      selenium-client (>= 1.2.17)
+      selenium-rc (>= 2.1.0)
+    jazz_money (0.0.3)
+      harmony (= 0.5.4)
+    johnson (2.0.0.pre3)
+      stackdeck (~> 0.2)
+    rack (1.2.1)
+    rspec (1.3.0)
+    selenium-client (1.2.18)
+    selenium-rc (2.2.4)
+      selenium-client (>= 1.2.18)
+    stackdeck (0.2.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  harmony (= 0.5.4)
+  jasmine (= 0.11.1.0)
+  jazz_money (= 0.0.3)
+  johnson (= 2.0.0.pre3)
+  stackdeck (= 0.2.0)
