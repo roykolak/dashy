@@ -1,0 +1,12 @@
+body {
+  background:#111;
+}
+.people {
+  width:100%;
+  
+  .person {
+    width:30%;
+    border-radius:5px;
+    background:#999;
+  }
+}
