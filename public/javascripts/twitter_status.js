@@ -15,7 +15,7 @@ function TwitterStatus(status) {
 
       return {
         message: $.trim(message),
-        hashTags: hashTags
+        tags: hashTags
       }
     }
   }

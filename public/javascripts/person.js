@@ -31,8 +31,6 @@ function Person(twitterName) {
         $(imageElement).attr('src', 'images/smileys/happy.png');
       } else if(hasMood('#angry', tags)) {
         $(imageElement).attr('src', 'images/smileys/angry.png');
-      } else {
-        $(imageElement).attr('src', 'images/smileys/default.png');
       }
     }
   };

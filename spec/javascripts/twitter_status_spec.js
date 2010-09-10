@@ -12,7 +12,7 @@ describe("TwitterStatus", function() {
     });
 
     it("returns an array of found hash tags", function() {
-      expect(parsedStatus.hashTags).toEqual(['#sad', '#late']);
+      expect(parsedStatus.tags).toEqual(['#sad', '#late']);
     });
   });
 });

@@ -2,13 +2,25 @@
 <html>
   <head>
     <title>Dashboard</title>
+    <link rel="stylesheet/less" href="css/style.css" type="text/css" />
   </head>
   <body>
     <ul id="people"></ul>
     <div>
-      <script src="javascripts/less-1.0.18.min.js"></script>
-      <script src="javascripts/jquery-1.4.2.min.js"></script>
+      <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
+      <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
       <script src="javascripts/person.js"></script>
+      <script src="javascripts/twitter_status.js"></script>
+      <script src="javascripts/config.js"></script>
+      <script src="javascripts/loader.js"></script>
+      <script>
+        var loader = new Loader(config);
+        loader.loadPeople();
+        
+        var interval = setInterval(function() {
+          loader.refreshPeople();
+        }, 5000);
+      </script>
     </div>
   </body>
 </html>

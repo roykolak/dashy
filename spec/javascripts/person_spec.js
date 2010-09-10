@@ -41,11 +41,5 @@ describe("Person", function() {
       person.setMood(['#angry']);
       expect($('.person .image')).toHaveAttr('src', 'images/smileys/angry.png');
     });
-    
-    it("sets image to default.png when passed an unrecongizable hash tag", function() {
-      person.setMood(['#happy']);
-      person.setMood(['#what']);
-      expect($('.person .image')).toHaveAttr('src', 'images/smileys/default.png');
-    });
   });
 });

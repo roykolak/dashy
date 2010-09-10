@@ -1,12 +1,36 @@
 body {
   background:#111;
 }
-.people {
+
+li { list-style-type:none; }
+h1, h2, h3 { margin:0; }
+
+#people {
   width:100%;
   
   .person {
-    width:30%;
     border-radius:5px;
-    background:#999;
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#09284C), to(#222));
+    color:#333;
+    float:left;
+    height:300px;
+    margin-right:10px;
+    width:30%;
+    
+    .name { 
+      color:#000;
+      background:#662E2E;
+      font-size:70px;
+      text-align:center;
+    }
+    .message {
+      color:#CCC;
+      font-size:30px;
+    }
+    .image {
+      display:block;
+      margin:auto;
+      width:200px;
+    }
   }
 }
