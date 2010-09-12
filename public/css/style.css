@@ -55,6 +55,7 @@ h1 {
     .message {
       bottom:10px;
       color:#333;
+      display:none;
       font-size:30px;
       position:absolute;
       text-align:center;
@@ -62,11 +63,7 @@ h1 {
     .image {
       display:block;
       margin:auto;
-      width:200px;
+      width:350px;
     }
   }
-  .person:last-child div,
-  .person:last-child .name { margin-right:0px; }
-  
-  
 }
