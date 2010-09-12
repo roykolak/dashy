@@ -1,31 +1,63 @@
 body {
-  background:#111;
+  background:#000;
+  font-family: 'Droid Sans', arial, serif;
+  padding:20px;
 }
 
 li { list-style-type:none; }
-h1, h2, h3 { margin:0; }
+h1, h2, h3, p, li, ul { 
+  margin:0;
+  padding:0;
+}
+
+h1 {
+  background:#333;
+  border-radius:20px;
+  color:#AAA;
+  font-family: 'Lobster', arial, serif;
+  font-size:120px;
+  margin-top:20px;
+  padding:10px;
+  text-align:center;
+}
 
 #people {
   width:100%;
-  
+    
   .person {
-    border-radius:5px;
-    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#09284C), to(#222));
     color:#333;
-    float:left;
-    height:300px;
-    margin-right:10px;
-    width:30%;
+    display:inline-block;
+    position:relative;
+    width:33.3333%;
+    clear:both;
+    
+    div { 
+      background:#BBB;
+      border-top-left-radius:10px;
+      border-top-right-radius:10px;
+      height:350px;
+      position:relative;
+    }
+    
+    div, .name { 
+      padding:10px;
+      margin-right:25px;
+    }
     
     .name { 
       color:#000;
-      background:#662E2E;
-      font-size:70px;
+      background:#999;
+      border-bottom-left-radius:10px;
+      border-bottom-right-radius:10px;
+      font-size:60px;
       text-align:center;
     }
     .message {
-      color:#CCC;
+      bottom:10px;
+      color:#333;
       font-size:30px;
+      position:absolute;
+      text-align:center;
     }
     .image {
       display:block;
@@ -33,4 +65,8 @@ h1, h2, h3 { margin:0; }
       width:200px;
     }
   }
+  .person:last-child div,
+  .person:last-child .name { margin-right:0px; }
+  
+  
 }

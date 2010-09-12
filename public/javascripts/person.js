@@ -1,5 +1,6 @@
 function Person(twitterName) {  
   var personElement = $(document.createElement('li')),
+      divElement = $(document.createElement('div')),
       imageElement = $(document.createElement('img')),
       nameElement = $(document.createElement('h3')),
       messageElement = $(document.createElement('p'));
@@ -7,13 +8,15 @@ function Person(twitterName) {
   $(personElement).addClass('person');
   
   $(imageElement).addClass('image').attr('src','images/smileys/default.png');
-  $(personElement).append(imageElement);
+  $(divElement).append(imageElement);
+  
+  $(messageElement).addClass('message');
+  $(divElement).append(messageElement);
+  
+  $(personElement).append(divElement);
   
   $(nameElement).addClass('name').text(twitterName);
   $(personElement).append(nameElement);
-  
-  $(messageElement).addClass('message');
-  $(personElement).append(messageElement);
   
   $('#people').append(personElement);
 
@@ -31,6 +34,8 @@ function Person(twitterName) {
         $(imageElement).attr('src', 'images/smileys/happy.png');
       } else if(hasMood('#angry', tags)) {
         $(imageElement).attr('src', 'images/smileys/angry.png');
+      } else {
+        $(imageElement).attr('src', 'images/smileys/happy.png');
       }
     }
   };

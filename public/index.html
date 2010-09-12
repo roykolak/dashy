@@ -3,9 +3,14 @@
   <head>
     <title>Dashboard</title>
     <link rel="stylesheet/less" href="css/style.css" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <ul id="people"></ul>
+    <div id="announce">
+      <h1>Just when I thought I was out, they pull me back in</h1>
+    </div>
     <div>
       <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
       <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
@@ -17,9 +22,10 @@
         var loader = new Loader(config);
         loader.loadPeople();
         
+        loader.refreshPeople();
         var interval = setInterval(function() {
           loader.refreshPeople();
-        }, 5000);
+        }, 60000);
       </script>
     </div>
   </body>

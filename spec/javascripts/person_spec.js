@@ -41,5 +41,18 @@ describe("Person", function() {
       person.setMood(['#angry']);
       expect($('.person .image')).toHaveAttr('src', 'images/smileys/angry.png');
     });
+    
+    describe("default mood", function() {
+      it("sets image to happy.png when passed an empty tag", function() {
+        person.setMood([]);
+        expect($('.person .image')).toHaveAttr('src', 'images/smileys/happy.png');
+      });
+      
+      it("sets image to happy.png when passed an unrecognizable tag", function() {
+        person.setMood(['#fake']);
+        expect($('.person .image')).toHaveAttr('src', 'images/smileys/happy.png');
+      });      
+    });
+
   });
 });
