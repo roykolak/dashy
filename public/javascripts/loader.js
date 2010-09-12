@@ -16,6 +16,11 @@ function Loader(config) {
       $.each(config.people, function(index) {
         var url = 'http://api.twitter.com/1/users/show.json?screen_name=' + this + '&callback=?';
         $.getJSON(url, function(data) {
+          // TODO: this is ugly, fyi
+          if(typeof(data.status) == 'undefined') {
+            data.status = { text:'' };
+          }
+          
           self.refreshPersonCallback(data.status.text, self.people[index]);
         });
       });
