@@ -16,29 +16,42 @@ describe("Loader", function() {
   });
   
   describe("#loadPeople", function() {
-    it("initializes people", function() {
-      var personSpy = spyOn(window, 'Person');
+    var personSpy;
+    
+    beforeEach(function() {
+      personSpy = spyOn(window, 'Person');
       var loader = new Loader(config);
       loader.loadPeople();
+    });
+    
+    it("initializes people", function() {
       expect(personSpy).toHaveBeenCalledWith('@roykolak');
     });
   });
   
-  xdescribe("#refreshPeople", function() {
-    it("updates the person's information", function() {
-      var data = { status: { text: 'this is the message buddy #happy' } };
+  describe("#refreshPeople", function() {
+    var data, getJSONSpy;
+    
+    beforeEach(function() {
+      data = { status: { text: 'this is the message buddy #happy' } };
       
-      spyOn($, 'getJSON').andCallFake(function() {
+      getJSONSpy = spyOn($, 'getJSON').andCallFake(function() {
         loader.refreshPersonCallback(data.status.text, loader.people[0]);
       });
-
+      
       loader.loadPeople();
-      loader.refreshPeople();
-
-      expect($('.person .message')).toHaveText('this is the message buddy');
-      expect($('.person .image')).toHaveAttr('src', 'images/smileys/happy.png');
     });
-
+    
+    it("makes a request to twitter using the person's twitter name", function() {
+      loader.refreshPeople();
+      expect(getJSONSpy.mostRecentCall.args[0]).toEqual('http://api.twitter.com/1/users/show.json?screen_name=@roykolak&callback=?');
+    });
+    
+    it("calls to refreshPersonCallback after the request is made", function() {
+      var callbackSpy = spyOn(loader, 'refreshPersonCallback');
+      loader.refreshPeople();
+      expect(callbackSpy).toHaveBeenCalledWith(data.status.text, loader.people[0]);
+    });
   });
   
   describe("#refreshPersonCallback", function() {
@@ -46,11 +59,17 @@ describe("Loader", function() {
       loader.loadPeople();
     });
     
-    it("inserts the message into the announcement header when the announce tag is present", function() {
-      loadFixtures('spec/javascripts/fixtures/announce.html');
-      loader.refreshPersonCallback('Just when I thought I was out, they pull me back in #announce', loader.people[0]);
-      expect($('#announce')).toHaveText('Just when I thought I was out, they pull me back in');
+    describe("announcements", function() {
+      beforeEach(function() {
+        loadFixtures('spec/javascripts/fixtures/announce.html');
+      });
+      
+      it("inserts the message into the announcement header when the announce tag is present", function() {
+        loader.refreshPersonCallback('Just when I thought I was out, they pull me back in #announce', loader.people[0]);
+        expect($('#announce')).toHaveText('Just when I thought I was out, they pull me back in');
+      });
     });
+
     
     describe("updating person data", function() {
       beforeEach(function() {
