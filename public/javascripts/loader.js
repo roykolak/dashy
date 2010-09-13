@@ -30,6 +30,10 @@ function Loader(config) {
       var status = new TwitterStatus(status).parse();
       person.setMessage(status.message);
       person.setMood(status.tags);
+      
+      if($.inArray('#announce', status.tags) != -1) {
+        $('#announce').text(status.message);
+      }
     }
   }
 }
