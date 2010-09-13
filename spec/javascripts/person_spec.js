@@ -14,7 +14,7 @@ describe("Person", function() {
     
     describe("populated information", function() {
       it("populates the person's name", function() {
-        expect($('.persofn .name')).toHaveText(twitterName);
+        expect($('.person .name')).toHaveText(twitterName);
       });
       
       it("populates the default smiley", function() {
