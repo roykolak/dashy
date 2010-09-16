@@ -27,7 +27,7 @@ describe("Person", function() {
     });
   });
   
-  describe("updateMessage", function() {
+  describe("#setMessage", function() {
     it("updates the user's message", function() {
       var message = 'running late, start w/o me!';
       person.setMessage(message);
@@ -35,7 +35,7 @@ describe("Person", function() {
     });
   });
   
-  describe("setMood", function() {
+  describe("#setMood", function() {
     describe("default mood", function() {
       it("sets image to happy.png when passed an empty tag", function() {
         person.setMood([]);
