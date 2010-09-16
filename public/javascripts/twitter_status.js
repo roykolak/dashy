@@ -9,7 +9,7 @@ function TwitterStatus(status) {
   return {
     parse: function() {
       while(match = findHashTags(message)) {
-        hashTags.push(match[0]);
+        hashTags.push(match[0].replace('#',''));
         message = message.replace(match, '');
       }
 

@@ -55,18 +55,25 @@ describe("Loader", function() {
   });
   
   describe("#refreshPersonCallback", function() {
+    var newAnnouncementAudioSpy;
+    
     beforeEach(function() {
+      newAnnouncementAudioSpy = spyOn(Audio.newAnnouncement, 'play');
       loader.loadPeople();
     });
     
     describe("announcements", function() {
       beforeEach(function() {
         loadFixtures('spec/javascripts/fixtures/announce.html');
+        loader.refreshPersonCallback('Just when I thought I was out, they pull me back in #announce', loader.people[0]);
       });
       
       it("inserts the message into the announcement header when the announce tag is present", function() {
-        loader.refreshPersonCallback('Just when I thought I was out, they pull me back in #announce', loader.people[0]);
         expect($('#announce')).toHaveText('Just when I thought I was out, they pull me back in');
+      });
+      
+      it("plays a noise when there's a new announcement", function() {
+        expect(newAnnouncementAudioSpy).toHaveBeenCalled();
       });
     });
 

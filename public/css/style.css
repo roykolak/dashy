@@ -66,4 +66,7 @@ h1 {
       width:350px;
     }
   }
+  
+  .person:last-child div,
+  .person:last-child .name { margin-right:0; }
 }

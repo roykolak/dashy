@@ -18,7 +18,7 @@ function Loader(config) {
         $.getJSON(url, function(data) {
           // TODO: this is ugly, fyi
           if(typeof(data.status) == 'undefined') {
-            data.status = { text:'' };
+            data.status = { text:'#happy' };
           }
           
           self.refreshPersonCallback(data.status.text, self.people[index]);
@@ -31,7 +31,11 @@ function Loader(config) {
       person.setMessage(status.message);
       person.setMood(status.tags);
       
-      if($.inArray('#announce', status.tags) != -1) {
+      if($.inArray('announce', status.tags) != -1) {
+        if($('#announce').text() != status.message) {
+          Audio.newAnnouncement.play();
+        }
+        
         $('#announce').text(status.message);
       }
     }
