@@ -45,6 +45,11 @@ function Person(twitterName) {
       $(messageElement).text(status);
     },
     
+    madeAnnouncement: function() {
+      $('.person').removeClass('announced');
+      $(personElement).addClass('announced');
+    },
+    
     setMood: function(tags) {
       if(moodWasSpecifiedInTags(tags)) {        
         if($.inArray(this.mood, tags) == -1) {

@@ -27,6 +27,13 @@ describe("Person", function() {
     });
   });
   
+  describe("#madeAnnouncement", function() {
+    it("removes announced class from all persons and adds it to the person who made the new announcement", function() {
+      person.madeAnnouncement();
+      expect($('.person')).toHaveClass('announced');
+    });
+  });
+  
   describe("#setMessage", function() {
     it("updates the user's message", function() {
       var message = 'running late, start w/o me!';

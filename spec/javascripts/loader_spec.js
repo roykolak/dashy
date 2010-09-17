@@ -55,11 +55,12 @@ describe("Loader", function() {
   });
   
   describe("#refreshPersonCallback", function() {
-    var newAnnouncementAudioSpy;
+    var newAnnouncementAudioSpy, personSpy;
     
     beforeEach(function() {
       newAnnouncementAudioSpy = spyOn(Audio.newAnnouncement, 'play');
       loader.loadPeople();
+      personSpy = spyOn(loader.people[0], 'madeAnnouncement');
     });
     
     describe("announcements", function() {
@@ -74,6 +75,10 @@ describe("Loader", function() {
       
       it("plays a noise when there's a new announcement", function() {
         expect(newAnnouncementAudioSpy).toHaveBeenCalled();
+      });
+      
+      it("marks the person who made the announcement", function() {
+        expect(personSpy).toHaveBeenCalled();
       });
     });
 

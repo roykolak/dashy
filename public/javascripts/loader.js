@@ -34,6 +34,7 @@ function Loader(config) {
       if($.inArray('announce', status.tags) != -1) {
         if($('#announce').text() != status.message) {
           Audio.newAnnouncement.play();
+          person.madeAnnouncement();
         }
         
         $('#announce').text(status.message);

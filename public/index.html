@@ -7,27 +7,38 @@
     <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <audio id="mood_change" src="sounds/mood_change.mp3"></audio>
-    <audio id="new_announcement" src="sounds/new_announcement.mp3"></audio>
-    <ul id="people"></ul>
-    <h1 id="announce"></h1>
-    <div>
-      <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
-      <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
-      <script src="javascripts/audio.js"></script>
-      <script src="javascripts/person.js"></script>
-      <script src="javascripts/twitter_status.js"></script>
-      <script src="javascripts/config.js"></script>
-      <script src="javascripts/loader.js"></script>
-      <script>
-        var loader = new Loader(config);
-        loader.loadPeople();
+    <div id="progress"></div>
+    <div class="dashboard">
+      <audio id="mood_change" src="sounds/mood_change.mp3"></audio>
+      <audio id="new_announcement" src="sounds/new_announcement.mp3"></audio>
+      <ul id="people"></ul>
+      <h1 id="announce"></h1>
+      <div>
+        <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
+        <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
+        <script src="javascripts/audio.js"></script>
+        <script src="javascripts/person.js"></script>
+        <script src="javascripts/twitter_status.js"></script>
+        <script src="javascripts/config.js"></script>
+        <script src="javascripts/loader.js"></script>
+        <script>
+          var loader = new Loader(config);
+          loader.loadPeople();
         
-        loader.refreshPeople();
-        var interval = setInterval(function() {
-          loader.refreshPeople();
-        }, 60000);
-      </script>
+          // TODO: where to put this?
+          function peopleRefresher() {
+            loader.refreshPeople();
+            $('#progress').animate({ width: '100%' }, 85000, 'linear', function() {
+              $(this).css('width', 0);
+            });
+          }
+          
+          peopleRefresher();
+          var interval = setInterval(function() {
+            peopleRefresher();
+          }, 90000);
+        </script>
+      </div>
     </div>
   </body>
 </html>
