@@ -4,7 +4,8 @@ describe("Loader", function() {
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/people.html');
     config = { 
-      people: ['@roykolak']
+      people: ['@roykolak'],
+      builds: ['Sweet Project']
     };
     loader = new Loader(config);
   });
@@ -15,17 +16,37 @@ describe("Loader", function() {
     });
   });
   
+  describe("#loadbuilds", function() {
+    var buildSpy;
+    
+    beforeEach(function() {
+      buildSpy = spyOn(window, 'Build');
+      loader.loadBuilds();
+    });
+    
+    it("initializes builds", function() {
+      expect(buildSpy).toHaveBeenCalledWith('Sweet Project');
+    });
+    
+    it("stores the initialized builds", function() {
+      expect(loader.builds.length).toBe(1);
+    });
+  });
+  
   describe("#loadPeople", function() {
     var personSpy;
     
     beforeEach(function() {
       personSpy = spyOn(window, 'Person');
-      var loader = new Loader(config);
       loader.loadPeople();
     });
     
     it("initializes people", function() {
       expect(personSpy).toHaveBeenCalledWith('@roykolak');
+    });
+    
+    it("stores the initialized people", function() {
+      expect(loader.people.length).toBe(1);
     });
   });
   
@@ -70,7 +91,7 @@ describe("Loader", function() {
       });
       
       it("inserts the message into the announcement header when the announce tag is present", function() {
-        expect($('#announce')).toHaveText('Just when I thought I was out, they pull me back in');
+        expect($('#announce h1')).toHaveText('Just when I thought I was out, they pull me back in');
       });
       
       it("plays a noise when there's a new announcement", function() {

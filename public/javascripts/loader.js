@@ -3,11 +3,19 @@ function Loader(config) {
   return {
     config:config,
     people: [],
+    builds: [],
     
     loadPeople: function() {
       var self = this;
       $.each(config.people, function(i, v) {
         self.people.push(new Person(v));
+      });
+    },
+    
+    loadBuilds: function() {
+      var self = this;
+      $.each(config.builds, function(i, v) {
+        self.builds.push(new Build(v));
       });
     },
     
@@ -32,12 +40,12 @@ function Loader(config) {
       person.setMood(status.tags);
       
       if($.inArray('announce', status.tags) != -1) {
-        if($('#announce').text() != status.message) {
+        if($('#announce h1').text() != status.message) {
           Audio.newAnnouncement.play();
           person.madeAnnouncement();
         }
         
-        $('#announce').text(status.message);
+        $('#announce h1').text(status.message);
       }
     }
   }

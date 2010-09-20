@@ -10,17 +10,6 @@ h1, h2, h3, p, li, ul {
   padding:0;
 }
 
-h1 {
-  background:#333;
-  border-radius:20px;
-  color:#AAA;
-  font-family: 'Lobster', arial, serif;
-  font-size:120px;
-  margin-top:20px;
-  padding:10px;
-  text-align:center;
-}
-
 #progress { 
   background:#777;
   width:0;
@@ -30,6 +19,18 @@ h1 {
 .dashboard {
   font-family: 'Droid Sans', arial, serif;
   padding:20px;
+}
+.clear { clear:both; }
+
+#announce {
+  h1 { 
+    border-radius:20px;
+    color:#FFF;
+    font-size:130px;
+    margin:60px 0;
+    padding:10px;
+    text-align:center;
+  }
 }
 
 #people {
@@ -87,4 +88,18 @@ h1 {
   
   .person:last-child div,
   .person:last-child .name { margin-right:0; }
+}
+#builds {
+  font-size:85px;  
+  margin-top:20px;
+  
+  .build {
+    background:#CCC;
+    border-radius:20px;
+    margin-top:20px;
+    padding:30px;
+    
+    .name { float:left; }
+    .time { float:right; }
+  }
 }
