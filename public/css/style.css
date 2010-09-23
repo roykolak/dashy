@@ -70,11 +70,12 @@ h1, h2, h3, p, li, ul {
     }
   }
   
-  .announced div, {
-    background:#FFF;
+  .success.announced .wrapper, {
+    background: -webkit-gradient(linear, left top, left bottom, from(#55ba55), to(#1b891b));
   }
-  .announced .name, {
-    background:#DDD;
+  
+  .failure.announced .wrapper, {
+    background: -webkit-gradient(linear, left top, left bottom, from(#d67979), to(#b63f3f));
   }
   
   .success .wrapper { 

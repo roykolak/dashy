@@ -5,7 +5,7 @@ function Person(twitterName) {
       nameElement = $(document.createElement('h3')),
       messageElement = $(document.createElement('p'));
       
-  $(personElement).addClass('person');
+  $(personElement).addClass('person').addClass('success');
   $(wrapperElement).addClass('wrapper');
   
   $(imageElement).addClass('image').attr('src','images/smileys/happy.png');

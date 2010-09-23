@@ -3,7 +3,7 @@ describe("Build", function() {
   
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/builds.html');
-    build = new Build('project build');
+    build = new Build({ name:'project build', url:''});
   });
   
   describe("#initialize", function() {
