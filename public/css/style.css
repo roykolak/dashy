@@ -97,7 +97,7 @@ h1, h2, h3, p, li, ul {
     background:#CCC;
     border-radius:20px;
     margin-top:20px;
-    padding:30px;
+    padding:20px 30px;
     
     .name { float:left; }
     .time { float:right; }
