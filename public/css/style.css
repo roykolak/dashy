@@ -26,7 +26,7 @@ h1, h2, h3, p, li, ul {
   h1 { 
     border-radius:20px;
     color:#FFF;
-    font-size:130px;
+    font-size:100px;
     margin:60px 0;
     padding:10px;
     text-align:center;
@@ -47,7 +47,7 @@ h1, h2, h3, p, li, ul {
       background:#AAA;
       border-top-left-radius:10px;
       border-top-right-radius:10px;
-      height:350px;
+      height:300px;
       position:relative;
     }
     
@@ -61,7 +61,7 @@ h1, h2, h3, p, li, ul {
       background:#888;
       border-bottom-left-radius:10px;
       border-bottom-right-radius:10px;
-      font-size:60px;
+      font-size:40px;
       text-align:center;
     }
     .message {
@@ -75,7 +75,7 @@ h1, h2, h3, p, li, ul {
     .image {
       display:block;
       margin:auto;
-      width:350px;
+      width:300px;
     }
   }
   
@@ -90,7 +90,7 @@ h1, h2, h3, p, li, ul {
   .person:last-child .name { margin-right:0; }
 }
 #builds {
-  font-size:85px;  
+  font-size:60px;  
   margin-top:20px;
   
   .build {
