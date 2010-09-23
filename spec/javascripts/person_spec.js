@@ -67,6 +67,14 @@ describe("Person", function() {
       it("sets mood property to angry", function() {
         expect(person.mood).toEqual('angry');
       });
+
+      it("removes a class of 'success' on the person wrapper", function() {
+        expect($('.person').hasClass('success')).toBeFalsy();
+      });
+      
+      it("adds a class of 'failure' on the person wrapper", function() {
+        expect($('.person').hasClass('failure')).toBeTruthy();
+      });
     });
     
     describe("toggling to happy", function() {
@@ -80,6 +88,14 @@ describe("Person", function() {
 
       it("sets mood property to happy", function() {
         expect(person.mood).toEqual('happy');
+      });
+      
+      it("removes a class of 'failure' on the person wrapper", function() {
+        expect($('.person').hasClass('failure')).toBeFalsy();
+      });
+      
+      it("adds a class of 'success' on the person wrapper", function() {
+        expect($('.person').hasClass('success')).toBeTruthy();
       });
     });
     

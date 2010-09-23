@@ -3,7 +3,7 @@ var config = {
     '@roybot5000', 
     '@tomkersten', 
     '@paulsexton'
-  ],
+   ],
   builds:[
     'ArlisWebsite', 
     'Codefumes Android', 

@@ -1,22 +1,23 @@
 function Person(twitterName) {  
   var personElement = $(document.createElement('li')),
-      divElement = $(document.createElement('div')),
+      wrapperElement = $(document.createElement('div')),
       imageElement = $(document.createElement('img')),
       nameElement = $(document.createElement('h3')),
       messageElement = $(document.createElement('p'));
       
   $(personElement).addClass('person');
+  $(wrapperElement).addClass('wrapper');
   
   $(imageElement).addClass('image').attr('src','images/smileys/happy.png');
-  $(divElement).append(imageElement);
+  $(wrapperElement).append(imageElement);
   
   $(messageElement).addClass('message');
-  $(divElement).append(messageElement);
+  $(wrapperElement).append(messageElement);
   
-  $(personElement).append(divElement);
+  $(nameElement).addClass('name').text(twitterName);  
+  $(wrapperElement).append(nameElement);
   
-  $(nameElement).addClass('name').text(twitterName);
-  $(personElement).append(nameElement);
+  $(personElement).append(wrapperElement);
   
   $('#people').append(personElement);
   
@@ -55,17 +56,20 @@ function Person(twitterName) {
         if($.inArray(this.mood, tags) == -1) {
           Audio.moodChange.play();
         }
-      
+        
         if(hasMood('happy', tags)) {
           $(imageElement).attr('src', 'images/smileys/happy.png');
+          $(personElement).removeClass('failure').addClass('success');
           this.mood = 'happy';
         
         } else if(hasMood('angry', tags)) {
           $(imageElement).attr('src', 'images/smileys/angry.png');
+          $(personElement).removeClass('success').addClass('failure');
           this.mood = 'angry';
         
         } else {
           $(imageElement).attr('src', 'images/smileys/happy.png');
+          $(personElement).removeClass('failure').addClass('success');
           this.mood = 'happy';
         }
       }
