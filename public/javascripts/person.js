@@ -1,25 +1,24 @@
 function Person(twitterName) {  
-  var personElement = $(document.createElement('li')),
-      wrapperElement = $(document.createElement('div')),
+  var listItemElement = $(document.createElement('li')),
+      personElement = $(document.createElement('div')),
       imageElement = $(document.createElement('img')),
       nameElement = $(document.createElement('h3')),
       messageElement = $(document.createElement('p'));
       
-  $(personElement).addClass('person').addClass('success');
-  $(wrapperElement).addClass('wrapper');
+  $(personElement).addClass('person');
   
   $(imageElement).addClass('image').attr('src','images/smileys/happy.png');
-  $(wrapperElement).append(imageElement);
+  $(personElement).append(imageElement);
   
   $(messageElement).addClass('message');
-  $(wrapperElement).append(messageElement);
+  $(personElement).append(messageElement);
   
   $(nameElement).addClass('name').text(twitterName);  
-  $(wrapperElement).append(nameElement);
+  $(personElement).append(nameElement);
   
-  $(personElement).append(wrapperElement);
+  $(listItemElement).append(personElement);
   
-  $('#people').append(personElement);
+  $('#people').append(listItemElement);
   
 
   function hasMood(mood, tags) {

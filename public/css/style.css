@@ -22,6 +22,12 @@ h1, h2, h3, p, li, ul {
 }
 .clear { clear:both; }
 
+.person, .build { background:#FFF; }
+.success { background: -webkit-gradient(linear, left top, left bottom, from(#55ba55), to(#1b891b)); }
+.failure { background: -webkit-gradient(linear, left top, left bottom, from(#d67979), to(#b63f3f)); }
+.building { background: -webkit-gradient(linear, left top, left bottom, from(#e9d06a), to(#c0aa51)); }
+
+
 #announce {
   h1 { 
     border-radius:20px;
@@ -36,14 +42,14 @@ h1, h2, h3, p, li, ul {
 #people {
   width:100%;
     
-  .person {
+  li {
     color:#333;
     display:inline-block;
     position:relative;
     width:33.3333%;
     clear:both;
     
-    .wrapper {
+    .person {
       border-radius:20px;
       margin-right:20px;
       
@@ -70,22 +76,6 @@ h1, h2, h3, p, li, ul {
     }
   }
   
-  .success.announced .wrapper, {
-    background: -webkit-gradient(linear, left top, left bottom, from(#55ba55), to(#1b891b));
-  }
-  
-  .failure.announced .wrapper, {
-    background: -webkit-gradient(linear, left top, left bottom, from(#d67979), to(#b63f3f));
-  }
-  
-  .success .wrapper { 
-    background: -webkit-gradient(linear, left top, left bottom, from(#55ba55), to(#1b891b));
-  }
-  
-  .failure .wrapper { 
-    background: -webkit-gradient(linear, left top, left bottom, from(#d67979), to(#b63f3f));
-  }
-  
   .person:last-child .wrapper { margin-right:0; }
 }
 #builds {
@@ -93,7 +83,6 @@ h1, h2, h3, p, li, ul {
   margin-top:20px;
   
   .build {
-    background:#CCC;
     border-radius:20px;
     margin-top:20px;
     padding:20px 30px;

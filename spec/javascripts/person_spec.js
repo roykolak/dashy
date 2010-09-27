@@ -20,10 +20,6 @@ describe("Person", function() {
       it("sets the mood image to happy", function() {
         expect($('.person .image')).toHaveAttr('src', 'images/smileys/happy.png');
       });
-      
-      it("sets the current mood to happy", function() {
-        expect(person.mood).toEqual('happy');
-      });
     });
   });
   

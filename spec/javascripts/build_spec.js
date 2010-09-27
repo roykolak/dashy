@@ -15,4 +15,30 @@ describe("Build", function() {
       expect($('.build .name')).toHaveText('project build');
     });
   });
+  
+  describe("#setStatus", function() {
+    it("removes 'failure', 'building', and 'success' classes from the project", function() {
+      build.setStatus('failure');
+      build.setStatus('building');
+      build.setStatus('success');
+      build.setStatus('status');
+      expect($('.build').hasClass('failure building success')).toBeFalsy();
+    });
+    
+    it("adds a 'building' class to a project when it is building", function() {
+      build.setStatus('building');
+      expect($('.build').hasClass('building')).toBeTruthy();
+    });
+    
+    it("adds a 'success' class to a project when it is successfully built", function() {
+      build.setStatus('success');
+      expect($('.build').hasClass('success')).toBeTruthy();
+    });
+    
+    it("adds a 'failure' class to a project when it failed to build", function() {
+      build.setStatus('failure');
+      expect($('.build').hasClass('failure')).toBeTruthy();
+    });
+    
+  });
 });
