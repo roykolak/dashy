@@ -31,16 +31,17 @@
           loader.loadBuilds();
         
           // TODO: where to put this?
-          function peopleRefresher() {
+          function refresh() {
             loader.refreshPeople();
+            loader.refreshBuilds();
             $('#progress').animate({ width: '100%' }, 85000, 'linear', function() {
               $(this).css('width', 0);
             });
           }
           
-          peopleRefresher();
+          refresh();
           var interval = setInterval(function() {
-            peopleRefresher();
+            refresh();
           }, 90000);
         </script>
       </div>

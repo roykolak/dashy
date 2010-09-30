@@ -12,6 +12,7 @@ function Build(config) {
   $('#builds').append(buildElement);
    
   return {
+    name: config.name,
     setStatus: function(status) {
       $(buildElement).removeClass('failure building success');
       

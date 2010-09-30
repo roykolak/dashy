@@ -5,7 +5,7 @@ describe("Loader", function() {
     loadFixtures('spec/javascripts/fixtures/people.html');
     config = { 
       people: ['@roykolak'],
-      builds: ['Sweet Project']
+      builds: [{ name:'Sweet Project', url:'http://www.buildresults.com/project'}]
     };
     loader = new Loader(config);
   });
@@ -25,7 +25,7 @@ describe("Loader", function() {
     });
     
     it("initializes builds", function() {
-      expect(buildSpy).toHaveBeenCalledWith('Sweet Project');
+      expect(buildSpy).toHaveBeenCalledWith(config.builds[0]);
     });
     
     it("stores the initialized builds", function() {
@@ -50,72 +50,33 @@ describe("Loader", function() {
     });
   });
   
+  describe("#refreshBuilds", function() {
+    var data, getJSONSpy;
+    
+    beforeEach(function() {
+      data = { result: 'SUCCESS' };
+      getJSONSpy = spyOn($, 'getJSON');
+      loader.loadBuilds();
+      loader.refreshBuilds();
+    });
+    
+    it("makes a request to the build server using the stored url for the project", function() {
+      expect(getJSONSpy.mostRecentCall.args[0]).toEqual(config.builds[0].url + '?jsonp=?');
+    });
+  });
+  
   describe("#refreshPeople", function() {
     var data, getJSONSpy;
     
     beforeEach(function() {
       data = { status: { text: 'this is the message buddy #happy' } };
-      
-      getJSONSpy = spyOn($, 'getJSON').andCallFake(function() {
-        loader.refreshPersonCallback(data.status.text, loader.people[0]);
-      });
-      
+      getJSONSpy = spyOn($, 'getJSON');
       loader.loadPeople();
     });
     
     it("makes a request to twitter using the person's twitter name", function() {
       loader.refreshPeople();
       expect(getJSONSpy.mostRecentCall.args[0]).toEqual('http://api.twitter.com/1/users/show.json?screen_name=@roykolak&callback=?');
-    });
-    
-    it("calls to refreshPersonCallback after the request is made", function() {
-      var callbackSpy = spyOn(loader, 'refreshPersonCallback');
-      loader.refreshPeople();
-      expect(callbackSpy).toHaveBeenCalledWith(data.status.text, loader.people[0]);
-    });
-  });
-  
-  describe("#refreshPersonCallback", function() {
-    var newAnnouncementAudioSpy, personSpy;
-    
-    beforeEach(function() {
-      newAnnouncementAudioSpy = spyOn(Audio.newAnnouncement, 'play');
-      loader.loadPeople();
-      personSpy = spyOn(loader.people[0], 'madeAnnouncement');
-    });
-    
-    describe("announcements", function() {
-      beforeEach(function() {
-        loadFixtures('spec/javascripts/fixtures/announce.html');
-        loader.refreshPersonCallback('Just when I thought I was out, they pull me back in #announce', loader.people[0]);
-      });
-      
-      it("inserts the message into the announcement header when the announce tag is present", function() {
-        expect($('#announce h1')).toHaveText('Just when I thought I was out, they pull me back in');
-      });
-      
-      it("plays a noise when there's a new announcement", function() {
-        expect(newAnnouncementAudioSpy).toHaveBeenCalled();
-      });
-      
-      it("marks the person who made the announcement", function() {
-        expect(personSpy).toHaveBeenCalled();
-      });
-    });
-
-    
-    describe("updating person data", function() {
-      beforeEach(function() {
-        loader.refreshPersonCallback('this is the message buddy #happy', loader.people[0]);
-      });
-      
-      it("updates the person's message", function() {
-        expect($('.person .message')).toHaveText('this is the message buddy');
-      });
-    
-      it("updates the person's mood", function() {
-        expect($('.person .image')).toHaveAttr('src', 'images/smileys/happy.png');
-      });      
     });
   });
 });
