@@ -25,7 +25,12 @@ function Build(config) {
     },
     
     setDuration: function(duration) {
-      $(timeElement).text(duration + ' sec');
+      var duration_text = '';
+      if(duration > 0) {
+        duration_text = duration + ' sec';
+      }
+      
+      $(timeElement).text(duration_text);
     }
   };
 }

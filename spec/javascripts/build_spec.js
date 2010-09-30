@@ -43,8 +43,13 @@ describe("Build", function() {
   
   describe("#setDuration", function() {
     it("inserts the passed time into the time div and appends time label", function() {
-      build.setStatus('5.4 seconds');
-      expect($('.build .time').toHaveText('5.4 sec');
+      build.setDuration(5);
+      expect($('.build .time')).toHaveText('5 sec');
+    });
+    
+    it("empties the time container if passed zero", function() {
+      build.setDuration(0);
+      expect($('.build .time')).toHaveText('');
     });
   });
 });

@@ -27,14 +27,14 @@
         <script src="javascripts/loader.js"></script>
         <script>
           var loader = new Loader(config);
-          loader.loadPeople();
+          //loader.loadPeople();
           loader.loadBuilds();
         
           // TODO: where to put this?
           function refresh() {
-            loader.refreshPeople();
+            //loader.refreshPeople();
             loader.refreshBuilds();
-            $('#progress').animate({ width: '100%' }, 85000, 'linear', function() {
+            $('#progress').animate({ width: '100%' }, 15000, 'linear', function() {
               $(this).css('width', 0);
             });
           }
@@ -42,7 +42,7 @@
           refresh();
           var interval = setInterval(function() {
             refresh();
-          }, 90000);
+          }, 15000);
         </script>
       </div>
     </div>
