@@ -16,9 +16,14 @@ function Loader(config) {
       var self = this;
       $.each(config.builds, function(index) {
         $.getJSON(this['url'] + '?jsonp=?', function(data) {;
-          var status = 'failure';
+          var build = self.builds[index],
+              status = 'failure';
+              
           status = (data.building ? 'building' : 'success');
-          self.builds[index].setStatus(status);
+          build.setStatus(status);
+          if(data.duration > 0) {
+            build.setDuration(Math.round(parseInt(data.duration) / 1000));
+          }
         });
       });
     },
@@ -50,6 +55,8 @@ function Loader(config) {
             }
 
             $('#announce h1').text(status.message);
+          } else {
+            $('#announce h1');
           }
         });
       });

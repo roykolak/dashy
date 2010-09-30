@@ -39,6 +39,12 @@ describe("Build", function() {
       build.setStatus('failure');
       expect($('.build').hasClass('failure')).toBeTruthy();
     });
-    
+  });
+  
+  describe("#setDuration", function() {
+    it("inserts the passed time into the time div and appends time label", function() {
+      build.setStatus('5.4 seconds');
+      expect($('.build .time').toHaveText('5.4 sec');
+    });
   });
 });
