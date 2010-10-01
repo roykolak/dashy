@@ -1,4 +1,5 @@
 Audio = {
   moodChange: document.getElementById('mood_change'),
-  newAnnouncement: document.getElementById('new_announcement')
+  newAnnouncement: document.getElementById('new_announcement'),
+  success: document.getElementById('success')
 }

@@ -4,5 +4,8 @@ var Audio = {
   },
   moodChange: { 
     play:function() {} 
+  },
+  success: { 
+    play:function() {} 
   }
 }

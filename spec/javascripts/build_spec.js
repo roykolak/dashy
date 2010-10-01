@@ -3,7 +3,7 @@ describe("Build", function() {
   
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/builds.html');
-    build = new Build({ name:'project build', url:''});
+    build = new Build({ name:'project build', url:'http://www.buildstatus.com'});
   });
   
   describe("#initialize", function() {
@@ -13,6 +13,10 @@ describe("Build", function() {
     
     it("inserts the build name in the header", function() {
       expect($('.build .name')).toHaveText('project build');
+    });
+    
+    it("stores the url and append jsonp", function() {
+      expect(build.url).toEqual('http://www.buildstatus.com?jsonp=?');
     });
   });
   
@@ -39,6 +43,30 @@ describe("Build", function() {
       build.setStatus('failure');
       expect($('.build').hasClass('failure')).toBeTruthy();
     });
+    
+    it("sets the previous build status w/ the passed build status", function() {
+      build.setStatus('success');
+      expect(build.previousBuild).toEqual('success');
+    });
+
+    describe("sounds", function() {
+      var successAudioSpy;
+      
+      beforeEach(function() {
+        successAudioSpy = spyOn(Audio.success, 'play');
+      });
+      
+      it("plays the success sound when the status is 'success' and previous status was not success", function() {  
+        build.setStatus('failure');
+        build.setStatus('success');
+        expect(successAudioSpy).toHaveBeenCalled();
+      });
+      
+      it("does not play the success sound when the status is not 'success'", function() {
+        build.setStatus('failure');
+        expect(successAudioSpy).not.toHaveBeenCalled();
+      });
+    });
   });
   
   describe("#setDuration", function() {
@@ -50,6 +78,35 @@ describe("Build", function() {
     it("empties the time container if passed zero", function() {
       build.setDuration(0);
       expect($('.build .time')).toHaveText('');
+    });
+  });
+  
+  describe("#update", function() {
+    var setStatusSpy, setDurationSpy;
+    
+    beforeEach(function() {
+      setStatusSpy = spyOn(build, 'setStatus');
+      setDurationSpy = spyOn(build, 'setDuration');
+    });
+    
+    it("sets the status of the build to building when it is building", function() {
+      build.update({ building:true });
+      expect(setStatusSpy).toHaveBeenCalledWith('building');
+    });
+    
+    it("sets the status of the build to success when it has successfuly built", function() {
+      build.update({ building:false, result:'SUCCESS' });
+      expect(setStatusSpy).toHaveBeenCalledWith('success');
+    });
+    
+    it("sets the status of the build to failure when it has failed being built", function() {
+      build.update({ building:false, result:'FAILURE' });
+      expect(setStatusSpy).toHaveBeenCalledWith('failure');
+    });
+    
+    it("converts the duration to seconds and calls setDuration w/ the value", function() {
+      build.update({ building:false, result:'FAILURE', duration:'5432' });
+      expect(setDurationSpy).toHaveBeenCalledWith(5);
     });
   });
 });

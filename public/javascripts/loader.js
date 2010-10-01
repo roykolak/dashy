@@ -13,17 +13,9 @@ function Loader(config) {
     },
     
     refreshBuilds: function() {
-      var self = this;
-      $.each(config.builds, function(index) {
-        $.getJSON(this['url'] + '?jsonp=?', function(data) {;
-          var build = self.builds[index],
-              status = 'failure';
-              
-          status = (data.building ? 'building' : 'success');
-          build.setStatus(status);
-          if(data.duration > 0) {
-            build.setDuration(Math.round(parseInt(data.duration) / 1000));
-          }
+      $.each(this.builds, function(i, build) {
+        $.getJSON(build.url, function(data) {
+          build.update(data);
         });
       });
     },
