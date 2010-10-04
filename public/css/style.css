@@ -13,7 +13,7 @@ h1, h2, h3, p, li, ul {
 #progress { 
   background:#777;
   width:0;
-  height:5px;
+  height:20px;
 }
 
 .dashboard {
@@ -29,6 +29,7 @@ h1, h2, h3, p, li, ul {
 
 
 #announce {
+  display:none;
   h1 { 
     border-radius:20px;
     color:#FFF;
