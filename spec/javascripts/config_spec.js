@@ -12,6 +12,7 @@ describe("Config JSON", function() {
       var build = config.builds[0];
       expect(build.name).toBeDefined();
       expect(build.url).toBeDefined();
+      expect(build.sound).toBeDefined();
     });
   });
 });

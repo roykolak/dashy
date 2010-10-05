@@ -1,9 +1,10 @@
 describe("Build", function() {
-  var build;
+  var build, options;
   
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/builds.html');
-    build = new Build({ name:'project build', url:'http://www.buildstatus.com'});
+    options = { name:'project build', url:'http://www.buildstatus.com', sound:true }
+    build = new Build(options);
   });
   
   describe("#initialize", function() {
@@ -55,17 +56,32 @@ describe("Build", function() {
       beforeEach(function() {
         successAudioSpy = spyOn(Audio.success, 'play');
       });
-      
-      it("plays the success sound when the status is 'success' and previous status was not success", function() {  
-        build.setStatus('failure');
-        build.setStatus('success');
-        expect(successAudioSpy).toHaveBeenCalled();
+      describe("when the sound option is set to false", function() {
+        beforeEach(function() {
+          options.sound = false
+          build = new Build(options);
+        });
+        
+        it("does not play a sound if the sound option is set to false", function() {
+          build.setStatus('failure');
+          build.setStatus('success');
+          expect(successAudioSpy).not.toHaveBeenCalled();        
+        });        
       });
       
-      it("does not play the success sound when the status is not 'success'", function() {
-        build.setStatus('failure');
-        expect(successAudioSpy).not.toHaveBeenCalled();
+      describe("when the sound option is true", function() {
+        it("plays the success sound when the status is 'success' and the previous status was not success", function() {  
+          build.setStatus('failure');
+          build.setStatus('success');
+          expect(successAudioSpy).toHaveBeenCalled();
+        });
+      
+        it("does not play the success sound when the status is not 'success'", function() {
+          build.setStatus('failure');
+          expect(successAudioSpy).not.toHaveBeenCalled();
+        });        
       });
+
     });
   });
   
