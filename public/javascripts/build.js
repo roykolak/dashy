@@ -34,11 +34,14 @@ function Build(config) {
         this.previousBuild = status; 
       }
     
-      if(this.previousBuild != 'success' && status == 'success') {
-        if(this.sound) {
+      if(this.sound) {
+        if(this.previousBuild != 'success' && status == 'success') {
           Audio.success.play();
+        } else if(this.previousBuild != 'building' && status == 'building') {
+          Audio.building.play();
         }
       }
+      
       this.previousBuild = status;
     },
     

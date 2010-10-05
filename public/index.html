@@ -12,10 +12,12 @@
       <audio id="mood_change" src="sounds/mood_change.mp3"></audio>
       <audio id="new_announcement" src="sounds/new_announcement.mp3"></audio>
       <audio id="success" src="sounds/success.mp3"></audio>
+      <audio id="building" src="sounds/building.mp3"></audio>
       <ul id="people"></ul>
       <div id="announce">
         <h1></h1>
       </div>
+      <h1>Dashy, He's always watching.</h1>
       <ul id="builds"></ul>
       <div>
         <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
@@ -28,14 +30,13 @@
         <script src="javascripts/loader.js"></script>
         <script>
           var loader = new Loader(config);
-          //loader.loadPeople();
           loader.loadBuilds();
         
           // TODO: where to put this?
+          var refreshInterval = 5000;
           function refresh() {
-            //loader.refreshPeople();
             loader.refreshBuilds();
-            $('#progress').animate({ width: '100%' }, 14000, 'linear', function() {
+            $('#progress').animate({ width: '100%' }, refreshInterval - 1000, 'linear', function() {
               $(this).css('width', 0);          
             });
           }
@@ -43,7 +44,7 @@
           refresh();
           var interval = setInterval(function() {
             refresh();
-          }, 15000);
+          }, refreshInterval);
         </script>
       </div>
     </div>

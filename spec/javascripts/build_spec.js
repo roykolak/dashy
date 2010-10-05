@@ -51,21 +51,25 @@ describe("Build", function() {
     });
 
     describe("sounds", function() {
-      var successAudioSpy;
+      var successAudioSpy, buildingAudioSpy;
       
       beforeEach(function() {
         successAudioSpy = spyOn(Audio.success, 'play');
+        buildingAudioSpy = spyOn(Audio.building, 'play');
       });
+      
       describe("when the sound option is set to false", function() {
         beforeEach(function() {
           options.sound = false
           build = new Build(options);
         });
         
-        it("does not play a sound if the sound option is set to false", function() {
+        it("does not play sounds for the project", function() {
           build.setStatus('failure');
           build.setStatus('success');
-          expect(successAudioSpy).not.toHaveBeenCalled();        
+          build.setStatus('building');
+          expect(successAudioSpy).not.toHaveBeenCalled();
+          expect(buildingAudioSpy).not.toHaveBeenCalled();     
         });        
       });
       
@@ -75,13 +79,13 @@ describe("Build", function() {
           build.setStatus('success');
           expect(successAudioSpy).toHaveBeenCalled();
         });
-      
-        it("does not play the success sound when the status is not 'success'", function() {
+        
+        it("plays the building sound when the status is 'building' and the previous status was not building", function() {  
           build.setStatus('failure');
-          expect(successAudioSpy).not.toHaveBeenCalled();
-        });        
+          build.setStatus('building');
+          expect(buildingAudioSpy).toHaveBeenCalled();
+        });
       });
-
     });
   });
   

@@ -11,9 +11,9 @@ h1, h2, h3, p, li, ul {
 }
 
 #progress { 
-  background:#777;
+  background:#555;
   width:0;
-  height:20px;
+  height:10px;
 }
 
 .dashboard {
@@ -27,6 +27,13 @@ h1, h2, h3, p, li, ul {
 .failure { background: -webkit-gradient(linear, left top, left bottom, from(#d67979), to(#b63f3f)); }
 .building { background: -webkit-gradient(linear, left top, left bottom, from(#e9d06a), to(#c0aa51)); }
 
+h1 { 
+  border-radius:20px;
+  color:#FFF;
+  font-size:90px;
+  font-family:"Lobster";
+  padding:10px;
+}
 
 #announce {
   display:none;
