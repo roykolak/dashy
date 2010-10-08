@@ -1,3 +1,12 @@
+GIT
+  remote: http://github.com/roykolak/jazz_money.git
+  revision: d4c0151179f70d3b4c1f587bb746f7399a87c5af
+  branch: update-to-jasmine-1.0.0.rc1
+  specs:
+    jazz_money (0.0.4)
+      harmony (= 0.5.4)
+      jasmine (= 1.0.0.rc1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -14,9 +23,6 @@ GEM
       rspec (>= 1.1.5)
       selenium-client (>= 1.2.17)
       selenium-rc (>= 2.1.0)
-    jazz_money (0.0.4)
-      harmony (= 0.5.4)
-      jasmine (= 1.0.0.rc1)
     johnson (2.0.0.pre3)
       stackdeck (~> 0.2)
     json_pure (1.4.6)
@@ -36,7 +42,7 @@ DEPENDENCIES
   growl (= 1.0.3)
   harmony (= 0.5.4)
   jasmine (= 1.0.0.rc1)
-  jazz_money (= 0.0.4)
+  jazz_money!
   johnson (= 2.0.0.pre3)
   rake (= 0.8.7)
   stackdeck (= 0.2.0)
