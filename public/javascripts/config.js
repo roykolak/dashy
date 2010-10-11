@@ -14,6 +14,10 @@ var config = {
       url:'http://builder.gn-research/job/Dashboard/lastBuild/api/json',
       sound:true
     }, {
+      name:'S2 Circuit',
+      url:'http://phobos:8080/job/S2%20circuit/lastBuild/api/json',
+      sound:true
+    }, {
       name:'LibTdt ReleaseBot',
       url:'http://builder.gn-research/job/LibTdt%20ReleaseBot/lastBuild/api/json',
       sound:false
