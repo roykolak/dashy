@@ -18,25 +18,25 @@ var config = {
       url:'http://phobos:8080/job/S2%20circuit/lastBuild/api/json',
       sound:true
     }, {
-      name:'LibTdt ReleaseBot',
-      url:'http://builder.gn-research/job/LibTdt%20ReleaseBot/lastBuild/api/json',
+      name:'LibTdt',
+      url:'http://phobos:8080/job/LibTdt/lastBuild/api/json',
       sound:false
-    }, {
-      name:'SB0 Test',
-      url:'http://builder.gn-research/job/SB0%20Test/lastBuild/api/json',
-      sound:false
-    }, {
-      name:'Sound Booth 0', 
-      url:'http://builder.gn-research/job/Sound%20Booth%200/lastBuild/api/json',
-      sound:false
-    }, {
-      name:'Sound Booth 1',
-      url:'http://builder.gn-research/job/Sound%20Booth%201/lastBuild/api/json',
-      sound:false
-    }, {
-      name:'Sound Booth 2',
-      url:'http://builder.gn-research/job/Sound%20Booth%202/lastBuild/api/json',
-      sound:false
-    }    
+    }// , {
+    //       name:'SB0 Test',
+    //       url:'http://builder.gn-research/job/SB0%20Test/lastBuild/api/json',
+    //       sound:false
+    //     }, {
+    //       name:'Sound Booth 0', 
+    //       url:'http://builder.gn-research/job/Sound%20Booth%200/lastBuild/api/json',
+    //       sound:false
+    //     }, {
+    //       name:'Sound Booth 1',
+    //       url:'http://builder.gn-research/job/Sound%20Booth%201/lastBuild/api/json',
+    //       sound:false
+    //     }, {
+    //       name:'Sound Booth 2',
+    //       url:'http://builder.gn-research/job/Sound%20Booth%202/lastBuild/api/json',
+    //       sound:false
+    //     }    
   ]
 }
