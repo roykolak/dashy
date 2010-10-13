@@ -21,6 +21,10 @@ var config = {
       name:'LibTdt',
       url:'http://phobos:8080/job/LibTdt/lastBuild/api/json',
       sound:true
+    }, {
+      name:'Eup',
+      url:'http://builder.gn-research/job/Eup/lastBuild/api/json',
+      sound:true
     }// , {
     //       name:'SB0 Test',
     //       url:'http://builder.gn-research/job/SB0%20Test/lastBuild/api/json',
