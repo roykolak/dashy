@@ -9,10 +9,9 @@
   <body>
     <div id="progress"></div>
     <div class="dashboard">
-      <audio id="mood_change" src="sounds/mood_change.mp3"></audio>
-      <audio id="new_announcement" src="sounds/new_announcement.mp3"></audio>
       <audio id="success" src="sounds/success.mp3"></audio>
       <audio id="building" src="sounds/building.mp3"></audio>
+      <audio id="failure" src="sounds/failure.mp3"></audio>
       <ul id="people"></ul>
       <div id="announce">
         <h1></h1>
@@ -23,9 +22,7 @@
         <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
         <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
         <script src="javascripts/audio.js"></script>
-        <script src="javascripts/person.js"></script>
         <script src="javascripts/build.js"></script>
-        <script src="javascripts/twitter_status.js"></script>
         <script src="javascripts/config.js"></script>
         <script src="javascripts/loader.js"></script>
         <script>
@@ -37,7 +34,7 @@
           function refresh() {
             loader.refreshBuilds();
             $('#progress').animate({ width: '100%' }, refreshInterval - 1000, 'linear', function() {
-              $(this).css('width', 0);          
+              $(this).css('width', 0);
             });
           }
           

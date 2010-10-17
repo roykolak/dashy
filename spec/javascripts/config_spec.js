@@ -1,8 +1,4 @@
 describe("Config JSON", function() {
-  it("should contain a people property of an array", function() {
-    expect($.isArray(config.people)).toBeTruthy();
-  });
-  
   it("should contain a builds property of an array", function() {
     expect($.isArray(config.builds)).toBeTruthy();
   });
@@ -12,7 +8,6 @@ describe("Config JSON", function() {
       var build = config.builds[0];
       expect(build.name).toBeDefined();
       expect(build.url).toBeDefined();
-      expect(build.sound).toBeDefined();
     });
   });
 });

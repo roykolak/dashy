@@ -50,40 +50,46 @@ describe("Build", function() {
       expect(build.previousBuild).toEqual('success');
     });
 
-    describe("sounds", function() {
-      var successAudioSpy, buildingAudioSpy;
-      
-      beforeEach(function() {
-        successAudioSpy = spyOn(Audio.success, 'play');
-        buildingAudioSpy = spyOn(Audio.building, 'play');
-      });
-      
-      describe("when the sound option is set to false", function() {
+    describe("sounds", function() {      
+      describe("the success sound", function() {
+        var buildingAudioSpy;
+        
         beforeEach(function() {
-          options.sound = false
-          build = new Build(options);
+          successAudioSpy = spyOn(Audio.success, 'play');
         });
         
-        it("does not play sounds for the project", function() {
-          build.setStatus('failure');
-          build.setStatus('success');
-          build.setStatus('building');
-          expect(successAudioSpy).not.toHaveBeenCalled();
-          expect(buildingAudioSpy).not.toHaveBeenCalled();     
-        });        
-      });
-      
-      describe("when the sound option is true", function() {
         it("plays the success sound when the status is 'success' and the previous status was not success", function() {  
           build.setStatus('failure');
           build.setStatus('success');
           expect(successAudioSpy).toHaveBeenCalled();
+        });
+      });
+
+      describe("the building sound", function() {
+        var buildingAudioSpy;
+        
+        beforeEach(function() {
+          buildingAudioSpy = spyOn(Audio.building, 'play');
         });
         
         it("plays the building sound when the status is 'building' and the previous status was not building", function() {  
           build.setStatus('failure');
           build.setStatus('building');
           expect(buildingAudioSpy).toHaveBeenCalled();
+        });
+      });
+      
+      describe("the failure sound", function() {
+        var failureAudioSpy;
+        
+        beforeEach(function() {
+          failureAudioSpy = spyOn(Audio.failure, "play");
+        });
+        
+        it("plays the failure sound when the status is 'failure' and the previous status was not failure", function() {
+          build.setStatus('building');
+          build.setStatus('failure');
+          expect(failureAudioSpy).toHaveBeenCalled();
         });
       });
     });

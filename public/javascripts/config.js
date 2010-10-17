@@ -1,30 +1,20 @@
 var config = {
-  people:[
-    '@roybot5000', 
-    '@tomkersten', 
-    '@paulsexton'
-   ],
   builds:[
     {
       name:'ArlisWebsite', 
-      url:'http://builder.gn-research/job/ArlisWebsite/lastBuild/api/json',
-      sound:true
+      url:'http://builder.gn-research/job/ArlisWebsite/lastBuild/api/json'
     },{
       name:'Dashboard',
-      url:'http://builder.gn-research/job/Dashboard/lastBuild/api/json',
-      sound:true
+      url:'http://builder.gn-research/job/Dashboard/lastBuild/api/json'
     }, {
       name:'S2 Circuit',
-      url:'http://phobos:8080/job/S2%20circuit/lastBuild/api/json',
-      sound:true
+      url:'http://phobos:8080/job/S2%20circuit/lastBuild/api/json'
     }, {
       name:'LibTdt',
-      url:'http://phobos:8080/job/LibTdt/lastBuild/api/json',
-      sound:true
+      url:'http://phobos:8080/job/LibTdt/lastBuild/api/json'
     }, {
       name:'Eup',
-      url:'http://builder.gn-research/job/Eup/lastBuild/api/json',
-      sound:true
+      url:'http://builder.gn-research/job/Eup/lastBuild/api/json'
     }// , {
     //       name:'SB0 Test',
     //       url:'http://builder.gn-research/job/SB0%20Test/lastBuild/api/json',

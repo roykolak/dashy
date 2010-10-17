@@ -17,7 +17,6 @@ function Build(config) {
    
   return {
     url: config.url + '?jsonp=?',
-    sound: config.sound,
     
     setStatus: function(status) {
       $(buildElement).removeClass('failure building success');
@@ -34,12 +33,13 @@ function Build(config) {
         this.previousBuild = status; 
       }
     
-      if(this.sound) {
-        if(this.previousBuild != 'success' && status == 'success') {
-          Audio.success.play();
-        } else if(this.previousBuild != 'building' && status == 'building') {
-          Audio.building.play();
-        }
+
+      if(this.previousBuild != 'success' && status == 'success') {
+        Audio.success.play();
+      } else if(this.previousBuild != 'building' && status == 'building') {
+        Audio.building.play();
+      } else if(this.previousBuild != 'failure' && status == 'failure') {
+        Audio.failure.play();
       }
       
       this.previousBuild = status;
