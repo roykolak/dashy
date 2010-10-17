@@ -20,6 +20,7 @@ function Loader(config) {
     },
     
     refresh: function() {
+      this.checkForDashboardChanges();
       this.refreshBuilds();
       this.startProgressBarAnimation();
     },
@@ -27,6 +28,12 @@ function Loader(config) {
     startProgressBarAnimation: function() {
       $('#progress').animate({ width: '100%' }, this.refreshInterval - 1000, 'linear', function() {
         $(this).css('width', 0);
+      });
+    },
+    
+    checkForDashboardChanges: function() {
+      $.get('refresh.txt', function() {
+        location.reload();
       });
     }
   }

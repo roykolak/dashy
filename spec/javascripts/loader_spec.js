@@ -70,5 +70,19 @@ describe("Loader", function() {
       loader.refresh();
       expect(refreshBuildsSpy).toHaveBeenCalled();
     });
+    
+    it("calls to checkForDashboardChanges", function() {
+      var checkForDashboardChangesSpy = spyOn(loader, 'checkForDashboardChanges');
+      loader.refresh();
+      expect(checkForDashboardChangesSpy).toHaveBeenCalled();
+    });
+  });
+  
+  describe("#checkForDashboardChanges", function() {
+    it("makes a request for the refresh asset", function() {
+      var getSpy = spyOn($, 'get');
+      loader.checkForDashboardChanges();
+      expect(getSpy.mostRecentCall.args[0]).toEqual('refresh.txt');
+    });
   });
 });
