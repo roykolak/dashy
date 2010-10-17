@@ -32,7 +32,10 @@ function Build(config) {
       if(typeof(this.previousBuild) == 'undefined') {
         this.previousBuild = status; 
       }
-    
+      
+      if (this.previousBuild != status) {
+        this.fadeInAndOut();
+      };
 
       if(this.previousBuild != 'success' && status == 'success') {
         Audio.success.play();
@@ -59,6 +62,17 @@ function Build(config) {
       }
       
       this.setDuration(convertDurationToSeconds(data.duration));
+    },
+    
+    fadeInAndOut: function() {
+      var duration = "slow";
+      var iterations = 4;
+      
+      for(iterations; iterations > 0; iterations--) {
+        $.each(['fadeOut', 'fadeIn'], function(i, effect) {
+          $(buildElement)[effect](duration);
+        });
+      }
     }
   };
 }

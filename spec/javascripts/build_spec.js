@@ -21,6 +21,7 @@ describe("Build", function() {
     });
   });
   
+  
   describe("#setStatus", function() {
     it("removes 'failure', 'building', and 'success' classes from the project", function() {
       build.setStatus('failure');
@@ -49,7 +50,16 @@ describe("Build", function() {
       build.setStatus('success');
       expect(build.previousBuild).toEqual('success');
     });
+    
+    it("blinks a few times when a new status is set", function() {
+      var fadeInAndOutSpy = spyOn(build, 'fadeInAndOut');
 
+      build.setStatus('success');
+      build.setStatus('building');
+
+      expect(fadeInAndOutSpy).toHaveBeenCalled();
+    });
+    
     describe("sounds", function() {      
       describe("the success sound", function() {
         var buildingAudioSpy;
@@ -133,6 +143,28 @@ describe("Build", function() {
     it("converts the duration to seconds and calls setDuration w/ the value", function() {
       build.update({ building:false, result:'FAILURE', duration:'5432' });
       expect(setDurationSpy).toHaveBeenCalledWith(5);
+    });
+  });
+  
+  describe("#fadeInAndOut", function() {
+    var duration, calls
+    
+    beforeEach(function() {
+      duration = "slow";
+      calls = 4;
+    });
+    it("calls to fadeIn a specific number of times w/ a duration", function() {
+      var fadeInSpy = spyOn($.fn, "fadeIn");
+      build.fadeInAndOut();
+      expect(fadeInSpy).toHaveBeenCalledWith(duration);
+      expect(fadeInSpy.callCount).toEqual(calls);
+    });
+    
+    it("calls to fadeOut a specific number of times w/ a duration", function() {
+      var fadeOutSpy = spyOn($.fn, "fadeOut");
+      build.fadeInAndOut();
+      expect(fadeOutSpy).toHaveBeenCalledWith(duration);
+      expect(fadeOutSpy.callCount).toEqual(calls);
     });
   });
 });
