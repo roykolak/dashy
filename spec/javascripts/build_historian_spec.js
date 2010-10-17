@@ -39,20 +39,13 @@ describe("BuildHistorian", function() {
     
     describe("when there are ten previous build status", function() {
       beforeEach(function() {
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
-        buildHistorian.addStatus('success');
+        for(var times = 11; times > 0; times--) {
+          buildHistorian.addStatus('success');
+        }
       });
       
       it("removes the oldest status and prepends the new status", function() {
+        expect($('.project .history li').length).toEqual(buildHistorian.maxStatuses);
         buildHistorian.addStatus('success');        
         expect($('.project .history li').length).toEqual(buildHistorian.maxStatuses);
       });

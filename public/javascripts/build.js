@@ -41,6 +41,7 @@ function Build(config) {
         this.fadeInAndOut();
       };
 
+      // REFACTOR: too busy
       if(this.previousBuild != 'success' && status == 'success') {
         Audio.success.play();
         this.buildHistorian.addStatus('success');
