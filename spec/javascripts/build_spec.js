@@ -8,16 +8,20 @@ describe("Build", function() {
   });
   
   describe("#initialize", function() {
-    it("inserts a new build html block", function() {
-      expect($('.build, .build .name, .build .time')).toExist();
+    it("inserts a new project html block", function() {
+      expect($('.project .current_build, .project .current_build .name, .project .current_build .time')).toExist();
     });
     
     it("inserts the build name in the header", function() {
-      expect($('.build .name')).toHaveText('project build');
+      expect($('.project .current_build .name')).toHaveText('project build');
     });
     
     it("stores the url and append jsonp", function() {
       expect(build.url).toEqual('http://www.buildstatus.com?jsonp=?');
+    });
+    
+    it("initializes a BuildHistorian", function() {
+      expect(build.buildHistorian).toBeDefined();
     });
   });
   
@@ -28,22 +32,22 @@ describe("Build", function() {
       build.setStatus('building');
       build.setStatus('success');
       build.setStatus('status');
-      expect($('.build').hasClass('failure building success')).toBeFalsy();
+      expect($('.current_build').hasClass('failure building success')).toBeFalsy();
     });
     
     it("adds a 'building' class to a project when it is building", function() {
       build.setStatus('building');
-      expect($('.build').hasClass('building')).toBeTruthy();
+      expect($('.current_build').hasClass('building')).toBeTruthy();
     });
     
     it("adds a 'success' class to a project when it is successfully built", function() {
       build.setStatus('success');
-      expect($('.build').hasClass('success')).toBeTruthy();
+      expect($('.current_build').hasClass('success')).toBeTruthy();
     });
     
     it("adds a 'failure' class to a project when it failed to build", function() {
       build.setStatus('failure');
-      expect($('.build').hasClass('failure')).toBeTruthy();
+      expect($('.current_build').hasClass('failure')).toBeTruthy();
     });
     
     it("sets the previous build status w/ the passed build status", function() {
@@ -58,6 +62,26 @@ describe("Build", function() {
       build.setStatus('building');
 
       expect(fadeInAndOutSpy).toHaveBeenCalled();
+    });
+    
+    describe("setting the build history", function() {
+      var buildHistorianSpy;
+      
+      beforeEach(function() {
+        buildHistorianSpy = spyOn(build.buildHistorian, 'addStatus');
+      });
+      
+      it("calls to the build historian when the status is success and it was previously not a success", function() {
+        build.setStatus('building');
+        build.setStatus('success');
+        expect(buildHistorianSpy).toHaveBeenCalledWith('success');
+      });
+      
+      it("calls to the build historian when the status is failure and it was previously not a failure", function() {
+        build.setStatus('building');
+        build.setStatus('failure');
+        expect(buildHistorianSpy).toHaveBeenCalledWith('failure');
+      });
     });
     
     describe("sounds", function() {      
@@ -108,12 +132,12 @@ describe("Build", function() {
   describe("#setDuration", function() {
     it("inserts the passed time into the time div and appends time label", function() {
       build.setDuration(5);
-      expect($('.build .time')).toHaveText('5 sec');
+      expect($('.current_build .time')).toHaveText('5 sec');
     });
     
     it("empties the time container if passed zero", function() {
       build.setDuration(0);
-      expect($('.build .time')).toHaveText('');
+      expect($('.current_build .time')).toHaveText('');
     });
   });
   

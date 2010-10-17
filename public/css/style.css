@@ -22,7 +22,7 @@ h1, h2, h3, p, li, ul {
 }
 .clear { clear:both; }
 
-.person, .build { background:#FFF; }
+.current_build { background:#FFF; }
 .success { background: -webkit-gradient(linear, left top, left bottom, from(#55ba55), to(#1b891b)); }
 .failure { background: -webkit-gradient(linear, left top, left bottom, from(#d67979), to(#b63f3f)); }
 .building { background: -webkit-gradient(linear, left top, left bottom, from(#e9d06a), to(#c0aa51)); }
@@ -35,68 +35,31 @@ h1 {
   padding:10px;
 }
 
-#announce {
-  display:none;
-  h1 { 
-    border-radius:20px;
-    color:#FFF;
-    font-size:100px;
-    margin:60px 0;
-    padding:10px;
-    text-align:center;
-  }
-}
-
-#people {
-  display:none;
-  width:100%;
-    
-  li {
-    color:#333;
-    display:inline-block;
-    position:relative;
-    width:33.3333%;
-    clear:both;
-    
-    .person {
-      border-radius:20px;
-      margin-right:20px;
-      
-      .name { 
-        color:#000;
-        font-size:40px;
-        padding:15px 0px;
-        text-align:center;
-      }
-      .message {
-        bottom:10px;
-        color:#333;
-        display:none;
-        font-size:30px;
-        position:absolute;
-        text-align:center;
-      }
-      .image {
-        display:block;
-        margin:auto;
-        padding-top:20px;
-        width:300px;
-      }
-    }
-  }
-  
-  .person:last-child .wrapper { margin-right:0; }
-}
 #builds {
   font-size:60px;  
   margin-top:20px;
   
-  .build {
+  .current_build {
     border-radius:20px;
     margin-top:20px;
     padding:20px 30px;
     
     .name { float:left; }
     .time { float:right; }
+  }
+  
+  .history {
+    -webkit-mask-image: -webkit-gradient(linear, left center, right center, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));
+    
+    li { 
+      border-radius:25px;
+      display:inline-block;
+      height:50px; 
+      margin:16px 40px 30px 0;
+      text-indent:-5000px;
+      width:50px;
+    }
+    
+    :last-child { margin-right:0; }
   }
 }

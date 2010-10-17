@@ -1,15 +1,18 @@
 function Build(config) {
-  var buildElement = $(document.createElement('li')),
+  var projectElement = $(document.createElement('li')),
+      buildElement = $(document.createElement('div')),
       nameElement = $(document.createElement('h3')),
       timeElement = $(document.createElement('p')),
       clearingElement = $(document.createElement('div'));
 
-  $(buildElement).addClass('build');
+  $(projectElement).addClass('project')
+  $(buildElement).addClass('current_build');
   $(nameElement).addClass('name').text(config.name);
   $(timeElement).addClass('time');
   $(clearingElement).addClass('clear');
   $(buildElement).append(nameElement).append(timeElement).append(clearingElement);
-  $('#builds').append(buildElement);
+  $(projectElement).append(buildElement)
+  $('#builds').append(projectElement);
    
   function convertDurationToSeconds(duration) {
     return Math.round(parseInt(duration) / 1000);
@@ -17,6 +20,7 @@ function Build(config) {
    
   return {
     url: config.url + '?jsonp=?',
+    buildHistorian: new BuildHistorian(projectElement),
     
     setStatus: function(status) {
       $(buildElement).removeClass('failure building success');
@@ -39,10 +43,12 @@ function Build(config) {
 
       if(this.previousBuild != 'success' && status == 'success') {
         Audio.success.play();
+        this.buildHistorian.addStatus('success');
       } else if(this.previousBuild != 'building' && status == 'building') {
         Audio.building.play();
       } else if(this.previousBuild != 'failure' && status == 'failure') {
         Audio.failure.play();
+        this.buildHistorian.addStatus('failure');
       }
       
       this.previousBuild = status;
