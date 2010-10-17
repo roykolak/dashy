@@ -27,21 +27,12 @@
         <script src="javascripts/loader.js"></script>
         <script>
           var loader = new Loader(config);
-          loader.loadBuilds();
-        
-          // TODO: where to put this?
-          var refreshInterval = 5000;
-          function refresh() {
-            loader.refreshBuilds();
-            $('#progress').animate({ width: '100%' }, refreshInterval - 1000, 'linear', function() {
-              $(this).css('width', 0);
-            });
-          }
+          loader.loadBuilds();        
+          loader.refresh();
           
-          refresh();
-          var interval = setInterval(function() {
-            refresh();
-          }, refreshInterval);
+          setInterval(function() {
+            loader.refresh();
+          }, loader.refreshInterval);
         </script>
       </div>
     </div>

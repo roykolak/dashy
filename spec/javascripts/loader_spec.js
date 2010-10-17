@@ -12,6 +12,10 @@ describe("Loader", function() {
     it("stores the passed config options", function() {
       expect(loader.config).toEqual(config);
     });
+    
+    it("sets the refresh interval to 5 seconds", function() {
+      expect(loader.refreshInterval).toEqual(5000);
+    });
   });
   
   describe("#loadbuilds", function() {
@@ -43,6 +47,28 @@ describe("Loader", function() {
     
     it("makes a request to the build server using the stored url for the project", function() {
       expect(getJSONSpy.mostRecentCall.args[0]).toEqual(config.builds[0].url + '?jsonp=?');
+    });
+  });
+  
+  describe("#startProgressBarAnimation", function() {
+    it("animates the progres bar", function() {
+      var animateSpy = spyOn($.fn, 'animate');
+      loader.startProgressBarAnimation();
+      expect(animateSpy).toHaveBeenCalled();
+    });
+  });
+  
+  describe("#refresh", function() {
+    it("calls to startProgressBarAnimation", function() {
+      var startProgressBarAnimationSpy = spyOn(loader, 'startProgressBarAnimation');
+      loader.refresh();
+      expect(startProgressBarAnimationSpy).toHaveBeenCalled();
+    });
+    
+    it("calls to refreshBuilds", function() {
+      var refreshBuildsSpy = spyOn(loader, 'refreshBuilds');
+      loader.refresh();
+      expect(refreshBuildsSpy).toHaveBeenCalled();
     });
   });
 });

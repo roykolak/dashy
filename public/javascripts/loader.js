@@ -1,8 +1,8 @@
-function Loader(config) {
-  
+function Loader(config) {  
   return {
-    config:config,
+    config: config,
     builds: [],
+    refreshInterval: 5000,
     
     loadBuilds: function() {
       var self = this;
@@ -16,6 +16,17 @@ function Loader(config) {
         $.getJSON(build.url, function(data) {
           build.update(data);
         });
+      });
+    },
+    
+    refresh: function() {
+      this.refreshBuilds();
+      this.startProgressBarAnimation();
+    },
+    
+    startProgressBarAnimation: function() {
+      $('#progress').animate({ width: '100%' }, this.refreshInterval - 1000, 'linear', function() {
+        $(this).css('width', 0);
       });
     }
   }
