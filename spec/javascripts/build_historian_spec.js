@@ -1,4 +1,4 @@
-xdescribe("BuildHistorian", function() {
+describe("BuildHistorian", function() {
   var buildHistorian;
   
   beforeEach(function() {
