@@ -15,6 +15,9 @@ var config = {
     }, {
       name:'Eup',
       url:'http://builder.gn-research/job/Eup/lastBuild/api/json'
+    }, {
+      name:'Eup User Management',
+      url:'http://builder.gn-research/job/EUP%20User%20Management/lastBuild/api/json'
     }// , {
     //       name:'SB0 Test',
     //       url:'http://builder.gn-research/job/SB0%20Test/lastBuild/api/json',
