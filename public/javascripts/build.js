@@ -38,7 +38,7 @@ function Build(config) {
       }
       
       if (this.previousBuild != status) {
-        this.fadeInAndOut();
+        $(buildElement).twinkle();
       };
 
       // REFACTOR: too busy
@@ -69,17 +69,6 @@ function Build(config) {
       }
       
       this.setDuration(convertDurationToSeconds(data.duration));
-    },
-    
-    fadeInAndOut: function() {
-      var duration = "slow";
-      var iterations = 4;
-      
-      for(iterations; iterations > 0; iterations--) {
-        $.each(['fadeOut', 'fadeIn'], function(i, effect) {
-          $(buildElement)[effect](duration);
-        });
-      }
     }
   };
 }

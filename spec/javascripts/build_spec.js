@@ -56,12 +56,12 @@ describe("Build", function() {
     });
     
     it("blinks a few times when a new status is set", function() {
-      var fadeInAndOutSpy = spyOn(build, 'fadeInAndOut');
+      var twinkleSpy = spyOn($.fn, 'twinkle');
 
       build.setStatus('success');
       build.setStatus('building');
 
-      expect(fadeInAndOutSpy).toHaveBeenCalled();
+      expect(twinkleSpy).toHaveBeenCalled();
     });
     
     describe("setting the build history", function() {
@@ -167,28 +167,6 @@ describe("Build", function() {
     it("converts the duration to seconds and calls setDuration w/ the value", function() {
       build.update({ building:false, result:'FAILURE', duration:'5432' });
       expect(setDurationSpy).toHaveBeenCalledWith(5);
-    });
-  });
-  
-  describe("#fadeInAndOut", function() {
-    var duration, calls
-    
-    beforeEach(function() {
-      duration = "slow";
-      calls = 4;
-    });
-    it("calls to fadeIn a specific number of times w/ a duration", function() {
-      var fadeInSpy = spyOn($.fn, "fadeIn");
-      build.fadeInAndOut();
-      expect(fadeInSpy).toHaveBeenCalledWith(duration);
-      expect(fadeInSpy.callCount).toEqual(calls);
-    });
-    
-    it("calls to fadeOut a specific number of times w/ a duration", function() {
-      var fadeOutSpy = spyOn($.fn, "fadeOut");
-      build.fadeInAndOut();
-      expect(fadeOutSpy).toHaveBeenCalledWith(duration);
-      expect(fadeOutSpy.callCount).toEqual(calls);
     });
   });
 });
