@@ -7,7 +7,7 @@ def run
   result = `rake jasmine:headless`
   puts result
   growl result
-end
+end 
 
 def growl(message)
   time = message.match(/Finished in ([0-9]*\.?[0-9]+) seconds?/)[0]
