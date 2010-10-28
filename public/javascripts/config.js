@@ -18,22 +18,24 @@ var config = {
     }, {
       name:'Eup User Management',
       url:'http://builder.gn-research/job/EUP-User-Management/lastBuild/api/json'
-    }// , {
-    //       name:'SB0 Test',
-    //       url:'http://builder.gn-research/job/SB0%20Test/lastBuild/api/json',
-    //       sound:false
-    //     }, {
-    //       name:'Sound Booth 0', 
-    //       url:'http://builder.gn-research/job/Sound%20Booth%200/lastBuild/api/json',
-    //       sound:false
-    //     }, {
-    //       name:'Sound Booth 1',
-    //       url:'http://builder.gn-research/job/Sound%20Booth%201/lastBuild/api/json',
-    //       sound:false
-    //     }, {
-    //       name:'Sound Booth 2',
-    //       url:'http://builder.gn-research/job/Sound%20Booth%202/lastBuild/api/json',
-    //       sound:false
-    //     }    
+    }
+  ],
+  pings:[
+    {
+      name:'Phobos', 
+      url:'http://builder.gn-research/job/Ping%20Phobos/lastBuild/api/json'
+    }, {
+      name:'Hermes', 
+      url:'http://builder.gn-research/job/Ping%20Hermes/lastBuild/api/json'
+    }, {
+      name:'Sound Booth 0', 
+      url:'http://builder.gn-research/job/Ping%20Sound%20Booth%200/lastBuild/api/json'
+    }, {
+      name:'Sound Booth 1',
+      url:'http://builder.gn-research/job/Ping%20Sound%20Booth%201/lastBuild/api/json'
+    }, {
+      name:'Sound Booth 2',
+      url:'http://builder.gn-research/job/Ping%20Sound%20Booth%202/lastBuild/api/json'
+    }
   ]
 }

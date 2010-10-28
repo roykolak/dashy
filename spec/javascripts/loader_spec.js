@@ -3,7 +3,8 @@ describe("Loader", function() {
   
   beforeEach(function() {
     config = {
-      builds: [{ name:'Sweet Project', url:'http://www.buildresults.com/project'}]
+      builds: [{ name:'Sweet Project', url:'http://www.buildresults.com/project'}],
+      pings: [{ name:'Server 1', url:'http://www.server1.com/'}]
     };
     loader = new Loader(config);
   });
@@ -15,6 +16,23 @@ describe("Loader", function() {
     
     it("sets the refresh interval to 5 seconds", function() {
       expect(loader.refreshInterval).toEqual(5000);
+    });
+  });
+
+  describe("#loadPings", function() {
+    var pingSpy;
+    
+    beforeEach(function() {
+      pingSpy = spyOn(window, 'Ping');
+      loader.loadPings();
+    });
+    
+    it("initializes pings", function() {
+      expect(pingSpy).toHaveBeenCalledWith(config.pings[0]);
+    });
+    
+    it("stores the initialized pings", function() {
+      expect(loader.pings.length).toBe(1);
     });
   });
   
@@ -50,6 +68,21 @@ describe("Loader", function() {
     });
   });
   
+  describe("#refreshPings", function() {
+    var data, getJSONSpy;
+    
+    beforeEach(function() {
+      data = { result: 'SUCCESS' };
+      getJSONSpy = spyOn($, 'getJSON');
+      loader.loadPings();
+      loader.refreshPings();
+    });
+    
+    it("makes a request to the build server using the stored url for the project", function() {
+      expect(getJSONSpy.mostRecentCall.args[0]).toEqual(config.pings[0].url + '?jsonp=?');
+    });
+  });
+  
   describe("#startProgressBarAnimation", function() {
     it("animates the progres bar", function() {
       var animateSpy = spyOn($.fn, 'animate');
@@ -69,6 +102,12 @@ describe("Loader", function() {
       var refreshBuildsSpy = spyOn(loader, 'refreshBuilds');
       loader.refresh();
       expect(refreshBuildsSpy).toHaveBeenCalled();
+    });
+    
+    it("calls to refreshPings", function() {
+      var refreshPingsSpy = spyOn(loader, 'refreshPings');
+      loader.refresh();
+      expect(refreshPingsSpy).toHaveBeenCalled();
     });
     
     it("calls to checkForDashboardChanges", function() {

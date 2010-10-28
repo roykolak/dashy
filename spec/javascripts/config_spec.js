@@ -10,4 +10,12 @@ describe("Config JSON", function() {
       expect(build.url).toBeDefined();
     });
   });
+  
+  describe("the pings array", function() {
+    it("should contain a hash for each ping with specific properties set", function() {
+      var ping = config.pings[0];
+      expect(ping.name).toBeDefined();
+      expect(ping.url).toBeDefined();
+    });
+  });
 });

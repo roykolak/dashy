@@ -2,12 +2,28 @@ function Loader(config) {
   return {
     config: config,
     builds: [],
+    pings: [],
     refreshInterval: 5000,
+
+    loadPings: function() {
+      var self = this;
+      $.each(config.pings, function(i, v) {
+        self.pings.push(new Ping(v));
+      });
+    },
     
     loadBuilds: function() {
       var self = this;
       $.each(config.builds, function(i, v) {
         self.builds.push(new Build(v));
+      });
+    },
+
+    refreshPings: function() {
+      $.each(this.pings, function(i, ping) {
+        $.getJSON(ping.url, function(data) {
+          ping.update(data);
+        });
       });
     },
     
@@ -22,6 +38,7 @@ function Loader(config) {
     refresh: function() {
       this.checkForDashboardChanges();
       this.refreshBuilds();
+      this.refreshPings();
       this.startProgressBarAnimation();
     },
     
