@@ -17,12 +17,10 @@ function Ping(config) {
     url:config.url + '?jsonp=?',
     
     setStatus: function(status) {
-      $(buildElement).removeClass('building success');
+      $(buildElement).removeClass('failure success');
       
       if(status == 'success') {
         $(buildElement).addClass('success');
-      } else if(status == 'building') {
-        $(buildElement).addClass('building');
       } else if(status == 'failure') {
         $(buildElement).addClass('failure');
       }
