@@ -13,6 +13,9 @@ var config = {
       name:'LibTdt',
       url:'http://phobos:8080/job/LibTdt/lastBuild/api/json'
     }, {
+      name:'CRTools',
+      url:'http://phobos:8080/job/CRTools/lastBuild/api/json'
+    }, {
       name:'Eup',
       url:'http://builder.gn-research/job/Eup/lastBuild/api/json'
     }, {
