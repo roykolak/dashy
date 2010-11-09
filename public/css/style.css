@@ -1,3 +1,19 @@
+.rounded_corners(@radius: 20px) {
+  border-radius:@radius;
+  -moz-border-radius:@radius;
+  -webkit-border-radius:@radius;
+}
+.gradient(@start, @end) {
+  background:@end;
+  background:linear-gradient(left top, @start, @end);
+  background:-webkit-gradient(linear, left top, left bottom, from(@start), to(@end));
+  background:-moz-linear-gradient(center top, @start, @end);
+}
+.mask {
+  -webkit-mask-image: -webkit-gradient(linear, left center, right center, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));
+}
+
+
 body {
   background:#000;
   margin:0;
@@ -23,33 +39,15 @@ h1, h2, h3, p, li, ul {
 .clear { clear:both; }
 
 .success, .failure, .building { opacity:0.7; }
-.current_build { 
-  background:#BBB;
-  background:-webkit-gradient(linear, left top, left bottom, from(#DDD), to(#BBB)); 
-}
-.success { 
-  background:#04eb04;
-  background:-webkit-gradient(linear, left top, left bottom, from(#4afd4a), to(#04eb04)); 
-}
-.failure { 
-  background:#ec1f1f;
-  background:-webkit-gradient(linear, left top, left bottom, from(#fd6c6c), to(#ec1f1f)); 
-}
-.building { 
-  background:#e0dd00;
-  background:-webkit-gradient(linear, left top, left bottom, from(#fffd42), to(#e0dd00)); 
-}
+.current_build { .gradient(#DDD, #BBB); }
+.success { .gradient(#4afd4a, #04eb04); }
+.failure { .gradient(#fd6c6c, #ec1f1f); }
+.building { .gradient(#fffd42, #e0dd00); }
 
 .current_build { border:4px solid #DDD; }
 .current_build.success { border-color:#a1ffa1; }
 .current_build.failure { border-color:#ff9696; }
 .current_build.building { border-color:#ffeca0; }
-
-.rounded_corners(@radius: 20px) {
-  -moz-border-radius:@radius;
-  -webkit-border-radius:@radius;
-  border-radius:@radius;
-}
 
 h1 { 
   color:#FFF;
@@ -80,12 +78,12 @@ h1 {
     }
 
     .history {
-      -webkit-mask-image: -webkit-gradient(linear, left center, right center, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));
+      .mask;
       padding:0 10px;
       margin:0;
 
       li { 
-        border-radius:25px;
+        .rounded_corners(25px);
         display:inline-block;
         margin:16px 40px 0px 0;
         text-indent:-5000px;
