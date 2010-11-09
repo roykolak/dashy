@@ -31,13 +31,13 @@ var config = {
       name:'Hermes', 
       url:'http://builder.gn-research/job/Ping%20Hermes/lastBuild/api/json'
     }, {
-      name:'Sound Booth 0', 
+      name:'SB 0', 
       url:'http://builder.gn-research/job/Ping%20Sound%20Booth%200/lastBuild/api/json'
     }, {
-      name:'Sound Booth 1',
+      name:'SB 1',
       url:'http://builder.gn-research/job/Ping%20Sound%20Booth%201/lastBuild/api/json'
     }, {
-      name:'Sound Booth 2',
+      name:'SB 2',
       url:'http://builder.gn-research/job/Ping%20Sound%20Booth%202/lastBuild/api/json'
     }
   ]
