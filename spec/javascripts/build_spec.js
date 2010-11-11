@@ -46,7 +46,7 @@ describe("Build", function() {
     });
   });
   
-  describe("#recordHistorian", function() {
+  describe("#recordHistory", function() {
     var buildHistorianSpy;
     
     beforeEach(function() {

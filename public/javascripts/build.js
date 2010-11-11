@@ -51,10 +51,10 @@ function Build(config) {
     },
     
     recordHistory: function(status, newStatus) {
-      if(status != 'success' && newStatus == 'success') {
-        this.buildHistorian.addState(status);
-      } else if(status != 'failure' && newStatus == 'failure') {
-        this.buildHistorian.addState(status);
+      if(status == 'success' && newStatus != 'success') {
+        this.buildHistorian.addState('success');
+      } else if(status == 'failure' && newStatus != 'failure') {
+        this.buildHistorian.addState('failure');
       }
     },
     
