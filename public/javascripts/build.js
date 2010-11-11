@@ -31,6 +31,7 @@ function Build(config) {
       }
       
       if(this.status != newStatus) {
+        $('#builds').prepend($(buildElement).parent());
         $(buildElement).twinkle();
       };
 

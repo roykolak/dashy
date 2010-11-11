@@ -90,7 +90,7 @@ describe("Build", function() {
       build.setStatus('building');
 
       expect(twinkleSpy).toHaveBeenCalled();
-    });    
+    }); 
   });
   
   describe("#setDuration", function() {
