@@ -68,7 +68,7 @@ describe("Build", function() {
       var buildHistorianSpy;
       
       beforeEach(function() {
-        buildHistorianSpy = spyOn(build.buildHistorian, 'addStatus');
+        buildHistorianSpy = spyOn(build.buildHistorian, 'addState');
       });
       
       it("calls to the build historian when the status is success and it was previously not a success", function() {

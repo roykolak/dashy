@@ -44,12 +44,12 @@ function Build(config) {
       // REFACTOR: too busy
       if(this.previousBuild != 'success' && status == 'success') {
         Audio.success.play();
-        this.buildHistorian.addStatus('success');
+        this.buildHistorian.addState('success');
       } else if(this.previousBuild != 'building' && status == 'building') {
         Audio.building.play();
       } else if(this.previousBuild != 'failure' && status == 'failure') {
         Audio.failure.play();
-        this.buildHistorian.addStatus('failure');
+        this.buildHistorian.addState('failure');
       }
       
       this.previousBuild = status;

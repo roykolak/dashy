@@ -12,42 +12,62 @@ describe("BuildHistorian", function() {
     });
     
     it("inserts a build history list", function() {
-      expect($('.project .history')).toExist();
+      expect($('.history')).toExist();
     });
   });
   
-  describe("#addStatus", function() {
+  describe("#buildStateElement", function() {
+    var stateElement;
+    
     beforeEach(function() {
-      buildHistorian.addStatus('success');
+      stateElement = buildHistorian.buildStateElement();
+    });
+
+    it("creates an li", function() {
+      expect($(stateElement).is('li')).toBeTruthy();
     });
     
-    it("prepends a new build status to the history", function() {
-      expect($('.project .history li')).toExist();
+    it("adds a class of status to the element", function() {
+      expect($(stateElement).hasClass('status')).toBeTruthy();
+    });
+  });
+  
+  describe("removeOldestBuildResult", function() {
+    beforeEach(function() {
+      buildHistorian.addState('success');
     });
     
-    it("adds a class of 'status' to the prepended status element", function() {
-      expect($('.project .history .status')).toExist();
+    it("drops the oldest build state", function() {
+      expect($('.status').length).toEqual(1);
+      buildHistorian.removeOldestBuildState();
+      expect($('.status').length).toEqual(0);
+    });
+  });
+  
+  describe("#addState", function() {
+    beforeEach(function() {
+      buildHistorian.addState('success');
     });
     
-    it("adds the passed status as a class of the prepended status element", function() {
-      expect($('.project .history .success')).toExist();
+    it("adds the passed state as a class on the state element", function() {
+      expect($('.status').hasClass('success')).toBeTruthy();
     });
     
-    it("adds the passed status as the text of the prepended status element", function() {
-      expect($('.project .history .success')).toHaveText('success');
+    it("prepends a new state element", function() {
+      expect($('.status').length).toEqual(1)
     });
     
-    describe("when there are ten previous build status", function() {
+    describe("when there are 10 previous build states", function() {
       beforeEach(function() {
         for(var times = 11; times > 0; times--) {
-          buildHistorian.addStatus('success');
+          buildHistorian.addState('success');
         }
       });
       
-      it("removes the oldest status and prepends the new status", function() {
-        expect($('.project .history li').length).toEqual(buildHistorian.maxStatuses);
-        buildHistorian.addStatus('success');        
-        expect($('.project .history li').length).toEqual(buildHistorian.maxStatuses);
+      it("removes the oldest state and prepends the new state", function() {
+        expect($('.project .history li').length).toEqual(buildHistorian.maxStates);
+        buildHistorian.addState('success');
+        expect($('.project .history li').length).toEqual(buildHistorian.maxStates);
       });
     });
   });

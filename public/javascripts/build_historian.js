@@ -1,23 +1,30 @@
 function BuildHistorian(buildElement) {
   var historyElement = $(document.createElement('ol'));
-  
   $(historyElement).addClass('history');
   $(buildElement).append(historyElement);
   
   return {
     buildElement: buildElement,
-    maxStatuses: 12,
+    maxStates: 12,
     
-    addStatus: function(status) {
-      var statusElement = $(document.createElement('li'));
-      $(statusElement).addClass('status');
-      $(statusElement).addClass(status).text(status);
-      
-      if($(historyElement).children().length == this.maxStatuses) {
-        var oldestStatus = $(historyElement).children().last();
-        $(oldestStatus).remove();
+    addState: function(state) {
+      if($(historyElement).children().length == this.maxStates) {
+        this.removeOldestBuildState();
       }
-      $(historyElement).prepend(statusElement);
+      
+      var stateElement = this.buildStateElement();
+      $(stateElement).addClass(state).text(state);
+      $(historyElement).prepend(stateElement);
+    },
+    
+    buildStateElement: function() {
+      var element = $(document.createElement('li'));
+      $(element).addClass('status');
+      return element;
+    },
+    
+    removeOldestBuildState: function() {
+      $(historyElement).children().last().remove();
     }
   }
 }
