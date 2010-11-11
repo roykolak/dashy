@@ -22,37 +22,40 @@ function Build(config) {
     url: config.url + '?jsonp=?',
     buildHistorian: new BuildHistorian(projectElement),
     
-    setStatus: function(status) {
+    setStatus: function(newStatus) {
       $(buildElement).removeClass('failure building success');
+      $(buildElement).addClass(newStatus);
       
-      if(status == 'success') {
-        $(buildElement).addClass('success');
-      } else if(status == 'building') {
-        $(buildElement).addClass('building');
-      } else if(status == 'failure') {
-        $(buildElement).addClass('failure');
+      if(typeof(this.status) == 'undefined') {
+        this.status = newStatus;
       }
       
-      if(typeof(this.previousBuild) == 'undefined') {
-        this.previousBuild = status; 
-      }
-      
-      if (this.previousBuild != status) {
+      if(this.status != newStatus) {
         $(buildElement).twinkle();
       };
 
-      // REFACTOR: too busy
-      if(this.previousBuild != 'success' && status == 'success') {
-        Audio.success.play();
-        this.buildHistorian.addState('success');
-      } else if(this.previousBuild != 'building' && status == 'building') {
-        Audio.building.play();
-      } else if(this.previousBuild != 'failure' && status == 'failure') {
-        Audio.failure.play();
-        this.buildHistorian.addState('failure');
-      }
+      this.playSound(this.status, newStatus);
+      this.recordHistory(this.status, newStatus);
       
-      this.previousBuild = status;
+      this.status = newStatus;
+    },
+    
+    playSound: function(status, newStatus) {
+      if(status != 'success' && newStatus == 'success') {
+        Audio.success.play();
+      } else if(status != 'building' && newStatus == 'building') {
+        Audio.building.play();
+      } else if(status != 'failure' && newStatus == 'failure') {
+        Audio.failure.play();
+      }
+    },
+    
+    recordHistory: function(status, newStatus) {
+      if(status != 'success' && newStatus == 'success') {
+        this.buildHistorian.addState(status);
+      } else if(status != 'failure' && newStatus == 'failure') {
+        this.buildHistorian.addState(status);
+      }
     },
     
     setDuration: function(duration) {

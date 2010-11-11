@@ -3,7 +3,7 @@ describe("Build", function() {
   
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/builds.html');
-    options = { name:'project build', url:'http://www.buildstatus.com', sound:true }
+    options = { name:'project build', url:'http://www.buildstatus.com' }
     build = new Build(options);
   });
   
@@ -25,6 +25,44 @@ describe("Build", function() {
     });
   });
   
+  describe("#playSound", function() {           
+    it("plays the success sound when the status is 'success' and the previous status was not success", function() {  
+      var successAudioSpy = spyOn(Audio.success, 'play');
+      build.playSound('failure', 'success')
+      
+      expect(successAudioSpy).toHaveBeenCalled();
+    });
+      
+    it("plays the building sound when the status is 'building' and the previous status was not building", function() {  
+      var buildingAudioSpy = spyOn(Audio.building, 'play');
+      build.playSound('success', 'building');
+      expect(buildingAudioSpy).toHaveBeenCalled();
+    });
+              
+    it("plays the failure sound when the status is 'failure' and the previous status was not failure", function() {
+      var failureAudioSpy = spyOn(Audio.failure, "play");
+      build.playSound('success', 'failure');
+      expect(failureAudioSpy).toHaveBeenCalled();
+    });
+  });
+  
+  describe("#recordHistorian", function() {
+    var buildHistorianSpy;
+    
+    beforeEach(function() {
+      buildHistorianSpy = spyOn(build.buildHistorian, 'addState');
+    });
+    
+    it("calls to the build historian when the previous status is success and the new status is not success", function() {
+      build.recordHistory('success', 'failure');
+      expect(buildHistorianSpy).toHaveBeenCalledWith('success');
+    });
+    
+    it("calls to the build historian when the previous status is failure and the new status is not failure", function() {
+      build.recordHistory('failure', 'success');
+      expect(buildHistorianSpy).toHaveBeenCalledWith('failure');
+    });
+  });
   
   describe("#setStatus", function() {
     it("removes 'failure', 'building', and 'success' classes from the project", function() {
@@ -35,24 +73,14 @@ describe("Build", function() {
       expect($('.current_build').hasClass('failure building success')).toBeFalsy();
     });
     
-    it("adds a 'building' class to a project when it is building", function() {
+    it("adds the status as a class to a project", function() {
       build.setStatus('building');
       expect($('.current_build').hasClass('building')).toBeTruthy();
     });
     
-    it("adds a 'success' class to a project when it is successfully built", function() {
+    it("sets the current status to the passed status", function() {
       build.setStatus('success');
-      expect($('.current_build').hasClass('success')).toBeTruthy();
-    });
-    
-    it("adds a 'failure' class to a project when it failed to build", function() {
-      build.setStatus('failure');
-      expect($('.current_build').hasClass('failure')).toBeTruthy();
-    });
-    
-    it("sets the previous build status w/ the passed build status", function() {
-      build.setStatus('success');
-      expect(build.previousBuild).toEqual('success');
+      expect(build.status).toEqual('success');
     });
     
     it("blinks a few times when a new status is set", function() {
@@ -62,71 +90,7 @@ describe("Build", function() {
       build.setStatus('building');
 
       expect(twinkleSpy).toHaveBeenCalled();
-    });
-    
-    describe("setting the build history", function() {
-      var buildHistorianSpy;
-      
-      beforeEach(function() {
-        buildHistorianSpy = spyOn(build.buildHistorian, 'addState');
-      });
-      
-      it("calls to the build historian when the status is success and it was previously not a success", function() {
-        build.setStatus('building');
-        build.setStatus('success');
-        expect(buildHistorianSpy).toHaveBeenCalledWith('success');
-      });
-      
-      it("calls to the build historian when the status is failure and it was previously not a failure", function() {
-        build.setStatus('building');
-        build.setStatus('failure');
-        expect(buildHistorianSpy).toHaveBeenCalledWith('failure');
-      });
-    });
-    
-    describe("sounds", function() {      
-      describe("the success sound", function() {
-        var buildingAudioSpy;
-        
-        beforeEach(function() {
-          successAudioSpy = spyOn(Audio.success, 'play');
-        });
-        
-        it("plays the success sound when the status is 'success' and the previous status was not success", function() {  
-          build.setStatus('failure');
-          build.setStatus('success');
-          expect(successAudioSpy).toHaveBeenCalled();
-        });
-      });
-
-      describe("the building sound", function() {
-        var buildingAudioSpy;
-        
-        beforeEach(function() {
-          buildingAudioSpy = spyOn(Audio.building, 'play');
-        });
-        
-        it("plays the building sound when the status is 'building' and the previous status was not building", function() {  
-          build.setStatus('failure');
-          build.setStatus('building');
-          expect(buildingAudioSpy).toHaveBeenCalled();
-        });
-      });
-      
-      describe("the failure sound", function() {
-        var failureAudioSpy;
-        
-        beforeEach(function() {
-          failureAudioSpy = spyOn(Audio.failure, "play");
-        });
-        
-        it("plays the failure sound when the status is 'failure' and the previous status was not failure", function() {
-          build.setStatus('building');
-          build.setStatus('failure');
-          expect(failureAudioSpy).toHaveBeenCalled();
-        });
-      });
-    });
+    });    
   });
   
   describe("#setDuration", function() {
