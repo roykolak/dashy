@@ -83,14 +83,25 @@ describe("Build", function() {
       expect(build.status).toEqual('success');
     });
     
-    it("blinks a few times when a new status is set", function() {
-      var twinkleSpy = spyOn($.fn, 'twinkle');
+    describe("when a new status is set", function() {
+      it("blinks a few times", function() {
+        var twinkleSpy = spyOn($.fn, 'twinkle');
 
-      build.setStatus('success');
-      build.setStatus('building');
+        build.setStatus('success');
+        build.setStatus('building');
 
-      expect(twinkleSpy).toHaveBeenCalled();
-    }); 
+        expect(twinkleSpy).toHaveBeenCalled();
+      }); 
+      
+      it("ascends to the top", function() {
+        var ascendSpy = spyOn($.fn, 'ascend');
+
+        build.setStatus('success');
+        build.setStatus('building');
+
+        expect(ascendSpy).toHaveBeenCalled();
+      });      
+    });
   });
   
   describe("#setDuration", function() {

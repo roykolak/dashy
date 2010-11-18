@@ -13,4 +13,16 @@
       }
     });
   }
+  
+  $.fn.ascend = function() {
+    $(this).each(function() {
+      var element = $(this).parent();
+      if($('#builds li').index(element) != 0) {
+        $(element).slideUp('fast', function() {
+          $('#builds').prepend(element);
+          $(element).slideDown();
+        });
+      }
+    });
+  }
 })(jQuery);
