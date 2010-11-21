@@ -8,22 +8,30 @@ describe("Build", function() {
   });
   
   describe("#initialize", function() {
-    it("inserts a new project html block", function() {
-      expect($('.project .current_build, .project .current_build .name, .project .current_build .time')).toExist();
-    });
+    describe("elements created", function() {
+      it("inserts a new project html block", function() {
+        expect($('.project .current_build, .project .current_build .name, .project .current_build .time')).toExist();
+      });
     
-    it("inserts the build name in the header", function() {
-      expect($('.project .current_build .name')).toHaveText('project build');
-    });
+      it("inserts an underscore separated project id", function() {
+        expect($('#project_build')).toExist();
+      });
     
-    it("stores the url and append jsonp", function() {
-      expect(build.url).toEqual('http://www.buildstatus.com?jsonp=?');
+      it("inserts the build name in the header", function() {
+        expect($('.project .current_build .name')).toHaveText('project build');
+      });      
     });
     
     it("initializes a BuildHistorian", function() {
       expect(build.buildHistorian).toBeDefined();
     });
+    
+    it("stores the url and append jsonp", function() {
+      expect(build.url).toEqual('http://www.buildstatus.com?jsonp=?');
+    });    
   });
+  
+
   
   describe("#playSound", function() {           
     it("plays the success sound when the status is 'success' and the previous status was not success", function() {  

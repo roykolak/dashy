@@ -3,14 +3,10 @@ describe("BuildHistorian", function() {
   
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/build_history.html');
-    buildHistorian = new BuildHistorian($('.project'));
+    buildHistorian = new BuildHistorian('.project');
   });
   
   describe("#initialize", function() {
-    it("stores the build element", function() {
-      expect(buildHistorian.buildElement).toEqual($('.project'));
-    });
-    
     it("inserts a build history list", function() {
       expect($('.history')).toExist();
     });

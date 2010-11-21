@@ -1,20 +1,22 @@
-function BuildHistorian(buildElement) {
+function BuildHistorian(projectSelector) {
   var historyElement = $(document.createElement('ol'));
   $(historyElement).addClass('history');
-  $(buildElement).append(historyElement);
+  $(projectSelector).append(historyElement);
+  
+  var cssSelector = {
+    history: projectSelector + ' .history'
+  }
   
   return {
-    buildElement: buildElement,
     maxStates: 12,
     
     addState: function(state) {
-      if($(historyElement).children().length == this.maxStates) {
+      if($(cssSelector.history).children().length == this.maxStates) {
         this.removeOldestBuildState();
       }
-      
       var stateElement = this.buildStateElement();
       $(stateElement).addClass(state).text(state);
-      $(historyElement).prepend(stateElement);
+      $(cssSelector.history).prepend(stateElement);
     },
     
     buildStateElement: function() {
@@ -24,7 +26,7 @@ function BuildHistorian(buildElement) {
     },
     
     removeOldestBuildState: function() {
-      $(historyElement).children().last().remove();
+      $(cssSelector.history).children().last().remove();
     }
   }
 }
