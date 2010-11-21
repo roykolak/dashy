@@ -9,35 +9,37 @@
   <body>
     <div id="progress"></div>
     <div class="dashboard">
+      <h1 id="title">Dashy, He's always watching.</h1>
+      <ul id="builds" class="builds"></ul>
+      <ul id="pings"></ul>
+    </div>
+    <div id="audio">
       <audio id="success" src="sounds/success.mp3"></audio>
       <audio id="building" src="sounds/building.mp3"></audio>
       <audio id="failure" src="sounds/failure.mp3"></audio>
-      <h1>Dashy, He's always watching.</h1>
-      <ul id="builds" class="builds"></ul>
-      <ul id="pings"></ul>
-      <div>
-        <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
-        <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
-        <script src="javascripts/frameworks/jquery-ui-1.8.5.custom.min.js"></script>
-        <script src="javascripts/frameworks/jquery.quicksand.min.js"></script>        
-        <script src="javascripts/jquery_plugins.js"></script>
-        <script src="javascripts/audio.js"></script>
-        <script src="javascripts/ping.js"></script>
-        <script src="javascripts/build.js"></script>
-        <script src="javascripts/build_historian.js"></script>
-        <script src="javascripts/config.js"></script>
-        <script src="javascripts/loader.js"></script>
-        <script>
-          var loader = new Loader(config);
-          loader.loadPings();
-          loader.loadBuilds(); 
-          loader.refresh();
-          
-          setInterval(function() {
-            //loader.refresh();
-          }, loader.refreshInterval);
-        </script>
-      </div>
+    </div>
+    <div id="scripts">
+      <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
+      <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
+      <script src="javascripts/frameworks/jquery-ui-1.8.5.custom.min.js"></script>
+      <script src="javascripts/frameworks/jquery.quicksand.min.js"></script>        
+      <script src="javascripts/jquery_plugins.js"></script>
+      <script src="javascripts/audio.js"></script>
+      <script src="javascripts/ping.js"></script>
+      <script src="javascripts/build.js"></script>
+      <script src="javascripts/build_historian.js"></script>
+      <script src="javascripts/config.js"></script>
+      <script src="javascripts/loader.js"></script>
+      <script>
+        var loader = new Loader(config);
+        loader.loadPings();
+        loader.loadBuilds(); 
+        loader.refresh();
+        
+        setInterval(function() {
+          //loader.refresh();
+        }, loader.refreshInterval);
+      </script>
     </div>
   </body>
 </html>

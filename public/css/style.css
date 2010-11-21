@@ -14,28 +14,6 @@
 }
 
 
-body {
-  background:#000;
-  margin:0;
-  padding:0;
-}
-
-li { list-style-type:none; }
-h1, h2, h3, p, li, ul { 
-  margin:0;
-  padding:0;
-}
-
-#progress { 
-  background:#36689b;
-  width:0;
-  height:10px;
-}
-
-.dashboard {
-  font-family: 'Droid Sans', arial, serif;
-/*  padding:0 20px 20px;*/
-}
 .clear { clear:both; }
 
 .success, .failure, .building { opacity:0.7; }
@@ -49,7 +27,27 @@ h1, h2, h3, p, li, ul {
 .current_build.failure { border-color:#ff9696; }
 .current_build.building { border-color:#ffeca0; }
 
-h1 { 
+
+body {
+  background:#000;
+  margin:0;
+  padding:0;
+  font-family: 'Droid Sans', arial, serif;
+}
+
+li { list-style-type:none; }
+h1, h2, h3, p, li, ul { 
+  margin:0;
+  padding:0;
+}
+
+
+#progress { 
+  background:#36689b;
+  width:0;
+  height:10px;
+}
+#title { 
   color:#FFF;
   font-size:70px;
   font-family:"Lobster";
@@ -60,7 +58,7 @@ h1 {
 }
 #builds, .builds {
   font-size:60px;  
-  margin-top:20px;
+  margin:20px 20px 0 0;
   .project { 
     padding:10px;
     margin-bottom:10px;
@@ -99,6 +97,10 @@ h1 {
 
 #pings {
   margin-top:50px;
+  position:absolute;
+  bottom:0px;
+  width:100%;
+  background:#111;
   .ping {
     display:inline-block;
     width:20%;
