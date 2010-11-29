@@ -36,18 +36,18 @@ body {
 }
 
 li { list-style-type:none; }
-h1, h2, h3, p, li, ul { 
+h1, h2, h3, p, li, ul {
   margin:0;
   padding:0;
 }
 
 
-#progress { 
+#progress {
   background:#36689b;
   width:0;
   height:10px;
 }
-#title { 
+#title {
   color:#FFF;
   font-size:70px;
   font-family:"Lobster";
@@ -57,9 +57,9 @@ h1, h2, h3, p, li, ul {
   background:#333;
 }
 #builds, .builds {
-  font-size:60px;  
+  font-size:60px;
   margin:20px 20px 0 0;
-  .project { 
+  .project {
     padding:10px;
     margin-bottom:10px;
     .rounded_corners;
@@ -67,7 +67,7 @@ h1, h2, h3, p, li, ul {
     width:100%;
     width:100%;
     display: block;
-    
+
     .current_build {
       .rounded_corners;
       padding:20px 30px;
@@ -81,7 +81,7 @@ h1, h2, h3, p, li, ul {
       padding:0 10px;
       margin:0;
 
-      li { 
+      li {
         .rounded_corners(25px);
         display:inline-block;
         margin:16px 40px 0px 0;
@@ -97,22 +97,22 @@ h1, h2, h3, p, li, ul {
 
 #pings {
   margin-top:50px;
-  position:absolute;
+  position:fixed;
   bottom:0px;
   width:100%;
   background:#111;
   .ping {
     display:inline-block;
     width:20%;
-    
+
     .wrapper {
       margin:10px 10px;
       padding:15px 10px 10px;
       .rounded_corners;
       background:#333;
     }
-    
-    .current_build { 
+
+    .current_build {
       .rounded_corners(50px);
       width:80px;
       height:80px;
