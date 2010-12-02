@@ -94,7 +94,6 @@ h1, h2, h3, p, li, ul {
 }
 
 #pings {
-  display:none;
   margin-top:50px;
   position:fixed;
   bottom:0px;
