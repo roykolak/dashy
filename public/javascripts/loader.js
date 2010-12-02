@@ -1,4 +1,4 @@
-function Loader(config) {  
+function Loader(config) {
   return {
     config: config,
     builds: [],
@@ -11,7 +11,7 @@ function Loader(config) {
         self.pings.push(new Ping(v));
       });
     },
-    
+
     loadBuilds: function() {
       var self = this;
       $.each(config.builds, function(i, v) {
@@ -26,7 +26,7 @@ function Loader(config) {
         });
       });
     },
-    
+
     refreshBuilds: function() {
       $.each(this.builds, function(i, build) {
         $.getJSON(build.url, function(data) {
@@ -34,23 +34,30 @@ function Loader(config) {
         });
       });
     },
-    
+
     refresh: function() {
       this.checkForDashboardChanges();
       this.refreshBuilds();
       this.refreshPings();
       this.startProgressBarAnimation();
+      this.checkForAwesomeRequest();
     },
-    
+
     startProgressBarAnimation: function() {
       $('#progress').animate({ width: '100%' }, this.refreshInterval - 1000, 'linear', function() {
         $(this).css('width', 0);
       });
     },
-    
+
     checkForDashboardChanges: function() {
       $.get('refresh.txt', function() {
         location.reload();
+      });
+    },
+
+    checkForAwesomeRequest: function() {
+      $.get('awesome.txt', function() {
+        Audio.awesome.play();
       });
     }
   }

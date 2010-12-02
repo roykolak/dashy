@@ -1,5 +1,6 @@
 Audio = {
   success: document.getElementById('success'),
   building: document.getElementById('building'),
-  failure: document.getElementById('failure')
+  failure: document.getElementById('failure'),
+  awesome: document.getElementById('awesome')
 }

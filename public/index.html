@@ -17,12 +17,13 @@
       <audio id="success" src="sounds/success.mp3"></audio>
       <audio id="building" src="sounds/building.mp3"></audio>
       <audio id="failure" src="sounds/failure.mp3"></audio>
+      <audio id="awesome" src="sounds/awesome.mp3"></audio>
     </div>
     <div id="scripts">
       <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
       <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
       <script src="javascripts/frameworks/jquery-ui-1.8.5.custom.min.js"></script>
-      <script src="javascripts/frameworks/jquery.quicksand.min.js"></script>        
+      <script src="javascripts/frameworks/jquery.quicksand.min.js"></script>
       <script src="javascripts/jquery_plugins.js"></script>
       <script src="javascripts/audio.js"></script>
       <script src="javascripts/ping.js"></script>
@@ -33,9 +34,9 @@
       <script>
         var loader = new Loader(config);
         loader.loadPings();
-        loader.loadBuilds(); 
+        loader.loadBuilds();
         loader.refresh();
-        
+
         setInterval(function() {
           loader.refresh();
         }, loader.refreshInterval);
