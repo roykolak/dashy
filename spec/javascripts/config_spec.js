@@ -1,16 +1,16 @@
 describe("Config JSON", function() {
-  it("should contain a builds property of an array", function() {
-    expect($.isArray(config.builds)).toBeTruthy();
+  it("should contain a projects property of an array", function() {
+    expect($.isArray(config.projects)).toBeTruthy();
   });
-  
-  describe("the builds array", function() {
-    it("should contain a hash for each build with specific properties set", function() {
-      var build = config.builds[0];
-      expect(build.name).toBeDefined();
-      expect(build.url).toBeDefined();
+
+  describe("the projects array", function() {
+    it("should contain a hash for each project with specific properties set", function() {
+      var project = config.projects[0];
+      expect(project.name).toBeDefined();
+      expect(project.url).toBeDefined();
     });
   });
-  
+
   describe("the pings array", function() {
     it("should contain a hash for each ping with specific properties set", function() {
       var ping = config.pings[0];

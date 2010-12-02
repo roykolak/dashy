@@ -1,7 +1,7 @@
 function Loader(config) {
   return {
     config: config,
-    builds: [],
+    projects: [],
     pings: [],
     refreshInterval: 5000,
 
@@ -12,10 +12,10 @@ function Loader(config) {
       });
     },
 
-    loadBuilds: function() {
+    loadProjects: function() {
       var self = this;
-      $.each(config.builds, function(i, v) {
-        self.builds.push(new Build(v));
+      $.each(config.projects, function(i, v) {
+        self.projects.push(new Project(v));
       });
     },
 
@@ -27,17 +27,17 @@ function Loader(config) {
       });
     },
 
-    refreshBuilds: function() {
-      $.each(this.builds, function(i, build) {
-        $.getJSON(build.url, function(data) {
-          build.update(data);
+    refreshProjects: function() {
+      $.each(this.projects, function(i, project) {
+        $.getJSON(project.url, function(data) {
+          project.update(data);
         });
       });
     },
 
     refresh: function() {
       this.checkForDashboardChanges();
-      this.refreshBuilds();
+      this.refreshProjects();
       this.refreshPings();
       this.startProgressBarAnimation();
       this.checkForAwesomeRequest();

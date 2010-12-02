@@ -1,6 +1,6 @@
 (function($) {
   $.fn.twinkle = function() {
-    $(this).each(function() {
+    $(this).find('.current_build').each(function() {
       var duration = 500,
           iterations = 4,
           element = this,
@@ -19,12 +19,12 @@
     $(this).each(function() {
       if(moving == false) {
         moving = true;
-        var buildsClone = $('.builds').clone(),
-            buildIndex = $('.builds li').index($(this).parent());
+        var clone = $('.projects').clone(),
+            index = $('.projects li').index($(this));
 
-        $(buildsClone).prepend($(buildsClone).find('li')[buildIndex]);
-        var builds = $(buildsClone).children().get();
-        $('#builds').quicksand(builds, { easing: 'easeInOutQuad', attribute: 'id' }, function() {
+        $(clone).prepend($(clone).find('li')[index]);
+
+        $('#projects').quicksand($(clone).children().get(), { useScaling: true, easing: 'easeInOutQuad', attribute: 'id' }, function() {
           $('.builds li').css('opacity', 'auto');
           callback();
           moving = false;

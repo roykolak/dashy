@@ -12,9 +12,6 @@
 .horizontal_mask {
   -webkit-mask-image: -webkit-gradient(linear, left center, right center, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));
 }
-.vertical_mask {
-  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.5)));
-}
 
 
 .clear { clear:both; }
@@ -59,17 +56,16 @@ h1, h2, h3, p, li, ul {
   margin:0 0 50px;
   background:#333;
 }
-#builds, .builds {
+.projects {
   font-size:60px;
   margin:20px 0 0 0;
-  .vertical_mask;
   .project {
     padding:10px;
     margin-bottom:10px;
     .rounded_corners;
     background:#333;
-    display: block;
-
+    width:100%;
+    display:block;
     .current_build {
       .rounded_corners;
       padding:20px 30px;
@@ -98,6 +94,7 @@ h1, h2, h3, p, li, ul {
 }
 
 #pings {
+  display:none;
   margin-top:50px;
   position:fixed;
   bottom:0px;

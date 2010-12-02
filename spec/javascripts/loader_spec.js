@@ -3,7 +3,7 @@ describe("Loader", function() {
 
   beforeEach(function() {
     config = {
-      builds: [{ name:'Sweet Project', url:'http://www.buildresults.com/project'}],
+      projects: [{ name:'Sweet Project', url:'http://www.buildresults.com/project'}],
       pings: [{ name:'Server 1', url:'http://www.server1.com/'}]
     };
     loader = new Loader(config);
@@ -36,20 +36,20 @@ describe("Loader", function() {
     });
   });
 
-  describe("#loadbuilds", function() {
-    var buildSpy;
+  describe("#loadProjects", function() {
+    var projectSpy;
 
     beforeEach(function() {
-      buildSpy = spyOn(window, 'Build');
-      loader.loadBuilds();
+      projectSpy = spyOn(window, 'Project');
+      loader.loadProjects();
     });
 
-    it("initializes builds", function() {
-      expect(buildSpy).toHaveBeenCalledWith(config.builds[0]);
+    it("initializes projects", function() {
+      expect(projectSpy).toHaveBeenCalledWith(config.projects[0]);
     });
 
-    it("stores the initialized builds", function() {
-      expect(loader.builds.length).toBe(1);
+    it("stores the initialized projects", function() {
+      expect(loader.projects.length).toBe(1);
     });
   });
 
@@ -59,12 +59,12 @@ describe("Loader", function() {
     beforeEach(function() {
       data = { result: 'SUCCESS' };
       getJSONSpy = spyOn($, 'getJSON');
-      loader.loadBuilds();
-      loader.refreshBuilds();
+      loader.loadProjects();
+      loader.refreshProjects();
     });
 
     it("makes a request to the build server using the stored url for the project", function() {
-      expect(getJSONSpy.mostRecentCall.args[0]).toEqual(config.builds[0].url + '?jsonp=?');
+      expect(getJSONSpy.mostRecentCall.args[0]).toEqual(config.projects[0].url + '?jsonp=?');
     });
   });
 
@@ -98,10 +98,10 @@ describe("Loader", function() {
       expect(startProgressBarAnimationSpy).toHaveBeenCalled();
     });
 
-    it("calls to refreshBuilds", function() {
-      var refreshBuildsSpy = spyOn(loader, 'refreshBuilds');
+    it("calls to refreshProjects", function() {
+      var refreshProjectsSpy = spyOn(loader, 'refreshProjects');
       loader.refresh();
-      expect(refreshBuildsSpy).toHaveBeenCalled();
+      expect(refreshProjectsSpy).toHaveBeenCalled();
     });
 
     it("calls to refreshPings", function() {

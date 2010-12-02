@@ -1,7 +1,7 @@
 var config = {
-  builds:[
+  projects:[
     {
-      name:'ArlisWebsite', 
+      name:'ArlisWebsite',
       url:'http://builder.gn-research/job/ArlisWebsite/lastBuild/api/json'
     },{
       name:'Dashboard',
@@ -25,13 +25,13 @@ var config = {
   ],
   pings:[
     {
-      name:'Phobos', 
+      name:'Phobos',
       url:'http://builder.gn-research/job/Ping%20Phobos/lastBuild/api/json'
     }, {
-      name:'Hermes', 
+      name:'Hermes',
       url:'http://builder.gn-research/job/Ping%20Hermes/lastBuild/api/json'
     }, {
-      name:'SB 0', 
+      name:'SB 0',
       url:'http://builder.gn-research/job/Ping%20Sound%20Booth%200/lastBuild/api/json'
     }, {
       name:'SB 1',

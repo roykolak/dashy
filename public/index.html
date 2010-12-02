@@ -10,7 +10,7 @@
     <div id="progress"></div>
     <div class="dashboard">
       <h1 id="title">Dashy, He's always watching.</h1>
-      <ul id="builds" class="builds"></ul>
+      <ul id="projects" class="projects"></ul>
       <ul id="pings"></ul>
     </div>
     <div id="audio">
@@ -22,19 +22,22 @@
     <div id="scripts">
       <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
       <script src="javascripts/frameworks/jquery-1.4.2.min.js"></script>
+      <script src="javascripts/frameworks/jquery-css-transform.js"></script>
+      <script src="javascripts/frameworks/jquery-animate-css-rotate-scale.js"></script>
       <script src="javascripts/frameworks/jquery-ui-1.8.5.custom.min.js"></script>
       <script src="javascripts/frameworks/jquery.quicksand.min.js"></script>
       <script src="javascripts/jquery_plugins.js"></script>
       <script src="javascripts/audio.js"></script>
       <script src="javascripts/ping.js"></script>
-      <script src="javascripts/build.js"></script>
+      <script src="javascripts/project.js"></script>
+      <script src="javascripts/current_build.js"></script>
       <script src="javascripts/build_historian.js"></script>
       <script src="javascripts/config.js"></script>
       <script src="javascripts/loader.js"></script>
       <script>
         var loader = new Loader(config);
         loader.loadPings();
-        loader.loadBuilds();
+        loader.loadProjects();
         loader.refresh();
 
         setInterval(function() {
