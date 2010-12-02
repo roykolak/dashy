@@ -19,16 +19,12 @@
     $(this).each(function() {
       if(moving == false) {
         moving = true;
-        var buildsClone = $('.builds').clone();
-        var buildIndex = $('.builds li').index($(this).parent());
+        var buildsClone = $('.builds').clone(),
+            buildIndex = $('.builds li').index($(this).parent());
 
         $(buildsClone).prepend($(buildsClone).find('li')[buildIndex]);
-
-        $('#builds').quicksand($(buildsClone).children().get(), {
-          adjustHeight:false,
-          easing: 'easeInOutQuad',
-          attribute: 'id'
-        }, function() {
+        var builds = $(buildsClone).children().get();
+        $('#builds').quicksand(builds, { easing: 'easeInOutQuad', attribute: 'id' }, function() {
           $('.builds li').css('opacity', 'auto');
           callback();
           moving = false;
