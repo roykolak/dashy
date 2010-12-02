@@ -14,8 +14,17 @@ namespace :jasmine do
   end
 end
 
-desc "Deploy to dashboard box"
-task :deploy do
-  system("sh deploy.sh")
-  puts "Deployed!"
+namespace :request do
+  path = 'scripts'
+
+  desc "Do something awesome? Rake this."
+  task :awesome do
+    system("sh #{path}/awesome.sh")
+  end
+
+  desc "Deploy to dashboard box"
+  task :deploy do
+    system("sh #{path}/deploy.sh")
+    puts "Deployed!"
+  end
 end
