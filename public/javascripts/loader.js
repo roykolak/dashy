@@ -6,6 +6,8 @@ function Loader(config) {
     refreshInterval: 5000,
 
     loadPings: function() {
+      $('#pings .js_visibility_toggler').visibilityToggler();
+
       var self = this;
       $.each(config.pings, function(i, v) {
         self.pings.push(new Ping(v));

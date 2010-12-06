@@ -20,19 +20,21 @@ describe("Loader", function() {
   });
 
   describe("#loadPings", function() {
-    var pingSpy;
-
-    beforeEach(function() {
-      pingSpy = spyOn(window, 'Ping');
-      loader.loadPings();
-    });
-
     it("initializes pings", function() {
+      var pingSpy = spyOn(window, 'Ping');
+      loader.loadPings();
       expect(pingSpy).toHaveBeenCalledWith(config.pings[0]);
     });
 
     it("stores the initialized pings", function() {
+      loader.loadPings();
       expect(loader.pings.length).toBe(1);
+    });
+
+    it("attaches the visibility toggler", function() {
+      var visibilityTogglerSpy = spyOn($.fn, 'visibilityToggler');
+      loader.loadPings();
+      expect(visibilityTogglerSpy).toHaveBeenCalled();
     });
   });
 

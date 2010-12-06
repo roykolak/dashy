@@ -32,4 +32,13 @@
       }
     });
   }
+
+  $.fn.visibilityToggler = function() {
+    $(this).each(function() {
+      $(this).click(function(ev) {
+        ev.preventDefault();
+        $(this).siblings().slideToggle();
+      })
+    });
+  }
 })(jQuery);
