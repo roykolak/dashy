@@ -39,15 +39,17 @@ describe("Loader", function() {
   });
 
   describe("#loadProjects", function() {
-    var projectSpy;
+    var buildAndInsertSpy;
 
     beforeEach(function() {
-      projectSpy = spyOn(window, 'Project');
+      project = new Project(config.projects[0]);
+      buildAndInsertSpy = spyOn(project, 'buildAndInsertElements');
+      spyOn(window, 'Project').andReturn(project);
       loader.loadProjects();
     });
 
-    it("initializes projects", function() {
-      expect(projectSpy).toHaveBeenCalledWith(config.projects[0]);
+    it("builds and inserts the project HTML", function() {
+      expect(buildAndInsertSpy).toHaveBeenCalled();
     });
 
     it("stores the initialized projects", function() {

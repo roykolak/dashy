@@ -8,22 +8,16 @@ describe("Project", function() {
   });
 
   describe("#initialize", function() {
-    describe("elements created", function() {
-      it("inserts a new project html block", function() {
-        expect($('.project')).toExist();
-      });
-
-      it("inserts an underscore separated project id", function() {
-        expect($('#project_build')).toExist();
-      });
-    });
-
     it("initializes a BuildHistorian", function() {
-      expect(project.buildHistorian).toBeDefined();
+      buildHistorianSpy = spyOn(window, 'BuildHistorian');
+      project = new Project(options);
+      expect(buildHistorianSpy).toHaveBeenCalledWith('#project_build');
     });
 
     it("initializes a CurrentBuild", function() {
-      expect(project.currentBuild).toBeDefined();
+      currentBuildSpy = spyOn(window, 'CurrentBuild');
+      project = new Project(options);
+      expect(currentBuildSpy).toHaveBeenCalledWith('#project_build', options.name);
     });
 
     it("stores the url and append jsonp", function() {
@@ -31,7 +25,25 @@ describe("Project", function() {
     });
   });
 
+  describe("#buildAndInsertElements", function() {
+    beforeEach(function() {
+      project.buildAndInsertElements();
+    });
+
+    it("inserts a new project html block", function() {
+      expect($('.project')).toExist();
+    });
+
+    it("inserts an underscore separated project id", function() {
+      expect($('#project_build')).toExist();
+    });
+  });
+
   describe("#setStatus", function() {
+    beforeEach(function() {
+      project.buildAndInsertElements();
+    });
+
     describe("when a new status is set", function() {
       it("blinks a few times", function() {
         var twinkleSpy = spyOn($.fn, 'twinkle');

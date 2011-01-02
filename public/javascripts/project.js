@@ -1,16 +1,17 @@
 function Project(config) {
-  var projectElement = $(document.createElement('li')),
-      projectId = config.name.replace(/ /g,"_");
-
-  $(projectElement).addClass('project').attr('id', projectId);
-  $('#projects').append(projectElement);
-
-  var cssSelector = { project: '#' + projectId }
+  var projectId = config.name.replace(/ /g,"_"),
+      projectSelector = '#' + projectId;
 
   return {
     url: config.url + '?jsonp=?',
-    currentBuild: new CurrentBuild(cssSelector.project, config.name),
-    buildHistorian: new BuildHistorian(cssSelector.project),
+    currentBuild: new CurrentBuild(projectSelector, config.name),
+    buildHistorian: new BuildHistorian(projectSelector),
+
+    buildAndInsertElements: function() {
+      var projectElement = $(document.createElement('li'));
+      $(projectElement).addClass('project').attr('id', projectId);
+      $('#projects').append(projectElement);
+    },
 
     setStatus: function(newStatus) {
       this.currentBuild.setStatus(newStatus);
@@ -22,8 +23,8 @@ function Project(config) {
       this.recordHistory(this.status, newStatus);
 
       if(this.status != newStatus) {
-        $(cssSelector.project).ascend(function() {
-          $(cssSelector.project).twinkle();
+        $(projectSelector).ascend(function() {
+          $(projectSelector).twinkle();
         });
       }
 

@@ -17,7 +17,9 @@ function Loader(config) {
     loadProjects: function() {
       var self = this;
       $.each(config.projects, function(i, v) {
-        self.projects.push(new Project(v));
+        var project = new Project(v);
+        project.buildAndInsertElements();
+        self.projects.push(project);
       });
     },
 
