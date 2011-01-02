@@ -18,8 +18,8 @@ function Project(config) {
       $(projectElement).append(frame);
       $('#projects').append(projectElement);
 
-      buildHistorian.buildAndInsertElements();
       currentBuild.buildAndInsertElements();
+      buildHistorian.buildAndInsertElements();
     },
 
     setStatus: function(newStatus) {
