@@ -1,6 +1,6 @@
 function Project(config) {
   var projectId = config.name.replace(/ /g,"_"),
-      projectSelector = '#' + projectId;
+      projectSelector = '#' + projectId + ' .frame';
 
   var buildHistorian = new BuildHistorian(projectSelector);
   var currentBuild = new CurrentBuild(projectSelector, config.name);
@@ -12,7 +12,10 @@ function Project(config) {
 
     buildAndInsertElements: function() {
       var projectElement = $(document.createElement('li'));
+      var frame = $(document.createElement('div'));
       $(projectElement).addClass('project').attr('id', projectId);
+      $(frame).addClass('frame');
+      $(projectElement).append(frame);
       $('#projects').append(projectElement);
 
       buildHistorian.buildAndInsertElements();

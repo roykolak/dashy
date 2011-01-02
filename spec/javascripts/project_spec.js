@@ -11,13 +11,13 @@ describe("Project", function() {
     it("initializes a BuildHistorian", function() {
       buildHistorianSpy = spyOn(window, 'BuildHistorian');
       new Project(options);
-      expect(buildHistorianSpy).toHaveBeenCalledWith('#project_build');
+      expect(buildHistorianSpy).toHaveBeenCalledWith('#project_build .frame');
     });
 
     it("initializes a CurrentBuild", function() {
       currentBuildSpy = spyOn(window, 'CurrentBuild');
       new Project(options);
-      expect(currentBuildSpy).toHaveBeenCalledWith('#project_build', options.name);
+      expect(currentBuildSpy).toHaveBeenCalledWith('#project_build .frame', options.name);
     });
 
     it("stores the url and append jsonp", function() {
@@ -31,7 +31,7 @@ describe("Project", function() {
     });
 
     it("inserts a new project html block", function() {
-      expect($('.project')).toExist();
+      expect($('.project .frame')).toExist();
     });
 
     it("inserts an underscore separated project id", function() {

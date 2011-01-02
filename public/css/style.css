@@ -60,12 +60,15 @@ h1, h2, h3, p, li, ul {
   font-size:60px;
   margin:20px 0 0 0;
   .project {
-    padding:10px;
     margin-bottom:10px;
-    .rounded_corners;
-    background:#333;
     width:100%;
     display:block;
+
+    .frame {
+      background:#333;
+      padding:10px;
+      .rounded_corners;
+    }
     .current_build {
       .rounded_corners;
       padding:20px 30px;
