@@ -42,7 +42,6 @@ function Loader(config) {
       this.refreshProjects();
       this.refreshPings();
       this.startProgressBarAnimation();
-      this.checkForAwesomeRequest();
     },
 
     startProgressBarAnimation: function() {
@@ -54,12 +53,6 @@ function Loader(config) {
     checkForDashboardChanges: function() {
       $.get('refresh.txt', function() {
         location.reload();
-      });
-    },
-
-    checkForAwesomeRequest: function() {
-      $.get('awesome.txt', function() {
-        Audio.awesome.play();
       });
     }
   }

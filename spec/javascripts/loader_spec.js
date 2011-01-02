@@ -117,12 +117,6 @@ describe("Loader", function() {
       loader.refresh();
       expect(checkForDashboardChangesSpy).toHaveBeenCalled();
     });
-
-    it("calls to checkForAwesomeRequest", function() {
-      var checkForAwesomeRequestSpy = spyOn(loader, 'checkForAwesomeRequest');
-      loader.refresh();
-      expect(checkForAwesomeRequestSpy).toHaveBeenCalled();
-    });
   });
 
   describe("#checkForDashboardChanges", function() {
@@ -130,14 +124,6 @@ describe("Loader", function() {
       var getSpy = spyOn($, 'get');
       loader.checkForDashboardChanges();
       expect(getSpy.mostRecentCall.args[0]).toEqual('refresh.txt');
-    });
-  });
-
-  describe("#checkForAwesomeRequest", function() {
-    it("makes a request for the awesome job asset", function() {
-      var getSpy = spyOn($, 'get');
-      loader.checkForAwesomeRequest();
-      expect(getSpy.mostRecentCall.args[0]).toEqual('awesome.txt');
     });
   });
 });
