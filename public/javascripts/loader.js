@@ -10,7 +10,9 @@ function Loader(config) {
 
       var self = this;
       $.each(config.pings, function(i, v) {
-        self.pings.push(new Ping(v));
+        var ping = new Ping(v);
+        ping.buildAndInsertElements();
+        self.pings.push(ping);
       });
     },
 

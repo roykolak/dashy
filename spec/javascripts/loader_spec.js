@@ -20,14 +20,20 @@ describe("Loader", function() {
   });
 
   describe("#loadPings", function() {
-    it("initializes pings", function() {
-      var pingSpy = spyOn(window, 'Ping');
+    var buildAndInsertSpy;
+
+    beforeEach(function() {
+      ping = new Ping(config.pings[0]);
+      buildAndInsertSpy = spyOn(ping, 'buildAndInsertElements');
+      spyOn(window, 'Ping').andReturn(ping);
       loader.loadPings();
-      expect(pingSpy).toHaveBeenCalledWith(config.pings[0]);
+    });
+
+    it("builds and inserts the ping HTML", function() {
+      expect(buildAndInsertSpy).toHaveBeenCalled();
     });
 
     it("stores the initialized pings", function() {
-      loader.loadPings();
       expect(loader.pings.length).toBe(1);
     });
 

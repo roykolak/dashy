@@ -1,20 +1,25 @@
 function Ping(config) {
-  var pingElement = $(document.createElement('li')),
-      wrapperElement = $(document.createElement('div')),
-      buildElement = $(document.createElement('div')),
-      nameElement = $(document.createElement('h3'));
-
-  $(pingElement).addClass('ping');
-  $(wrapperElement).addClass('wrapper')
-  $(buildElement).addClass('current_build');
-  $(nameElement).addClass('name').text(config.name);
-  $(wrapperElement).append(buildElement, nameElement);
-  $(pingElement).append(wrapperElement);
-  $('#pings ul').append(pingElement);
+  var buildElement;
 
   return {
     name:config.name,
     url:config.url + '?jsonp=?',
+
+    buildAndInsertElements: function() {
+      buildElement = $(document.createElement('div'));
+      var pingElement = $(document.createElement('li')),
+          wrapperElement = $(document.createElement('div')),
+          nameElement = $(document.createElement('h3'));
+
+
+      $(pingElement).addClass('ping');
+      $(wrapperElement).addClass('wrapper')
+      $(buildElement).addClass('current_build');
+      $(nameElement).addClass('name').text(config.name);
+      $(wrapperElement).append(buildElement, nameElement);
+      $(pingElement).append(wrapperElement);
+      $('#pings ul').append(pingElement);
+    },
 
     setStatus: function(status) {
       $(buildElement).removeClass('failure success');
