@@ -1,9 +1,10 @@
 function Project(config) {
   var projectId = config.name.replace(/ /g,"_"),
-      projectSelector = '#' + projectId + ' .frame';
+      projectSelector = '#' + projectId,
+      projectFrameSelector = projectSelector + ' .frame';
 
-  var buildHistorian = new BuildHistorian(projectSelector);
-  var currentBuild = new CurrentBuild(projectSelector, config.name);
+  var buildHistorian = new BuildHistorian(projectFrameSelector);
+  var currentBuild = new CurrentBuild(projectFrameSelector, config.name);
 
   return {
     url: config.url + '?jsonp=?',
