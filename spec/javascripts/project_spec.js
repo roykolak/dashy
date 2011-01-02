@@ -10,13 +10,13 @@ describe("Project", function() {
   describe("#initialize", function() {
     it("initializes a BuildHistorian", function() {
       buildHistorianSpy = spyOn(window, 'BuildHistorian');
-      project = new Project(options);
+      new Project(options);
       expect(buildHistorianSpy).toHaveBeenCalledWith('#project_build');
     });
 
     it("initializes a CurrentBuild", function() {
       currentBuildSpy = spyOn(window, 'CurrentBuild');
-      project = new Project(options);
+      new Project(options);
       expect(currentBuildSpy).toHaveBeenCalledWith('#project_build', options.name);
     });
 
@@ -36,6 +36,40 @@ describe("Project", function() {
 
     it("inserts an underscore separated project id", function() {
       expect($('#project_build')).toExist();
+    });
+
+    describe("building and inserting build historian", function() {
+      var buildAndInsertForHistorianSpy;
+
+      beforeEach(function() {
+        // TODO: wow, there's alot of spying here...
+        var buildHistorian = new BuildHistorian('#project_build');
+        buildAndInsertForHistorianSpy = spyOn(buildHistorian, 'buildAndInsertElements');
+        spyOn(window, 'BuildHistorian').andReturn(buildHistorian);
+        var project = new Project(options);
+        project.buildAndInsertElements();
+      });
+
+      it("builds and inserts the build historian", function() {
+        expect(buildAndInsertForHistorianSpy).toHaveBeenCalled();
+      });
+    });
+
+    describe("building and inserting current build", function() {
+      var buildAndInsertForCurrentBuildSpy;
+
+      beforeEach(function() {
+        // TODO: wow, there's alot of spying here...
+        var currentBuild = new CurrentBuild('#project_build', options.name);
+        buildAndInsertForCurrentBuildSpy = spyOn(currentBuild, 'buildAndInsertElements');
+        spyOn(window, 'CurrentBuild').andReturn(currentBuild);
+        var project = new Project(options);
+        project.buildAndInsertElements();
+      });
+
+      it("builds and inserts the current build", function() {
+        expect(buildAndInsertForCurrentBuildSpy).toHaveBeenCalled();
+      });
     });
   });
 

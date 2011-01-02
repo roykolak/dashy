@@ -1,32 +1,32 @@
 function BuildHistorian(projectSelector) {
-  var historyElement = $(document.createElement('ol'));
-  $(historyElement).addClass('history');
-  $(projectSelector).append(historyElement);
-  
-  var cssSelector = {
-    history: projectSelector + ' .history'
-  }
-  
+  var historySelector =  projectSelector + ' .history';
+
   return {
     maxStates: 12,
-    
+
+    buildAndInsertElements: function() {
+      var historyElement = $(document.createElement('ol'));
+      $(historyElement).addClass('history');
+      $(projectSelector).append(historyElement);
+    },
+
     addState: function(state) {
-      if($(cssSelector.history).children().length == this.maxStates) {
+      if($(historySelector).children().length == this.maxStates) {
         this.removeOldestBuildState();
       }
       var stateElement = this.buildStateElement();
       $(stateElement).addClass(state).text(state);
-      $(cssSelector.history).prepend(stateElement);
+      $(historySelector).prepend(stateElement);
     },
-    
+
     buildStateElement: function() {
       var element = $(document.createElement('li'));
       $(element).addClass('status');
       return element;
     },
-    
+
     removeOldestBuildState: function() {
-      $(cssSelector.history).children().last().remove();
+      $(historySelector).children().last().remove();
     }
   }
 }

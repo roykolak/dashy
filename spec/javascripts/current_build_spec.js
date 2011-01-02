@@ -6,19 +6,25 @@ describe("CurrentBuild", function() {
     currentBuild = new CurrentBuild('#project_name', 'project name');
   });
 
-  describe("#initialize", function() {
-    describe("elements created", function() {
-      it("inserts a new project html block", function() {
-        expect($('.project .current_build .name, .project .current_build .time')).toExist();
-      });
+  describe("#buildAndInsertElements", function() {
+    beforeEach(function() {
+      currentBuild.buildAndInsertElements();
+    });
 
-      it("inserts the build name in the header", function() {
-        expect($('.project .current_build .name')).toHaveText('project name');
-      });
+    it("inserts a new project html block", function() {
+      expect($('.project .current_build .name, .project .current_build .time')).toExist();
+    });
+
+    it("inserts the build name in the header", function() {
+      expect($('.project .current_build .name')).toHaveText('project name');
     });
   });
 
   describe("#setStatus", function() {
+    beforeEach(function() {
+      currentBuild.buildAndInsertElements();
+    });
+
     it("removes 'failure', 'building', and 'success' classes from the project", function() {
       currentBuild.setStatus('failure');
       currentBuild.setStatus('building');
@@ -34,6 +40,10 @@ describe("CurrentBuild", function() {
   });
 
   describe("#setDuration", function() {
+    beforeEach(function() {
+      currentBuild.buildAndInsertElements();
+    });
+
     it("inserts the passed time into the time div and appends time label", function() {
       currentBuild.setDuration(5000);
       expect($('.current_build .time')).toHaveText('5 sec');

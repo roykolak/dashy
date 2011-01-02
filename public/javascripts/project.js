@@ -2,15 +2,21 @@ function Project(config) {
   var projectId = config.name.replace(/ /g,"_"),
       projectSelector = '#' + projectId;
 
+  var buildHistorian = new BuildHistorian(projectSelector);
+  var currentBuild = new CurrentBuild(projectSelector, config.name);
+
   return {
     url: config.url + '?jsonp=?',
-    currentBuild: new CurrentBuild(projectSelector, config.name),
-    buildHistorian: new BuildHistorian(projectSelector),
+    currentBuild: currentBuild,
+    buildHistorian: buildHistorian,
 
     buildAndInsertElements: function() {
       var projectElement = $(document.createElement('li'));
       $(projectElement).addClass('project').attr('id', projectId);
       $('#projects').append(projectElement);
+
+      buildHistorian.buildAndInsertElements();
+      currentBuild.buildAndInsertElements();
     },
 
     setStatus: function(newStatus) {
