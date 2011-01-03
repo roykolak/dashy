@@ -19,8 +19,8 @@ var config = {
       name:'Eup',
       url:'http://builder.gn-research/job/Eup/lastBuild/api/json'
     }, {
-      name:'Eup User Management',
-      url:'http://builder.gn-research/job/EUP-User-Management/lastBuild/api/json'
+      name:'Dispenser',
+      url:'http://builder.gn-research/job/Dispenser/lastBuild/api/json'
     }
   ],
   pings:[
