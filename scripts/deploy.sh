@@ -1,7 +1,7 @@
-ssh dashboard@dashboard <<EOT
-  cd /var/www/dashboard
-  git pull
-  touch public/refresh.txt
+scp -r public/* rkolak@research:/srv/www/htdocs/dashboard
+ssh rkolak@research <<EOT
+  cd /srv/www/htdocs/dashboard
+  touch refresh.txt
   sleep 7
-  rm public/refresh.txt
+  rm refresh.txt
 EOT
