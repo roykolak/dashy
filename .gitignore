@@ -1,3 +1,4 @@
 .DS_Store
 .bundle
 deploy.sh
+public/javascripts/config.js
