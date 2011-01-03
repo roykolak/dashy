@@ -1,3 +1,18 @@
+var config = {
+  projects:[
+    {
+      name:'Sample Build',
+      url:'http://path/to/sample/build/lastBuild/api/json'
+    }
+  ],
+  pings:[
+    {
+      name:'Sample Ping',
+      url:'http://path/to/sample/ping/lastBuild/api/json'
+    }
+  ]
+}
+
 describe("Config JSON", function() {
   it("should contain a projects property of an array", function() {
     expect($.isArray(config.projects)).toBeTruthy();
