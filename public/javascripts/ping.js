@@ -18,7 +18,7 @@ function Ping(config) {
       $(nameElement).addClass('name').text(config.name);
       $(wrapperElement).append(buildElement, nameElement);
       $(pingElement).append(wrapperElement);
-      $('#pings ul').append(pingElement);
+      $('#pings').append(pingElement);
     },
 
     setStatus: function(status) {

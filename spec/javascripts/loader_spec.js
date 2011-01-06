@@ -36,12 +36,6 @@ describe("Loader", function() {
     it("stores the initialized pings", function() {
       expect(loader.pings.length).toBe(1);
     });
-
-    it("attaches the visibility toggler", function() {
-      var visibilityTogglerSpy = spyOn($.fn, 'visibilityToggler');
-      loader.loadPings();
-      expect(visibilityTogglerSpy).toHaveBeenCalled();
-    });
   });
 
   describe("#loadProjects", function() {
