@@ -3,6 +3,7 @@ describe("Loader", function() {
 
   beforeEach(function() {
     config = {
+      title:'',
       projects: [{ name:'Sweet Project', url:'http://www.buildresults.com/project'}],
       pings: [{ name:'Server 1', url:'http://www.server1.com/'}]
     };
@@ -16,6 +17,10 @@ describe("Loader", function() {
 
     it("sets the refresh interval to 5 seconds", function() {
       expect(loader.refreshInterval).toEqual(5000);
+    });
+
+    it("sets the h1 title to the title in the config", function() {
+      expect($('#title')).toHaveText(config.title);
     });
   });
 

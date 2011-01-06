@@ -1,4 +1,5 @@
 var config = {
+  title:"Dashy, he's always watching",
   projects:[
     {
       name:'Name of project',

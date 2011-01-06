@@ -1,4 +1,6 @@
 function Loader(config) {
+  $('#title').text(config.title);
+
   return {
     config: config,
     projects: [],
