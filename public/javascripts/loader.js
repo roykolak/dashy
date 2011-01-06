@@ -25,6 +25,24 @@ function Loader(config) {
       });
     },
 
+    getState: function() {
+      var state = true;
+
+      $.each(this.projects, function(i, project) {
+        if(project.status == 'failure') {
+          state = false;
+        }
+      });
+
+      $.each(this.pings, function(i, ping) {
+        if(ping.status == 'failure') {
+          state = false;
+        }
+      });
+
+      return state;
+    },
+
     refreshPings: function() {
       $.each(this.pings, function(i, ping) {
         $.getJSON(ping.url, function(data) {
@@ -45,7 +63,13 @@ function Loader(config) {
       this.checkForDashboardChanges();
       this.refreshProjects();
       this.refreshPings();
+      this.updateFavicon();
       this.startProgressBarAnimation();
+    },
+
+    updateFavicon: function() {
+      var image = (this.getState() ? 'images/success.png' : 'images/failure.png');
+      $("link[rel=icon]").attr('href', image);
     },
 
     startProgressBarAnimation: function() {

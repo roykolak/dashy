@@ -63,6 +63,37 @@ describe("Loader", function() {
     });
   });
 
+  describe("#getState", function() {
+    beforeEach(function() {
+      loader.loadProjects();
+      loader.loadPings();
+    });
+
+    describe("when everything is passing", function() {
+      it("returns true", function() {
+        loader.projects[0].status = 'success';
+        loader.pings[0].status = 'success';
+        expect(loader.getState()).toEqual(true);
+      });
+    });
+
+    describe("when a project is failing", function() {
+      it("returns false", function() {
+        loader.projects[0].status = 'failure';
+        loader.pings[0].status = 'success';
+        expect(loader.getState()).toEqual(false);
+      });
+    });
+
+    describe("when a ping is failing", function() {
+      it("returns false", function() {
+        loader.projects[0].status = 'success';
+        loader.pings[0].status = 'failure';
+        expect(loader.getState()).toEqual(false);
+      });
+    });
+  });
+
   describe("#refreshBuilds", function() {
     var data, getJSONSpy;
 
@@ -124,6 +155,34 @@ describe("Loader", function() {
       var checkForDashboardChangesSpy = spyOn(loader, 'checkForDashboardChanges');
       loader.refresh();
       expect(checkForDashboardChangesSpy).toHaveBeenCalled();
+    });
+
+    it("calls to updateFavicon", function() {
+      var updateFaviconSpy = spyOn(loader, 'updateFavicon');
+      loader.refresh();
+      expect(updateFaviconSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe("#updateFavicon", function() {
+    beforeEach(function() {
+      loadFixtures('spec/javascripts/fixtures/header.html');
+    });
+
+    describe("when the state is passing", function() {
+      it("sets the favicon to passing image", function() {
+        spyOn(loader, 'getState').andReturn(true);
+        loader.updateFavicon();
+        expect($("link[rel=icon]").attr('href')).toEqual('images/success.png');
+      });
+    });
+
+    describe("when the state is failure", function() {
+      it("sets the favicon to failure image", function() {
+        spyOn(loader, 'getState').andReturn(false);
+        loader.updateFavicon();
+        expect($("link[rel=icon]").attr('href')).toEqual('images/failure.png');
+      });
     });
   });
 
