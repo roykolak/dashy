@@ -3,7 +3,7 @@ describe("Project", function() {
 
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/projects.html');
-    options = { name:'project build', url:'http://www.buildstatus.com' }
+    options = { name:'project build', url:'http://www.buildstatus.com', ci:'Hudson' }
     project = new Project(options);
   });
 
@@ -18,6 +18,12 @@ describe("Project", function() {
       currentBuildSpy = spyOn(window, 'CurrentBuild');
       new Project(options);
       expect(currentBuildSpy).toHaveBeenCalledWith('#project_build .frame', options.name);
+    });
+
+    it("initializes a StatusParser", function() {
+      statusParserSpy = spyOn(window, 'StatusParser');
+      new Project(options);
+      expect(statusParserSpy).toHaveBeenCalledWith(options.ci);
     });
 
     it("stores the url and append jsonp", function() {
@@ -152,31 +158,29 @@ describe("Project", function() {
   });
 
   describe("#update", function() {
-    var setStatusSpy, setDurationSpy;
+    var parsedResults = { status:'success', duration:10 },
+        setStatusSpy, setDurationSpy, parseSpy;
 
     beforeEach(function() {
       setStatusSpy = spyOn(project, 'setStatus');
       setDurationSpy = spyOn(project.currentBuild, 'setDuration');
+      parseSpy = spyOn(project.statusParser, 'parse').andReturn(parsedResults);
     });
 
-    it("sets the status of the build to building when it is building", function() {
-      project.update({ building:true });
-      expect(setStatusSpy).toHaveBeenCalledWith('building');
+    it("calls to statusParser with the response data", function() {
+      var responseData = "response data";
+      project.update(responseData);
+      expect(parseSpy).toHaveBeenCalledWith(responseData);
     });
 
-    it("sets the status of the build to success when it has successfuly built", function() {
-      project.update({ building:false, result:'SUCCESS' });
-      expect(setStatusSpy).toHaveBeenCalledWith('success');
+    it("sets the status of the build to the parsed status", function() {
+      project.update();
+      expect(setStatusSpy).toHaveBeenCalledWith(parsedResults.status);
     });
 
-    it("sets the status of the build to failure when it has failed being built", function() {
-      project.update({ building:false, result:'FAILURE' });
-      expect(setStatusSpy).toHaveBeenCalledWith('failure');
-    });
-
-    it("calls to currentBuild to set the build duration", function() {
-      project.update({ building:false, result:'FAILURE' });
-      expect(setDurationSpy).toHaveBeenCalled();
+    it("calls to current build to set the parsed duration of the build", function() {
+      project.update();
+      expect(setDurationSpy).toHaveBeenCalledWith(parsedResults.duration);
     });
   });
 });

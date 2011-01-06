@@ -2,13 +2,15 @@ var config = {
   projects:[
     {
       name:'Sample Build',
-      url:'http://path/to/sample/build/lastBuild/api/json'
+      url:'http://path/to/sample/build/lastBuild/api/json',
+      ci:'Hudson'
     }
   ],
   pings:[
     {
       name:'Sample Ping',
-      url:'http://path/to/sample/ping/lastBuild/api/json'
+      url:'http://path/to/sample/ping/lastBuild/api/json',
+      ci:'Hudson'
     }
   ]
 }
@@ -23,6 +25,7 @@ describe("Config JSON", function() {
       var project = config.projects[0];
       expect(project.name).toBeDefined();
       expect(project.url).toBeDefined();
+      expect(project.ci).toBeDefined();
     });
   });
 
