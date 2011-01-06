@@ -16,7 +16,8 @@ function BuildHistorian(projectSelector) {
       }
       var stateElement = this.buildStateElement();
       $(stateElement).addClass(state).text(state);
-      $(historySelector).prepend(stateElement);
+
+      $(stateElement).hide().prependTo(historySelector).fadeIn('slow');
     },
 
     buildStateElement: function() {
