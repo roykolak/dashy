@@ -5,11 +5,13 @@ function Project(config) {
 
   var buildHistorian = new BuildHistorian(projectFrameSelector);
   var currentBuild = new CurrentBuild(projectFrameSelector, config.name);
+  var statusParser = new StatusParser(config.ci);
 
   return {
     url: config.url + '?jsonp=?',
     currentBuild: currentBuild,
     buildHistorian: buildHistorian,
+    statusParser: statusParser,
 
     buildAndInsertElements: function() {
       var projectElement = $(document.createElement('li'));
@@ -62,14 +64,9 @@ function Project(config) {
     },
 
     update: function(data) {
-      if(data.building) {
-        this.setStatus('building');
-      } else {
-        var result = (data.result == 'SUCCESS' ? 'success' : 'failure');
-        this.setStatus(result);
-      }
-
-      this.currentBuild.setDuration(data.duration);
+      var result = statusParser.parse(data);
+      this.setStatus(result.status);
+      this.currentBuild.setDuration(result.duration);
     }
   };
 }
