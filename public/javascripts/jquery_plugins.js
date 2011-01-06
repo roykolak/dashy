@@ -25,7 +25,7 @@
         $(clone).prepend($(clone).find('li')[index]);
 
         $('#projects').quicksand($(clone).children().get(), { useScaling: true, easing: 'easeInOutQuad', attribute: 'id' }, function() {
-          $('.builds li').css('opacity', 'auto');
+          $('.projects li').css('opacity', 'auto');
           callback();
           moving = false;
         });
