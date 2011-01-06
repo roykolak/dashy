@@ -55,19 +55,5 @@ describe("BuildHistorian", function() {
     it("prepends a new state element", function() {
       expect($('.status').length).toEqual(1)
     });
-
-    describe("when there are 10 previous build states", function() {
-      beforeEach(function() {
-        for(var times = 11; times > 0; times--) {
-          buildHistorian.addState('success');
-        }
-      });
-
-      it("removes the oldest state and prepends the new state", function() {
-        expect($('.project .history li').length).toEqual(buildHistorian.maxStates);
-        buildHistorian.addState('success');
-        expect($('.project .history li').length).toEqual(buildHistorian.maxStates);
-      });
-    });
   });
 });

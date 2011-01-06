@@ -25,20 +25,11 @@
         $(clone).prepend($(clone).find('li')[index]);
 
         $('#projects').quicksand($(clone).children().get(), { useScaling: true, easing: 'easeInOutQuad', attribute: 'id' }, function() {
-          $('.builds li').css('opacity', 'auto');
+          $('.projects li').css('opacity', 'auto');
           callback();
           moving = false;
         });
       }
-    });
-  }
-
-  $.fn.visibilityToggler = function() {
-    $(this).each(function() {
-      $(this).click(function(ev) {
-        ev.preventDefault();
-        $(this).siblings().slideToggle();
-      })
     });
   }
 })(jQuery);

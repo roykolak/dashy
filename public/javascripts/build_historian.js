@@ -1,9 +1,15 @@
 function BuildHistorian(projectSelector) {
   var historySelector =  projectSelector + ' .history';
 
-  return {
-    maxStates: 12,
+  function checkIfOutOfRoom() {
+    var stateWidth = $('.status').outerWidth(true);
+    var numberOfStates = $(historySelector).children().length;
+    var historyWidth = $(historySelector).width();
 
+    return (numberOfStates >= Math.floor(historyWidth/stateWidth) ? true : false);
+  }
+
+  return {
     buildAndInsertElements: function() {
       var historyElement = $(document.createElement('ol'));
       $(historyElement).addClass('history');
@@ -11,13 +17,14 @@ function BuildHistorian(projectSelector) {
     },
 
     addState: function(state) {
-      if($(historySelector).children().length == this.maxStates) {
+      if(checkIfOutOfRoom()) {
         this.removeOldestBuildState();
       }
+
       var stateElement = this.buildStateElement();
       $(stateElement).addClass(state).text(state);
 
-      $(stateElement).hide().prependTo(historySelector).fadeIn('slow');
+      $(stateElement).prependTo(historySelector);
     },
 
     buildStateElement: function() {
