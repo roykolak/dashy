@@ -1,4 +1,4 @@
-function Loader(config) {
+function Dashboard(config) {
   return {
     config: config,
     projects: [],

@@ -1,24 +1,24 @@
-describe("Loader", function() {
-  var loader;
+describe("Dashboard", function() {
+  var dashboard;
 
   beforeEach(function() {
-    loader = new Loader(config);
+    dashboard = new Dashboard(config);
   });
 
   describe("#initialize", function() {
     it("stores the passed config options", function() {
-      expect(loader.config).toEqual(config);
+      expect(dashboard.config).toEqual(config);
     });
 
     it("sets the refresh interval to 5 seconds", function() {
-      expect(loader.refreshInterval).toEqual(5000);
+      expect(dashboard.refreshInterval).toEqual(5000);
     });
   });
 
   describe("#applyConfigSettings", function() {
     beforeEach(function() {
       loadFixtures('spec/javascripts/fixtures/configurable_elements.html');
-      loader.applyConfigSettings();
+      dashboard.applyConfigSettings();
     });
 
     it("sets the h1 title to the title in the config", function() {
@@ -45,7 +45,7 @@ describe("Loader", function() {
       ping = new Ping(config.pings[0]);
       buildAndInsertSpy = spyOn(ping, 'buildAndInsertElements');
       spyOn(window, 'Ping').andReturn(ping);
-      loader.loadPings();
+      dashboard.loadPings();
     });
 
     it("builds and inserts the ping HTML", function() {
@@ -53,7 +53,7 @@ describe("Loader", function() {
     });
 
     it("stores the initialized pings", function() {
-      expect(loader.pings.length).toBe(1);
+      expect(dashboard.pings.length).toBe(1);
     });
   });
 
@@ -64,7 +64,7 @@ describe("Loader", function() {
       project = new Project(config.projects[0]);
       buildAndInsertSpy = spyOn(project, 'buildAndInsertElements');
       spyOn(window, 'Project').andReturn(project);
-      loader.loadProjects();
+      dashboard.loadProjects();
     });
 
     it("builds and inserts the project HTML", function() {
@@ -72,37 +72,37 @@ describe("Loader", function() {
     });
 
     it("stores the initialized projects", function() {
-      expect(loader.projects.length).toBe(1);
+      expect(dashboard.projects.length).toBe(1);
     });
   });
 
   describe("#getState", function() {
     beforeEach(function() {
-      loader.loadProjects();
-      loader.loadPings();
+      dashboard.loadProjects();
+      dashboard.loadPings();
     });
 
     describe("when everything is passing", function() {
       it("returns true", function() {
-        loader.projects[0].status = 'success';
-        loader.pings[0].status = 'success';
-        expect(loader.getState()).toEqual(true);
+        dashboard.projects[0].status = 'success';
+        dashboard.pings[0].status = 'success';
+        expect(dashboard.getState()).toEqual(true);
       });
     });
 
     describe("when a project is failing", function() {
       it("returns false", function() {
-        loader.projects[0].status = 'failure';
-        loader.pings[0].status = 'success';
-        expect(loader.getState()).toEqual(false);
+        dashboard.projects[0].status = 'failure';
+        dashboard.pings[0].status = 'success';
+        expect(dashboard.getState()).toEqual(false);
       });
     });
 
     describe("when a ping is failing", function() {
       it("returns false", function() {
-        loader.projects[0].status = 'success';
-        loader.pings[0].status = 'failure';
-        expect(loader.getState()).toEqual(false);
+        dashboard.projects[0].status = 'success';
+        dashboard.pings[0].status = 'failure';
+        expect(dashboard.getState()).toEqual(false);
       });
     });
   });
@@ -113,8 +113,8 @@ describe("Loader", function() {
     beforeEach(function() {
       data = { result: 'SUCCESS' };
       getJSONSpy = spyOn($, 'getJSON');
-      loader.loadProjects();
-      loader.refreshProjects();
+      dashboard.loadProjects();
+      dashboard.refreshProjects();
     });
 
     it("makes a request to the build server using the stored url for the project", function() {
@@ -128,8 +128,8 @@ describe("Loader", function() {
     beforeEach(function() {
       data = { result: 'SUCCESS' };
       getJSONSpy = spyOn($, 'getJSON');
-      loader.loadPings();
-      loader.refreshPings();
+      dashboard.loadPings();
+      dashboard.refreshPings();
     });
 
     it("makes a request to the build server using the stored url for the project", function() {
@@ -140,39 +140,39 @@ describe("Loader", function() {
   describe("#startProgressBarAnimation", function() {
     it("animates the progres bar", function() {
       var animateSpy = spyOn($.fn, 'animate');
-      loader.startProgressBarAnimation();
+      dashboard.startProgressBarAnimation();
       expect(animateSpy).toHaveBeenCalled();
     });
   });
 
   describe("#refresh", function() {
     it("calls to startProgressBarAnimation", function() {
-      var startProgressBarAnimationSpy = spyOn(loader, 'startProgressBarAnimation');
-      loader.refresh();
+      var startProgressBarAnimationSpy = spyOn(dashboard, 'startProgressBarAnimation');
+      dashboard.refresh();
       expect(startProgressBarAnimationSpy).toHaveBeenCalled();
     });
 
     it("calls to refreshProjects", function() {
-      var refreshProjectsSpy = spyOn(loader, 'refreshProjects');
-      loader.refresh();
+      var refreshProjectsSpy = spyOn(dashboard, 'refreshProjects');
+      dashboard.refresh();
       expect(refreshProjectsSpy).toHaveBeenCalled();
     });
 
     it("calls to refreshPings", function() {
-      var refreshPingsSpy = spyOn(loader, 'refreshPings');
-      loader.refresh();
+      var refreshPingsSpy = spyOn(dashboard, 'refreshPings');
+      dashboard.refresh();
       expect(refreshPingsSpy).toHaveBeenCalled();
     });
 
     it("calls to checkForDashboardChanges", function() {
-      var checkForDashboardChangesSpy = spyOn(loader, 'checkForDashboardChanges');
-      loader.refresh();
+      var checkForDashboardChangesSpy = spyOn(dashboard, 'checkForDashboardChanges');
+      dashboard.refresh();
       expect(checkForDashboardChangesSpy).toHaveBeenCalled();
     });
 
     it("calls to updateFavicon", function() {
-      var updateFaviconSpy = spyOn(loader, 'updateFavicon');
-      loader.refresh();
+      var updateFaviconSpy = spyOn(dashboard, 'updateFavicon');
+      dashboard.refresh();
       expect(updateFaviconSpy).toHaveBeenCalled();
     });
   });
@@ -184,16 +184,16 @@ describe("Loader", function() {
 
     describe("when the state is passing", function() {
       it("sets the favicon to passing image", function() {
-        spyOn(loader, 'getState').andReturn(true);
-        loader.updateFavicon();
+        spyOn(dashboard, 'getState').andReturn(true);
+        dashboard.updateFavicon();
         expect($("link[rel=icon]").attr('href')).toEqual('images/success.png');
       });
     });
 
     describe("when the state is failure", function() {
       it("sets the favicon to failure image", function() {
-        spyOn(loader, 'getState').andReturn(false);
-        loader.updateFavicon();
+        spyOn(dashboard, 'getState').andReturn(false);
+        dashboard.updateFavicon();
         expect($("link[rel=icon]").attr('href')).toEqual('images/failure.png');
       });
     });
@@ -202,7 +202,7 @@ describe("Loader", function() {
   describe("#checkForDashboardChanges", function() {
     it("makes a request for the refresh asset", function() {
       var getSpy = spyOn($, 'get');
-      loader.checkForDashboardChanges();
+      dashboard.checkForDashboardChanges();
       expect(getSpy.mostRecentCall.args[0]).toEqual('refresh.txt');
     });
   });

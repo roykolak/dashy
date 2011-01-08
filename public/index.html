@@ -33,17 +33,17 @@
       <script src="javascripts/current_build.js"></script>
       <script src="javascripts/build_historian.js"></script>
       <script src="javascripts/config.js"></script>
-      <script src="javascripts/loader.js"></script>
+      <script src="javascripts/dashboard.js"></script>
       <script src="javascripts/status_parser.js"></script>
       <script>
-        var loader = new Loader(config);
-        loader.loadPings();
-        loader.loadProjects();
-        loader.refresh();
+        var dashboard = new Dashboard(config);
+        dashboard.loadPings();
+        dashboard.loadProjects();
+        dashboard.refresh();
 
         setInterval(function() {
-          loader.refresh();
-        }, loader.refreshInterval);
+          dashboard.refresh();
+        }, dashboard.refreshInterval);
       </script>
     </div>
   </body>
