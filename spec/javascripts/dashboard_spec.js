@@ -9,10 +9,6 @@ describe("Dashboard", function() {
     it("stores the passed config options", function() {
       expect(dashboard.config).toEqual(config);
     });
-
-    it("sets the refresh interval to 5 seconds", function() {
-      expect(dashboard.refreshInterval).toEqual(5000);
-    });
   });
 
   describe("#applyConfigSettings", function() {
@@ -35,6 +31,10 @@ describe("Dashboard", function() {
 
     it("sets the failure audio tag's src to the failure sound path from the config", function() {
       expect($('#failure').attr('src')).toEqual(config.sounds.failure);
+    });
+
+    it("sets the refresh interval to interval from the config", function() {
+      expect(dashboard.refreshInterval).toEqual(config.refreshInterval);
     });
   });
 

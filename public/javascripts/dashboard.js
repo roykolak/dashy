@@ -3,9 +3,9 @@ function Dashboard(config) {
     config: config,
     projects: [],
     pings: [],
-    refreshInterval: 5000,
 
     applyConfigSettings: function() {
+      this.refreshInterval = this.config.refreshInterval;
       $('#title').text(this.config.title);
       $('#success').attr('src', this.config.sounds.success);
       $('#building').attr('src', this.config.sounds.building);

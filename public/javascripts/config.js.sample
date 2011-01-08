@@ -1,5 +1,6 @@
 var config = {
   title:"Dashy, he's always watching",
+  refreshInterval:5000,
   sounds: {
     success:'sounds/success.mp3',
     building:'sounds/building.mp3',

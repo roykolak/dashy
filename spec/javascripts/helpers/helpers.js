@@ -2,6 +2,7 @@ jQuery.fx.off = true;
 
 var config = {
   title: '',
+  refreshInterval:5000,
   sounds: {
     success:'sounds/success.mp3',
     building:'sounds/building.mp3',

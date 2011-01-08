@@ -3,8 +3,12 @@ describe("Config JSON", function() {
     expect($.isArray(config.projects)).toBeTruthy();
   });
 
-  it("contains a title propert", function() {
+  it("contains a title property", function() {
     expect(config.title).toBeDefined();
+  });
+
+  it("contains a default refresh interval property", function() {
+    expect(config.refreshInterval).toEqual(5000);
   });
 
   describe("sounds", function() {
