@@ -1,12 +1,7 @@
 describe("Loader", function() {
-  var config, loader;
+  var loader;
 
   beforeEach(function() {
-    config = {
-      title:'',
-      projects: [{ name:'Sweet Project', url:'http://www.buildresults.com/project'}],
-      pings: [{ name:'Server 1', url:'http://www.server1.com/'}]
-    };
     loader = new Loader(config);
   });
 
@@ -18,9 +13,28 @@ describe("Loader", function() {
     it("sets the refresh interval to 5 seconds", function() {
       expect(loader.refreshInterval).toEqual(5000);
     });
+  });
+
+  describe("#applyConfigSettings", function() {
+    beforeEach(function() {
+      loadFixtures('spec/javascripts/fixtures/configurable_elements.html');
+      loader.applyConfigSettings();
+    });
 
     it("sets the h1 title to the title in the config", function() {
       expect($('#title')).toHaveText(config.title);
+    });
+
+    it("sets the success audio tag's src to the success sound path from the config", function() {
+      expect($('#success').attr('src')).toEqual(config.sounds.success);
+    });
+
+    it("sets the building audio tag's src to the building sound path from the config", function() {
+      expect($('#building').attr('src')).toEqual(config.sounds.building);
+    });
+
+    it("sets the failure audio tag's src to the failure sound path from the config", function() {
+      expect($('#failure').attr('src')).toEqual(config.sounds.failure);
     });
   });
 

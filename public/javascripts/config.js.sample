@@ -1,5 +1,10 @@
 var config = {
   title:"Dashy, he's always watching",
+  sounds: {
+    success:'sounds/success.mp3',
+    building:'sounds/building.mp3',
+    failure:'sounds/failure.mp3'
+  },
   projects:[
     {
       name:'Name of project',

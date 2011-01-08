@@ -1,11 +1,16 @@
 function Loader(config) {
-  $('#title').text(config.title);
-
   return {
     config: config,
     projects: [],
     pings: [],
     refreshInterval: 5000,
+
+    applyConfigSettings: function() {
+      $('#title').text(this.config.title);
+      $('#success').attr('src', this.config.sounds.success);
+      $('#building').attr('src', this.config.sounds.building);
+      $('#failure').attr('src', this.config.sounds.failure);
+    },
 
     loadPings: function() {
       var self = this;
