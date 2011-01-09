@@ -25,7 +25,7 @@ The only code you need to touch is in public/javascripts/config.js
 Here are a few tips:
 
 * the ci property in each project should always be 'Hudson' (it's the only system supported at the moment)
-* the url property in each project should always point to the json feed of the last build
+* the url property in each project should always point to the jsonp feed of the last build
 * the pings array should contain Hudson builds that ping a server and return true or false, therefore follow the same rules above.
 
 Here is a sample config.js file
@@ -41,22 +41,22 @@ Here is a sample config.js file
       projects:[
         {
           name:'Android app',
-          url:'http://builder/job/ArlisWebsite/lastBuild/api/json',
+          url:'http://builder/job/ArlisWebsite/lastBuild/api/json?jsonp=?',
           ci:'Hudson'
         },{
           name:'iPhone app',
-          url:'http://builder/job/Dashboard/lastBuild/api/json',
+          url:'http://builder/job/Dashboard/lastBuild/api/json?jsonp=?',
           ci:'Hudson'
         }
       ],
       pings:[
         {
           name:'Builder',
-          url:'http://builder/job/Ping%20Phobos/lastBuild/api/json',
+          url:'http://builder/job/Ping%20Phobos/lastBuild/api/json?jsonp=?',
           ci:'Hudson'
         }, {
           name:'Filestore',
-          url:'http://builder/job/Ping%20Hermes/lastBuild/api/json',
+          url:'http://builder/job/Ping%20Hermes/lastBuild/api/json?jsonp=?',
           ci:'Hudson'
         }
       ]
@@ -64,7 +64,7 @@ Here is a sample config.js file
 
 # Trouble? Help out?
 
-I would love to hear any feedback you have. Want to help? Fork!
+Send any feedback you have. Want to help? Fork!
 
 * Email roy.kolak@gmail.com
 * Or create an issue
