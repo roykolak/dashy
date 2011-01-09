@@ -37,6 +37,7 @@
       <script src="javascripts/status_parser.js"></script>
       <script>
         var dashboard = new Dashboard(config);
+        dashboard.applyConfigSettings();
         dashboard.loadPings();
         dashboard.loadProjects();
         dashboard.refresh();
