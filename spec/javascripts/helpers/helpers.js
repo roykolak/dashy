@@ -1,7 +1,7 @@
 jQuery.fx.off = true;
 
 var config = {
-  title: '',
+  title: "Dashy, he's always watching",
   refreshInterval:5000,
   sounds: {
     success:'sounds/success.mp3',
