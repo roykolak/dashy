@@ -41,22 +41,22 @@ Here is a sample config.js file
       projects:[
         {
           name:'Android app',
-          url:'http://builder/job/ArlisWebsite/lastBuild/api/json?jsonp=?',
+          url:'http://builder/job/AndroidApp/lastBuild/api/json?jsonp=?',
           ci:'Hudson'
         },{
           name:'iPhone app',
-          url:'http://builder/job/Dashboard/lastBuild/api/json?jsonp=?',
+          url:'http://builder/job/iPhoneApp/lastBuild/api/json?jsonp=?',
           ci:'Hudson'
         }
       ],
       pings:[
         {
           name:'Builder',
-          url:'http://builder/job/Ping%20Phobos/lastBuild/api/json?jsonp=?',
+          url:'http://builder/job/PingBuilder/lastBuild/api/json?jsonp=?',
           ci:'Hudson'
         }, {
           name:'Filestore',
-          url:'http://builder/job/Ping%20Hermes/lastBuild/api/json?jsonp=?',
+          url:'http://builder/job/PingFilestore/lastBuild/api/json?jsonp=?',
           ci:'Hudson'
         }
       ]
