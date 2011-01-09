@@ -1,0 +1,70 @@
+# What?
+
+Dashy is a frontend to CI software. It animates, it makes noises, it remembers past build states, it is just a simple webpage, and it gets you new friends.
+
+# Why?
+
+Because CI is boring and monotonous. Dashy is made of the opposite.
+
+# How?
+
+Dashy only supports Hudson at the moment because Hudson is the only CI system in the entire world to support JSONp. (remember Dashy is a dumb webpage frontend)
+
+## Setup
+
+  1. Get code
+  2. Drop the '.sample' from public/javascript/config.js.sample
+  3. Configure config.js to meet your needs
+  4. Load public/index.html in a browser
+  5. Get some sleep, you look tired
+
+## Configuring
+
+The only code you need to touch is in public/javascripts/config.js
+
+Here are a few tips:
+
+* the ci property in each project should always be 'Hudson' (it's the only system supported at the moment)
+* the url property in each project should always point to the json feed of the last build
+* the pings array should contain Hudson builds that ping a server and return true or false, therefore follow the same rules above.
+
+Here is a sample config.js file
+
+    var config = {
+      title:"Dashy, He's always watching",
+      refreshInterval:5000,
+      sounds: {
+        success:'sounds/success.mp3',
+        building:'sounds/building.mp3',
+        failure:'sounds/failure.mp3'
+      },
+      projects:[
+        {
+          name:'Android app',
+          url:'http://builder/job/ArlisWebsite/lastBuild/api/json',
+          ci:'Hudson'
+        },{
+          name:'iPhone app',
+          url:'http://builder/job/Dashboard/lastBuild/api/json',
+          ci:'Hudson'
+        }
+      ],
+      pings:[
+        {
+          name:'Builder',
+          url:'http://builder/job/Ping%20Phobos/lastBuild/api/json',
+          ci:'Hudson'
+        }, {
+          name:'Filestore',
+          url:'http://builder/job/Ping%20Hermes/lastBuild/api/json',
+          ci:'Hudson'
+        }
+      ]
+    }
+
+# Trouble? Help out?
+
+I would love to hear any feedback you have. Want to help? Fork!
+
+* Email roy.kolak@gmail.com
+* Or create an issue
