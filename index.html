@@ -4,77 +4,76 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title>roykolak/dashy @ GitHub</title>
-	
+  <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+	<title>Dashy</title>
 	<style type="text/css">
 		body {
   		margin-top: 1.0em;
-  		background-color: #91f15f;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #000000;
+  		background-color: #333;
+		  font-family: Helvetica,Arial;
+  		color: #BBB;
+  		font-size:14px;
     }
-    #container {
-      margin: 0 auto;
-      width: 700px;
+    h1 {
+      font-size:70px;
+      font-family:Arvo;
+      margin:0;
+      padding:0;
+      color:#4baaec;
     }
-		h1 { font-size: 3.8em; color: #6e0ea0; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #6e0ea0; }
-    h3 { text-align: center; color: #6e0ea0; }
-    a { color: #6e0ea0; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
+    h2 {
+      font-size:15px;
+      color:#85c6f3;
+    }
+    p {
+      line-height:18px;
+    }
+    a { color:#FFF; }
+    .page {
+      margin:0 auto 100px;
+      width:600px;
+    }
+    .left {
+      float:left;
+      width:50%;
+    }
+    .right {
+      float:right;
+      width:50%;
+      text-align:right;
+    }
+    .dashboard {
+      box-shadow:10px 10px 10px #000;
+      -webkit-box-shadow: 0px 0px 20px #000;
+      border:1px solid #999;
+    }
+    .clear { clear:both; }
 	</style>
-	
+
 </head>
 
 <body>
-  <a href="http://github.com/roykolak/dashy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  <a href="http://github.com/roykolak/dashy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://assets2.github.com/img/4c7dc970b89fd04b81c8e221ba88ff99a06c6b61?repo=&url=http%3A%2F%2Fs3.amazonaws.com%2Fgithub%2Fribbons%2Fforkme_right_white_ffffff.png&path=" alt="Fork me on GitHub"></a>
 
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/roykolak/dashy/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/roykolak/dashy/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+  <div class="page">
+    <div class="left">
+      <h1>Dashy</h2>
+      <h2 class="tagline">He's always watching... your ci server.</h2>
     </div>
-
-    <h1><a href="http://github.com/roykolak/dashy">Dashy</a>
-      <span class="small">by <a href="http://github.com/roykolak">roykolak</a></span></h1>
+    <div class="right">
+      <div class="download">
+        <a href="http://github.com/roykolak/dashy/zipball/master">
+          <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+        <a href="http://github.com/roykolak/dashy/tarball/master">
+          <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+      </div>
+    </div>
+    <img class="dashboard" src="dashboard.jpg" />
 
     <div class="description">
-      He's always watching... your ci
+      <p>Attractive, noisey, and fun frontend for your CI software. Currently only works with <a href="">Hudson</a> due to the lack of JSONp support in continuous integration software.</p>
+      <p><a href="https://github.com/roykolak/dashy">https://github.com/roykolak/dashy</a></p>
     </div>
-
-    <h2>Authors</h2>
-<p>Roy Kolak (roy.kolak@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Roy Kolak (roy.kolak@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/roykolak/dashy/zipball/master">zip</a> or
-      <a href="http://github.com/roykolak/dashy/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/roykolak/dashy</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/roykolak/dashy">roykolak/dashy</a>
-    </div>
-
   </div>
-
-  
 </body>
 </html>
