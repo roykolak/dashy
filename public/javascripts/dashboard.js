@@ -50,17 +50,13 @@ function Dashboard(config) {
 
     refreshPings: function() {
       $.each(this.pings, function(i, ping) {
-        $.getJSON(ping.url, function(data) {
-          ping.update(data);
-        });
+        ping.update();
       });
     },
 
     refreshProjects: function() {
       $.each(this.projects, function(i, project) {
-        $.getJSON(project.url, function(data) {
-          project.update(data);
-        });
+        project.update();
       });
     },
 

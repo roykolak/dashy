@@ -49,6 +49,10 @@ describe("Config JSON", function() {
       it("contains a ci name", function() {
         expect(project.ci).toBeDefined();
       });
+
+      it("contains a url response format", function() {
+        expect(project.format).toBeDefined();
+      });
     });
   });
 

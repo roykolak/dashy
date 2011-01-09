@@ -107,36 +107,6 @@ describe("Dashboard", function() {
     });
   });
 
-  describe("#refreshBuilds", function() {
-    var data, getJSONSpy;
-
-    beforeEach(function() {
-      data = { result: 'SUCCESS' };
-      getJSONSpy = spyOn($, 'getJSON');
-      dashboard.loadProjects();
-      dashboard.refreshProjects();
-    });
-
-    it("makes a request to the build server using the stored url for the project", function() {
-      expect(getJSONSpy.mostRecentCall.args[0]).toEqual(config.projects[0].url + '?jsonp=?');
-    });
-  });
-
-  describe("#refreshPings", function() {
-    var data, getJSONSpy;
-
-    beforeEach(function() {
-      data = { result: 'SUCCESS' };
-      getJSONSpy = spyOn($, 'getJSON');
-      dashboard.loadPings();
-      dashboard.refreshPings();
-    });
-
-    it("makes a request to the build server using the stored url for the project", function() {
-      expect(getJSONSpy.mostRecentCall.args[0]).toEqual(config.pings[0].url + '?jsonp=?');
-    });
-  });
-
   describe("#startProgressBarAnimation", function() {
     it("animates the progres bar", function() {
       var animateSpy = spyOn($.fn, 'animate');

@@ -11,15 +11,17 @@ var config = {
   projects:[
     {
       name:'Sample Build',
-      url:'http://path/to/sample/build/lastBuild/api/json',
-      ci:'Hudson'
+      url:'http://path/to/sample/build/lastBuild/api/json?jsonp=?',
+      ci:'Hudson',
+      format:'json'
     }
   ],
   pings:[
     {
       name:'Sample Ping',
-      url:'http://path/to/sample/ping/lastBuild/api/json',
-      ci:'Hudson'
+      url:'http://path/to/sample/ping/lastBuild/api/json?jsonp=?',
+      ci:'Hudson',
+      format:'json'
     }
   ]
 }
