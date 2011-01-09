@@ -66,7 +66,7 @@ function Project(config) {
       var self = this;
       $.get(config.url, function(data) {
         self.responseHandler(statusParser.parse(data));
-      }, config.format);
+      });
     },
 
     responseHandler: function(response) {

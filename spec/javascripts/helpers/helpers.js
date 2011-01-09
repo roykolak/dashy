@@ -12,16 +12,14 @@ var config = {
     {
       name:'Sample Build',
       url:'http://path/to/sample/build/lastBuild/api/json?jsonp=?',
-      ci:'Hudson',
-      format:'json'
+      ci:'Hudson'
     }
   ],
   pings:[
     {
       name:'Sample Ping',
       url:'http://path/to/sample/ping/lastBuild/api/json?jsonp=?',
-      ci:'Hudson',
-      format:'json'
+      ci:'Hudson'
     }
   ]
 }
