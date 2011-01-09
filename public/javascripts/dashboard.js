@@ -1,15 +1,14 @@
 function Dashboard(config) {
   return {
-    config: config,
     projects: [],
     pings: [],
 
     applyConfigSettings: function() {
-      this.refreshInterval = this.config.refreshInterval;
-      $('#title').text(this.config.title);
-      $('#success').attr('src', this.config.sounds.success);
-      $('#building').attr('src', this.config.sounds.building);
-      $('#failure').attr('src', this.config.sounds.failure);
+      this.refreshInterval = config.refreshInterval;
+      $('#title').text(config.title);
+      $('#success').attr('src', config.sounds.success);
+      $('#building').attr('src', config.sounds.building);
+      $('#failure').attr('src', config.sounds.failure);
     },
 
     loadPings: function() {

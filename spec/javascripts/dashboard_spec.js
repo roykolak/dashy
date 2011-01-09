@@ -5,12 +5,6 @@ describe("Dashboard", function() {
     dashboard = new Dashboard(config);
   });
 
-  describe("#initialize", function() {
-    it("stores the passed config options", function() {
-      expect(dashboard.config).toEqual(config);
-    });
-  });
-
   describe("#applyConfigSettings", function() {
     beforeEach(function() {
       loadFixtures('spec/javascripts/fixtures/configurable_elements.html');
