@@ -2,15 +2,11 @@ function Ping(config) {
   var buildElement;
 
   return {
-    name:config.name,
-    url:config.url + '?jsonp=?',
-
     buildAndInsertElements: function() {
       buildElement = $(document.createElement('div'));
       var pingElement = $(document.createElement('li')),
           wrapperElement = $(document.createElement('div')),
           nameElement = $(document.createElement('h3'));
-
 
       $(pingElement).addClass('ping');
       $(wrapperElement).addClass('wrapper')
@@ -38,7 +34,6 @@ function Ping(config) {
         $(buildElement).twinkle();
       };
 
-
       if(this.previousBuild != 'failure' && status == 'failure') {
         Audio.failure.play();
       }
@@ -47,10 +42,14 @@ function Ping(config) {
     },
 
     update: function(data) {
-      if(data.result) {
-        var result = (data.result == 'SUCCESS' ? 'success' : 'failure');
-        this.setStatus(result);
-      }
+      var self = this;
+      $.get(config.url, function(data) {
+        self.responseHandler(statusParser.parse(data));
+      });
+    },
+
+    responseHandler: function(response) {
+      this.setStatus(response.status);
     }
   }
 }

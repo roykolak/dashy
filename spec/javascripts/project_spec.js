@@ -164,11 +164,6 @@ describe("Project", function() {
       project.update();
       expect(getSpy.mostRecentCall.args[0]).toEqual(project_config.url);
     });
-
-    it("makes the request using the project format type", function() {
-      project.update();
-      expect(getSpy.mostRecentCall.args[2]).toEqual(project_config.format);
-    });
   });
 
   describe("#responseHandler", function() {
