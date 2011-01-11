@@ -59,8 +59,13 @@ function Project(config) {
     update: function(data) {
       if(config.url != null) {
         var self = this;
-        $.getJSON(config.url, function(data) {
-          self.responseHandler(statusParser.parse(data));
+        // $.getJSON(config.url, function(data) {
+        //   self.responseHandler(statusParser.parse(data));
+        // });
+        this.responseHandler({ 
+          status:'success', 
+          commitMessage:'Fixed that really, really bad bug. You know the one I mean. THAT one.', 
+          duration:'3000' 
         });
       }
     },
