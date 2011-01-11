@@ -1,6 +1,8 @@
 function Ping(config) {
   var buildElement;
 
+  var statusParser = new StatusParser(config.ci);
+
   return {
     buildAndInsertElements: function() {
       buildElement = $(document.createElement('div'));
@@ -43,7 +45,7 @@ function Ping(config) {
 
     update: function(data) {
       var self = this;
-      $.get(config.url, function(data) {
+      $.getJSON(config.url, function(data) {
         self.responseHandler(statusParser.parse(data));
       });
     },

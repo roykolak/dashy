@@ -6,6 +6,14 @@ describe("Ping", function() {
     ping = new Ping(ping_config);
   });
 
+  describe("#initialize", function() {
+    it("initializes a StatusParser", function() {
+      statusParserSpy = spyOn(window, 'StatusParser');
+      new Ping(ping_config);
+      expect(statusParserSpy).toHaveBeenCalledWith(ping_config.ci);
+    });
+  });
+
   describe("#buildAndInsertElements", function() {
     beforeEach(function() {
       ping.buildAndInsertElements();
@@ -77,7 +85,7 @@ describe("Ping", function() {
     var getSpy;
 
     beforeEach(function() {
-      getSpy = spyOn($, 'get');
+      getSpy = spyOn($, 'getJSON');
     });
 
     it("makes the request to the ping url", function() {
