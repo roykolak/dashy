@@ -64,9 +64,10 @@ function Project(config) {
 
     update: function(data) {
       var self = this;
-      $.get(config.url, function(data) {
-        self.responseHandler(statusParser.parse(data));
-      });
+      // $.get(config.url, function(data) {
+      //   self.responseHandler(statusParser.parse(data));
+      // });
+      this.setStatus('success');
     },
 
     responseHandler: function(response) {

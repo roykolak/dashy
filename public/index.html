@@ -8,6 +8,12 @@
     <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   </head>
   <body>
+    <div id="demo">
+      <p>This is a demo, play with the buttons!
+        <a id="random_failure" class="button" href="#">Random failure</a>
+        <a id="random_success" class="button" href="#">Random success</a>
+      </p>
+    </div>
     <div id="progress"></div>
     <div class="dashboard">
       <h1 id="title"></h1>
@@ -42,9 +48,33 @@
         dashboard.loadProjects();
         dashboard.refresh();
 
-        setInterval(function() {
-          dashboard.refresh();
-        }, dashboard.refreshInterval);
+        // setInterval(function() {
+        //   dashboard.refresh();
+        // }, dashboard.refreshInterval);
+
+        function getRandomProject() {
+          return dashboard.projects[Math.floor(Math.random()*5)];
+        }
+
+        $('#random_failure').click(function(ev) {
+          ev.preventDefault();
+          var project = getRandomProject();
+          project.setStatus('building');
+          setTimeout(function() {
+            project.currentBuild.setDuration(Math.floor(Math.random()*1000000));
+            project.setStatus('failure');
+          }, 5000);
+        });
+
+        $('#random_success').click(function(ev) {
+          ev.preventDefault();
+          var project = getRandomProject();
+          project.setStatus('building');
+          setTimeout(function() {
+            project.currentBuild.setDuration(Math.floor(Math.random()*1000000));
+            project.setStatus('success');
+          }, 5000);
+        });
       </script>
     </div>
   </body>

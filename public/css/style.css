@@ -13,6 +13,23 @@
   -webkit-mask-image: -webkit-gradient(linear, left center, right center, from(rgba(0,0,0,1)), to(rgba(0,0,0,0.2)));
 }
 
+.button {
+  .gradient(#41a0c4, #066588);
+  .rounded_corners(4px);
+  text-decoration:none;
+  text-shadow:0px 0px 1px #222;
+  -webkit-box-shadow: 1px 1px 1px #95c8db;
+  color:#e7f1f5;
+  font-size:20px;
+  padding:5px 10px;
+  margin:0 5px;
+  display:inline-block;
+}
+#demo {
+  color:#e7f1f5;
+  margin:5px 0 10px 5px;
+}
+
 
 .clear { clear:both; }
 
