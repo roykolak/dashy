@@ -64,7 +64,7 @@ function Project(config) {
 
     update: function(data) {
       var self = this;
-      $.get(config.url, function(data) {
+      $.getJSON(config.url, function(data) {
         self.responseHandler(statusParser.parse(data));
       });
     },

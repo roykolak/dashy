@@ -157,7 +157,7 @@ describe("Project", function() {
     var getSpy;
 
     beforeEach(function() {
-      getSpy = spyOn($, 'get');
+      getSpy = spyOn($, 'getJSON');
     });
 
     it("makes the request to the project url", function() {
