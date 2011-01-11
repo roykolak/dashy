@@ -2,6 +2,8 @@
 
 Dashy is a frontend to CI software. It animates, it makes noises, it remembers past build states, it is just a simple webpage, and it gets you new friends.
 
+[Presentation](http://roykolak.github.com/dashy-presentation/)
+
 # Why?
 
 Because CI is boring and monotonous. Dashy is made of the opposite.
