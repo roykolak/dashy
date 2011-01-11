@@ -1,33 +1,29 @@
 describe("Project", function() {
-  var project, options;
+  var project,
+      project_config = config.projects[0];
 
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/projects.html');
-    options = { name:'project build', url:'http://www.buildstatus.com', ci:'Hudson' }
-    project = new Project(options);
+    project = new Project(project_config);
   });
 
   describe("#initialize", function() {
     it("initializes a BuildHistorian", function() {
       buildHistorianSpy = spyOn(window, 'BuildHistorian');
-      new Project(options);
-      expect(buildHistorianSpy).toHaveBeenCalledWith('#project_build .frame');
+      new Project(project_config);
+      expect(buildHistorianSpy).toHaveBeenCalledWith('#Sample_Build .frame');
     });
 
     it("initializes a CurrentBuild", function() {
       currentBuildSpy = spyOn(window, 'CurrentBuild');
-      new Project(options);
-      expect(currentBuildSpy).toHaveBeenCalledWith('#project_build .frame', options.name);
+      new Project(project_config);
+      expect(currentBuildSpy).toHaveBeenCalledWith('#Sample_Build .frame', project_config.name);
     });
 
     it("initializes a StatusParser", function() {
       statusParserSpy = spyOn(window, 'StatusParser');
-      new Project(options);
-      expect(statusParserSpy).toHaveBeenCalledWith(options.ci);
-    });
-
-    it("stores the url and append jsonp", function() {
-      expect(project.url).toEqual('http://www.buildstatus.com?jsonp=?');
+      new Project(project_config);
+      expect(statusParserSpy).toHaveBeenCalledWith(project_config.ci);
     });
   });
 
@@ -41,7 +37,7 @@ describe("Project", function() {
     });
 
     it("inserts an underscore separated project id", function() {
-      expect($('#project_build')).toExist();
+      expect($('#Sample_Build')).toExist();
     });
 
     describe("building and inserting build historian", function() {
@@ -52,7 +48,7 @@ describe("Project", function() {
         var buildHistorian = new BuildHistorian('#project_build');
         buildAndInsertForHistorianSpy = spyOn(buildHistorian, 'buildAndInsertElements');
         spyOn(window, 'BuildHistorian').andReturn(buildHistorian);
-        var project = new Project(options);
+        var project = new Project(project_config);
         project.buildAndInsertElements();
       });
 
@@ -66,10 +62,10 @@ describe("Project", function() {
 
       beforeEach(function() {
         // TODO: wow, there's alot of spying here...
-        var currentBuild = new CurrentBuild('#project_build', options.name);
+        var currentBuild = new CurrentBuild('#project_build', project_config.name);
         buildAndInsertForCurrentBuildSpy = spyOn(currentBuild, 'buildAndInsertElements');
         spyOn(window, 'CurrentBuild').andReturn(currentBuild);
-        var project = new Project(options);
+        var project = new Project(project_config);
         project.buildAndInsertElements();
       });
 
@@ -158,28 +154,34 @@ describe("Project", function() {
   });
 
   describe("#update", function() {
+    var getSpy;
+
+    beforeEach(function() {
+      getSpy = spyOn($, 'get');
+    });
+
+    it("makes the request to the project url", function() {
+      project.update();
+      expect(getSpy.mostRecentCall.args[0]).toEqual(project_config.url);
+    });
+  });
+
+  describe("#responseHandler", function() {
     var parsedResults = { status:'success', duration:10 },
-        setStatusSpy, setDurationSpy, parseSpy;
+        setStatusSpy, setDurationSpy;
 
     beforeEach(function() {
       setStatusSpy = spyOn(project, 'setStatus');
       setDurationSpy = spyOn(project.currentBuild, 'setDuration');
-      parseSpy = spyOn(project.statusParser, 'parse').andReturn(parsedResults);
-    });
-
-    it("calls to statusParser with the response data", function() {
-      var responseData = "response data";
-      project.update(responseData);
-      expect(parseSpy).toHaveBeenCalledWith(responseData);
     });
 
     it("sets the status of the build to the parsed status", function() {
-      project.update();
+      project.responseHandler(parsedResults);
       expect(setStatusSpy).toHaveBeenCalledWith(parsedResults.status);
     });
 
     it("calls to current build to set the parsed duration of the build", function() {
-      project.update();
+      project.responseHandler(parsedResults);
       expect(setDurationSpy).toHaveBeenCalledWith(parsedResults.duration);
     });
   });

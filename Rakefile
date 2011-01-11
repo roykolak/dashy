@@ -19,3 +19,8 @@ task :deploy do
   system("sh scripts/deploy.sh")
   puts "Deployed!"
 end
+
+desc "Autospec for jasmine!"
+task :autospec do
+  system("watchr watchr.rb")
+end

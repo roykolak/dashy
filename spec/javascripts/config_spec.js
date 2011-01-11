@@ -1,44 +1,76 @@
-var config = {
-  title: '',
-  projects:[
-    {
-      name:'Sample Build',
-      url:'http://path/to/sample/build/lastBuild/api/json',
-      ci:'Hudson'
-    }
-  ],
-  pings:[
-    {
-      name:'Sample Ping',
-      url:'http://path/to/sample/ping/lastBuild/api/json',
-      ci:'Hudson'
-    }
-  ]
-}
-
 describe("Config JSON", function() {
   it("contains a projects property of an array", function() {
     expect($.isArray(config.projects)).toBeTruthy();
   });
 
-  it("contains a title propert", function() {
-    expect(config.title).toBeDefined();
+  it("contains a default title property", function() {
+    expect(config.title).toEqual("Dashy, he's always watching");
   });
 
+  it("contains a default refresh interval property", function() {
+    expect(config.refreshInterval).toEqual(5000);
+  });
+
+  describe("sounds", function() {
+    it("contains the path to the default success sound", function() {
+      expect(config.sounds.success).toEqual('sounds/success.mp3');
+    });
+
+    it("contains the path to the default building sound", function() {
+      expect(config.sounds.building).toEqual('sounds/building.mp3');
+    });
+
+    it("contains the path to the default failure sound", function() {
+      expect(config.sounds.failure).toEqual('sounds/failure.mp3');
+    });
+  });
+
+
   describe("the projects array", function() {
-    it("contains a hash for each project with specific properties set", function() {
-      var project = config.projects[0];
-      expect(project.name).toBeDefined();
-      expect(project.url).toBeDefined();
-      expect(project.ci).toBeDefined();
+    it("contains a hash for each project", function() {
+      expect(config.projects[0]).toBeDefined();
+    });
+
+    describe("a project", function() {
+      var project;
+
+      beforeEach(function() {
+        project = config.projects[0];
+      });
+
+      it("contains a name", function() {
+        expect(project.name).toBeDefined();
+      });
+
+      it("contains a url", function() {
+        expect(project.url).toBeDefined();
+      });
+
+      it("contains a ci name", function() {
+        expect(project.ci).toBeDefined();
+      });
     });
   });
 
   describe("the pings array", function() {
-    it("contains a hash for each ping with specific properties set", function() {
-      var ping = config.pings[0];
-      expect(ping.name).toBeDefined();
-      expect(ping.url).toBeDefined();
+    it("contains a hash for each ping", function() {
+      expect(config.pings[0]).toBeDefined();
+    });
+
+    describe("a ping", function() {
+      var ping;
+
+      beforeEach(function() {
+        ping = config.pings[0];
+      });
+
+      it("contains a name", function() {
+        expect(ping.name).toBeDefined();
+      });
+
+      it("contains a url", function() {
+        expect(ping.url).toBeDefined();
+      });
     });
   });
 });

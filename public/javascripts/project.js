@@ -8,7 +8,6 @@ function Project(config) {
   var statusParser = new StatusParser(config.ci);
 
   return {
-    url: config.url + '?jsonp=?',
     currentBuild: currentBuild,
     buildHistorian: buildHistorian,
     statusParser: statusParser,
@@ -64,9 +63,15 @@ function Project(config) {
     },
 
     update: function(data) {
-      var result = statusParser.parse(data);
-      this.setStatus(result.status);
-      this.currentBuild.setDuration(result.duration);
+      var self = this;
+      $.get(config.url, function(data) {
+        self.responseHandler(statusParser.parse(data));
+      });
+    },
+
+    responseHandler: function(response) {
+      this.setStatus(response.status);
+      this.currentBuild.setDuration(response.duration);
     }
   };
 }

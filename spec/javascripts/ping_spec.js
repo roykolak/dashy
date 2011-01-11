@@ -1,20 +1,9 @@
 describe("Ping", function() {
-  var ping,
-      config = { name:'server', url:'http://builder.com' };
+  var ping_config = config.pings[0];
 
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/pings.html');
-    ping = new Ping(config);
-  });
-
-  describe("#initialize", function() {
-    it("stores the name", function() {
-      expect(ping.name).toEqual(config.name);
-    });
-
-    it("stores the url and append jsonp", function() {
-      expect(ping.url).toEqual(config.url + '?jsonp=?');
-    });
+    ping = new Ping(ping_config);
   });
 
   describe("#buildAndInsertElements", function() {
@@ -27,7 +16,7 @@ describe("Ping", function() {
     });
 
     it("inserts the build name in the header", function() {
-      expect($('.ping .name')).toHaveText(config.name);
+      expect($('.ping .name')).toHaveText(ping_config.name);
     });
   });
 
@@ -81,6 +70,33 @@ describe("Ping", function() {
           expect(failureAudioSpy).toHaveBeenCalled();
         });
       });
+    });
+  });
+
+  describe("#update", function() {
+    var getSpy;
+
+    beforeEach(function() {
+      getSpy = spyOn($, 'get');
+    });
+
+    it("makes the request to the ping url", function() {
+      ping.update();
+      expect(getSpy.mostRecentCall.args[0]).toEqual(ping_config.url);
+    });
+  });
+
+  describe("#responseHandler", function() {
+    var parsedResults = { status:'success' },
+        setStatusSpy;
+
+    beforeEach(function() {
+      setStatusSpy = spyOn(ping, 'setStatus');
+    });
+
+    it("sets the status of the build to the parsed status", function() {
+      ping.responseHandler(parsedResults);
+      expect(setStatusSpy).toHaveBeenCalledWith(parsedResults.status);
     });
   });
 });

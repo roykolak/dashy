@@ -1,11 +1,15 @@
-function Loader(config) {
-  $('#title').text(config.title);
-
+function Dashboard(config) {
   return {
-    config: config,
     projects: [],
     pings: [],
-    refreshInterval: 5000,
+
+    applyConfigSettings: function() {
+      this.refreshInterval = config.refreshInterval;
+      $('#title').text(config.title);
+      $('#success').attr('src', config.sounds.success);
+      $('#building').attr('src', config.sounds.building);
+      $('#failure').attr('src', config.sounds.failure);
+    },
 
     loadPings: function() {
       var self = this;
@@ -45,17 +49,13 @@ function Loader(config) {
 
     refreshPings: function() {
       $.each(this.pings, function(i, ping) {
-        $.getJSON(ping.url, function(data) {
-          ping.update(data);
-        });
+        ping.update();
       });
     },
 
     refreshProjects: function() {
       $.each(this.projects, function(i, project) {
-        $.getJSON(project.url, function(data) {
-          project.update(data);
-        });
+        project.update();
       });
     },
 

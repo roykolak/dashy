@@ -15,9 +15,9 @@
       <ul id="pings"></ul>
     </div>
     <div id="audio">
-      <audio id="success" src="sounds/success.mp3"></audio>
-      <audio id="building" src="sounds/building.mp3"></audio>
-      <audio id="failure" src="sounds/failure.mp3"></audio>
+      <audio id="success" src=""></audio>
+      <audio id="building" src=""></audio>
+      <audio id="failure" src=""></audio>
     </div>
     <div id="scripts">
       <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
@@ -33,17 +33,18 @@
       <script src="javascripts/current_build.js"></script>
       <script src="javascripts/build_historian.js"></script>
       <script src="javascripts/config.js"></script>
-      <script src="javascripts/loader.js"></script>
+      <script src="javascripts/dashboard.js"></script>
       <script src="javascripts/status_parser.js"></script>
       <script>
-        var loader = new Loader(config);
-        loader.loadPings();
-        loader.loadProjects();
-        loader.refresh();
+        var dashboard = new Dashboard(config);
+        dashboard.applyConfigSettings();
+        dashboard.loadPings();
+        dashboard.loadProjects();
+        dashboard.refresh();
 
         setInterval(function() {
-          loader.refresh();
-        }, loader.refreshInterval);
+          dashboard.refresh();
+        }, dashboard.refreshInterval);
       </script>
     </div>
   </body>
