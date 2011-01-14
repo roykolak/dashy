@@ -17,7 +17,8 @@ Dashy only supports Hudson at the moment because Hudson is the only CI system in
   1. Get code
   2. Drop the '.sample' from public/javascript/config.js.sample
   3. Configure config.js to meet your needs
-  4. Load public/index.html in a browser
+  4. Serve up public/ in something like Apache
+  6. Load it up in a browser
   5. Get some sleep, you look tired
 
 ## Configuring
