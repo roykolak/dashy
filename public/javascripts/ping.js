@@ -4,6 +4,8 @@ function Ping(config) {
   var statusParser = new StatusParser(config.ci);
 
   return {
+    ping: null,
+
     buildAndInsertElements: function() {
       buildElement = $(document.createElement('div'));
       var pingElement = $(document.createElement('li')),
@@ -19,28 +21,38 @@ function Ping(config) {
       $('#pings').append(pingElement);
     },
 
-    setStatus: function(status) {
+    setStatus: function(newStatus) {
+      if(this.status == null) {
+        this.status = newStatus;
+      }
+
+      this.updateElementClasses(newStatus);
+      this.reactVisually(newStatus);
+      this.playSound(newStatus);
+
+      this.status = newStatus;
+    },
+
+    updateElementClasses: function(newStatus) {
       $(buildElement).removeClass('failure success');
 
-      if(status == 'success') {
+      if(newStatus == 'success' || newStatus == 'building') {
         $(buildElement).addClass('success');
-      } else if(status == 'failure') {
+      } else if(newStatus == 'failure') {
         $(buildElement).addClass('failure');
       }
+    },
 
-      if(typeof(this.previousBuild) == 'undefined') {
-        this.previousBuild = status;
-      }
-
-      if (this.previousBuild != status) {
+    reactVisually: function(newStatus) {
+      if (this.status != newStatus) {
         $(buildElement).twinkle();
       };
+    },
 
-      if(this.previousBuild != 'failure' && status == 'failure') {
+    playSound: function(newStatus) {
+      if(this.status != 'failure' && newStatus == 'failure') {
         Audio.failure.play();
       }
-
-      this.previousBuild = status;
     },
 
     update: function(data) {
