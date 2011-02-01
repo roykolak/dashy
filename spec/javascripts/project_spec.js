@@ -25,6 +25,10 @@ describe("Project", function() {
       new Project(project_config);
       expect(statusParserSpy).toHaveBeenCalledWith(project_config.ci);
     });
+
+    it("sets the default status to null", function() {
+      expect(project.status).toEqual(null);
+    });
   });
 
   describe("#buildAndInsertElements", function() {
@@ -80,58 +84,72 @@ describe("Project", function() {
       project.buildAndInsertElements();
     });
 
-    describe("when a new status is set", function() {
-      it("blinks a few times", function() {
-        var twinkleSpy = spyOn($.fn, 'twinkle');
-
-        project.setStatus('success');
-        project.setStatus('building');
-
-        expect(twinkleSpy).toHaveBeenCalled();
-      });
-
-      it("ascends to the top", function() {
-        var ascendSpy = spyOn($.fn, 'ascend');
-
-        project.setStatus('success');
-        project.setStatus('building');
-
-        expect(ascendSpy).toHaveBeenCalled();
-      });
-    });
-
     it("calls to setStatus on currentBuild with the new status", function() {
       var setStatusSpy = spyOn(project.currentBuild, 'setStatus');
       project.setStatus('success');
       expect(setStatusSpy).toHaveBeenCalledWith('success');
     });
 
-    it("calls to recordHistory with the current and previous statuses", function() {
+    it("calls to recordHistory with the new status", function() {
       var recordHistorySpy = spyOn(project, 'recordHistory');
-      project.setStatus('success');
       project.setStatus('building');
-      expect(recordHistorySpy).toHaveBeenCalledWith('success', 'building');
+      expect(recordHistorySpy).toHaveBeenCalledWith('building');
+    });
+
+    it("calls to reactVisually with the new status", function() {
+      var reactVisuallySpy = spyOn(project, 'reactVisually');
+      project.setStatus('building');
+      expect(reactVisuallySpy).toHaveBeenCalledWith('building');
     });
   });
 
   describe("#playSound", function() {
     it("plays the success sound when the status is 'success' and the previous status was not success", function() {
       var successAudioSpy = spyOn(Audio.success, 'play');
-      project.playSound('failure', 'success')
+      project.status = 'failure';
+      project.playSound('success')
 
       expect(successAudioSpy).toHaveBeenCalled();
     });
 
     it("plays the building sound when the status is 'building' and the previous status was not building", function() {
       var buildingAudioSpy = spyOn(Audio.building, 'play');
-      project.playSound('success', 'building');
+      project.status = 'success';
+      project.playSound('building');
       expect(buildingAudioSpy).toHaveBeenCalled();
     });
 
     it("plays the failure sound when the status is 'failure' and the previous status was not failure", function() {
       var failureAudioSpy = spyOn(Audio.failure, "play");
-      project.playSound('success', 'failure');
+      project.status = 'success';
+      project.playSound('failure');
       expect(failureAudioSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe("#reactVisually", function() {
+    describe("when the new status is different from the past status", function() {
+      beforeEach(function() {
+        project.status = 'success';
+      });
+
+      it("calls to the ascend jQuery plugin", function() {
+        var ascendSpy = spyOn($.fn, 'ascend');
+        project.reactVisually('building');
+        expect(ascendSpy).toHaveBeenCalled();
+      });
+    });
+
+    describe("when the new status is the same as the past status", function() {
+      beforeEach(function() {
+        project.status = 'success';
+      });
+
+      it("does not call to the ascend jQuery plugin", function() {
+        var ascendSpy = spyOn($.fn, 'ascend');
+        project.reactVisually('success');
+        expect(ascendSpy).not.toHaveBeenCalled();
+      });
     });
   });
 
@@ -143,12 +161,14 @@ describe("Project", function() {
     });
 
     it("calls to the build historian when the previous status is success and the new status is not success", function() {
-      project.recordHistory('success', 'failure');
+      project.status = 'success'
+      project.recordHistory('failure');
       expect(buildHistorianSpy).toHaveBeenCalledWith('success');
     });
 
     it("calls to the build historian when the previous status is failure and the new status is not failure", function() {
-      project.recordHistory('failure', 'success');
+      project.status = 'failure';
+      project.recordHistory('success');
       expect(buildHistorianSpy).toHaveBeenCalledWith('failure');
     });
   });

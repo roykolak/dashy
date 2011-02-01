@@ -3,18 +3,20 @@ function Project(config) {
       projectSelector = '#' + projectId,
       projectFrameSelector = projectSelector + ' .frame';
 
-  var buildHistorian = new BuildHistorian(projectFrameSelector);
-  var currentBuild = new CurrentBuild(projectFrameSelector, config.name);
-  var statusParser = new StatusParser(config.ci);
+  var buildHistorian = new BuildHistorian(projectFrameSelector),
+      currentBuild = new CurrentBuild(projectFrameSelector, config.name),
+      statusParser = new StatusParser(config.ci);
 
   return {
     currentBuild: currentBuild,
     buildHistorian: buildHistorian,
     statusParser: statusParser,
+    status: null,
 
     buildAndInsertElements: function() {
-      var projectElement = $(document.createElement('li'));
-      var frame = $(document.createElement('div'));
+      var projectElement = $(document.createElement('li')),
+          frame = $(document.createElement('div'));
+
       $(projectElement).addClass('project').attr('id', projectId);
       $(frame).addClass('frame');
       $(projectElement).append(frame);
@@ -25,40 +27,41 @@ function Project(config) {
     },
 
     setStatus: function(newStatus) {
-      this.currentBuild.setStatus(newStatus);
-
-      if(typeof(this.status) == 'undefined') {
+      if(this.status == null) {
         this.status = newStatus;
       }
 
-      this.recordHistory(this.status, newStatus);
-
-      if(this.status != newStatus) {
-        $(projectSelector).ascend(function() {
-          $(projectSelector).twinkle();
-        });
-      }
-
-      this.playSound(this.status, newStatus);
+      this.currentBuild.setStatus(newStatus);
+      this.recordHistory(newStatus);
+      this.reactVisually(newStatus);
+      this.playSound(newStatus);
 
       this.status = newStatus;
     },
 
-    recordHistory: function(status, newStatus) {
-      if(status == 'success' && newStatus != 'success') {
+    recordHistory: function(newStatus) {
+      if(this.status == 'success' && newStatus != 'success') {
         this.buildHistorian.addState('success');
-      } else if(status == 'failure' && newStatus != 'failure') {
+      } else if(this.status == 'failure' && newStatus != 'failure') {
         this.buildHistorian.addState('failure');
       }
     },
 
-    playSound: function(status, newStatus) {
-      if(status != 'success' && newStatus == 'success') {
+    playSound: function(newStatus) {
+      if(this.status != 'success' && newStatus == 'success') {
         Audio.success.play();
-      } else if(status != 'building' && newStatus == 'building') {
+      } else if(this.status != 'building' && newStatus == 'building') {
         Audio.building.play();
-      } else if(status != 'failure' && newStatus == 'failure') {
+      } else if(this.status != 'failure' && newStatus == 'failure') {
         Audio.failure.play();
+      }
+    },
+
+    reactVisually: function(newStatus) {
+      if(this.status != newStatus) {
+        $(projectSelector).ascend(function() {
+          $(projectSelector).twinkle();
+        });
       }
     },
 
