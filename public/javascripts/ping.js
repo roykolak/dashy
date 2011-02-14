@@ -1,29 +1,24 @@
 function Ping(config) {
-  var buildElement;
+  var pingId = config.name.replace(/ /g,"_"),
+      currentBuild = '#' + pingId + ' .current_build';
 
   var statusParser = new StatusParser(config.ci);
+
+  $.template("ping", "<li id='${pingId}' class='ping'><div class='wrapper'><div class='current_build'><h3 class='name'>${name}</h3></div></div></li>")
 
   return {
     ping: null,
 
     buildAndInsertElements: function() {
-      buildElement = $(document.createElement('div'));
-      var pingElement = $(document.createElement('li')),
-          wrapperElement = $(document.createElement('div')),
-          nameElement = $(document.createElement('h3'));
-
-      $(pingElement).addClass('ping');
-      $(wrapperElement).addClass('wrapper')
-      $(buildElement).addClass('current_build');
-      $(nameElement).addClass('name').text(config.name);
-      $(wrapperElement).append(buildElement, nameElement);
-      $(pingElement).append(wrapperElement);
-      $('#pings').append(pingElement);
+      $.tmpl('ping', {pingId: pingId, name: config.name}).appendTo('#pings');
     },
 
     setStatus: function(newStatus) {
       if(this.status == null) {
         this.status = newStatus;
+      }
+      if(newStatus == 'building') {
+        newStatus = this.status;
       }
 
       this.updateElementClasses(newStatus);
@@ -34,18 +29,18 @@ function Ping(config) {
     },
 
     updateElementClasses: function(newStatus) {
-      $(buildElement).removeClass('failure success');
+      $(currentBuild).removeClass('failure success');
 
-      if(newStatus == 'success' || newStatus == 'building') {
-        $(buildElement).addClass('success');
+      if(newStatus == 'success') {
+        $(currentBuild).addClass('success');
       } else if(newStatus == 'failure') {
-        $(buildElement).addClass('failure');
+        $(currentBuild).addClass('failure');
       }
     },
 
     reactVisually: function(newStatus) {
       if (this.status != newStatus) {
-        $(buildElement).twinkle();
+        $(currentBuild).twinkle();
       };
     },
 

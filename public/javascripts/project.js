@@ -7,6 +7,8 @@ function Project(config) {
       currentBuild = new CurrentBuild(projectFrameSelector, config.name),
       statusParser = new StatusParser(config.ci);
 
+  $.template("project", "<li id='${projectId}' class='project'><div class='frame'></div></li>");
+
   return {
     currentBuild: currentBuild,
     buildHistorian: buildHistorian,
@@ -14,14 +16,8 @@ function Project(config) {
     status: null,
 
     buildAndInsertElements: function() {
-      var projectElement = $(document.createElement('li')),
-          frame = $(document.createElement('div'));
-
-      $(projectElement).addClass('project').attr('id', projectId);
-      $(frame).addClass('frame');
-      $(projectElement).append(frame);
-      $('#projects').append(projectElement);
-
+      $.tmpl("project", {projectId: projectId}).appendTo('#projects');
+      
       currentBuild.buildAndInsertElements();
       buildHistorian.buildAndInsertElements();
     },

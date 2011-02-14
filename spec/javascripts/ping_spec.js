@@ -66,18 +66,8 @@ describe("Ping", function() {
       ping.buildAndInsertElements();
     });
 
-    it("removes 'building', and 'success' classes from the ping", function() {
-      ping.updateElementClasses('success');
-      expect($('.current_build').hasClass('building success')).toBeFalsy();
-    });
-
     it("adds a 'success' class to a ping when it is successfully built", function() {
       ping.updateElementClasses('success');
-      expect($('.current_build').hasClass('success')).toBeTruthy();
-    });
-
-    it("adds a 'success' class to a ping when it is building", function() {
-      ping.updateElementClasses('building');
       expect($('.current_build').hasClass('success')).toBeTruthy();
     });
 
@@ -102,6 +92,13 @@ describe("Ping", function() {
 
     it("does not play the failure sound when the status is 'failure' and the previous status was failure", function() {
       ping.setStatus('failure');
+      ping.setStatus('failure');
+      expect(failureAudioSpy).not.toHaveBeenCalled();
+    });
+
+    it("does not play the failure sound when the status is 'failure' and the previous status was building", function() {
+      ping.setStatus('failure');
+      ping.setStatus('building');
       ping.setStatus('failure');
       expect(failureAudioSpy).not.toHaveBeenCalled();
     });

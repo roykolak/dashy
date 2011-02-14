@@ -2,18 +2,19 @@ function BuildHistorian(projectSelector) {
   var historySelector =  projectSelector + ' .history';
 
   function checkIfOutOfRoom() {
-    var stateWidth = $('.status').outerWidth(true);
-    var numberOfStates = $(historySelector).children().length;
-    var historyWidth = $(historySelector).width();
+    var stateWidth = $('.status').outerWidth(true),
+        numberOfStates = $(historySelector).children().length,
+        historyWidth = $(historySelector).width();
 
     return (numberOfStates >= Math.floor(historyWidth/stateWidth) ? true : false);
   }
+  
+  $.template('buildHistorian', "<ol class='history'></ol>");
+  $.template('buildState', "<li class='status ${state}'>${state}</li>");
 
   return {
     buildAndInsertElements: function() {
-      var historyElement = $(document.createElement('ol'));
-      $(historyElement).addClass('history');
-      $(projectSelector).append(historyElement);
+      $.tmpl('buildHistorian').appendTo(projectSelector);
     },
 
     addState: function(state) {
@@ -21,16 +22,7 @@ function BuildHistorian(projectSelector) {
         this.removeOldestBuildState();
       }
 
-      var stateElement = this.buildStateElement();
-      $(stateElement).addClass(state).text(state);
-
-      $(stateElement).prependTo(historySelector);
-    },
-
-    buildStateElement: function() {
-      var element = $(document.createElement('li'));
-      $(element).addClass('status');
-      return element;
+      $.tmpl('buildState', {state: state}).prependTo(historySelector);
     },
 
     removeOldestBuildState: function() {

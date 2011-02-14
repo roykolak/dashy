@@ -13,22 +13,6 @@ describe("BuildHistorian", function() {
     });
   });
 
-  describe("#buildStateElement", function() {
-    var stateElement;
-
-    beforeEach(function() {
-      stateElement = buildHistorian.buildStateElement();
-    });
-
-    it("creates an li", function() {
-      expect($(stateElement).is('li')).toBeTruthy();
-    });
-
-    it("adds a class of status to the element", function() {
-      expect($(stateElement).hasClass('status')).toBeTruthy();
-    });
-  });
-
   describe("removeOldestBuildResult", function() {
     beforeEach(function() {
       buildHistorian.buildAndInsertElements();
