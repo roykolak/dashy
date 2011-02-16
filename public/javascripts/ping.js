@@ -1,46 +1,53 @@
 function Ping(config) {
-  var buildElement;
+  var pingId = config.name.replace(/ /g,"_"),
+      currentBuild = '#' + pingId + ' .current_build';
 
   var statusParser = new StatusParser(config.ci);
 
-  return {
-    buildAndInsertElements: function() {
-      buildElement = $(document.createElement('div'));
-      var pingElement = $(document.createElement('li')),
-          wrapperElement = $(document.createElement('div')),
-          nameElement = $(document.createElement('h3'));
+  $.template("ping", "<li id='${pingId}' class='ping'><div class='wrapper'><div class='current_build'></div><h3 class='name'>${name}</h3></div></li>")
 
-      $(pingElement).addClass('ping');
-      $(wrapperElement).addClass('wrapper')
-      $(buildElement).addClass('current_build');
-      $(nameElement).addClass('name').text(config.name);
-      $(wrapperElement).append(buildElement, nameElement);
-      $(pingElement).append(wrapperElement);
-      $('#pings').append(pingElement);
+  return {
+    ping: null,
+
+    buildAndInsertElements: function() {
+      $.tmpl('ping', {pingId: pingId, name: config.name}).appendTo('#pings');
     },
 
-    setStatus: function(status) {
-      $(buildElement).removeClass('failure success');
-
-      if(status == 'success') {
-        $(buildElement).addClass('success');
-      } else if(status == 'failure') {
-        $(buildElement).addClass('failure');
+    setStatus: function(newStatus) {
+      if(this.status == null) {
+        this.status = newStatus;
+      }
+      if(newStatus == 'building') {
+        newStatus = this.status;
       }
 
-      if(typeof(this.previousBuild) == 'undefined') {
-        this.previousBuild = status;
-      }
+      this.updateElementClasses(newStatus);
+      this.reactVisually(newStatus);
+      this.playSound(newStatus);
 
-      if (this.previousBuild != status) {
-        $(buildElement).twinkle();
+      this.status = newStatus;
+    },
+
+    updateElementClasses: function(newStatus) {
+      $(currentBuild).removeClass('failure success');
+
+      if(newStatus == 'success') {
+        $(currentBuild).addClass('success');
+      } else if(newStatus == 'failure') {
+        $(currentBuild).addClass('failure');
+      }
+    },
+
+    reactVisually: function(newStatus) {
+      if (this.status != newStatus) {
+        $(currentBuild).twinkle();
       };
+    },
 
-      if(this.previousBuild != 'failure' && status == 'failure') {
+    playSound: function(newStatus) {
+      if(this.status != 'failure' && newStatus == 'failure') {
         Audio.failure.play();
       }
-
-      this.previousBuild = status;
     },
 
     update: function(data) {

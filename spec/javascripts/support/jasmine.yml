@@ -11,10 +11,7 @@
 #   - dist/**/*.js
 #
 src_files:
-    - public/javascripts/frameworks/jquery-1.4.2.min.js
-    - public/javascripts/frameworks/jquery-ui-1.8.5.custom.min.js
-    - public/javascripts/frameworks/jquery.quicksand.min.js
-    - public/javascripts/*.js
+    - public/javascripts/**/*.js
 
 # stylesheets
 #
@@ -40,8 +37,7 @@ stylesheets:
 #   - helpers/**/*.js
 #
 helpers:
-   - spec/javascripts/helpers/*.js
-   
+
 # spec_files
 #
 #  Return an array of filepaths relative to spec_dir to include.
@@ -53,8 +49,7 @@ helpers:
 #   - **/*[sS]pec.js
 #
 spec_files:
-   - spec/javascripts/*[sS]pec.js
-   
+
 # src_dir
 #
 # Source directory path. Your src_files must be returned relative to this path. Will use root if left blank.

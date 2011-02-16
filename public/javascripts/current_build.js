@@ -5,20 +5,12 @@ function CurrentBuild(projectSelector, projectName) {
   function convertDurationToSeconds(duration) {
     return Math.round(parseInt(duration) / 1000);
   }
+  
+  $.template("currentBuild", "<div class='current_build'><h3 class='name'>${projectName}</h3><p class='time'></p><div class='clear'></div>");
 
   return {
     buildAndInsertElements: function() {
-      var buildElement = $(document.createElement('div')),
-          nameElement = $(document.createElement('h3')),
-          timeElement = $(document.createElement('p')),
-          clearingElement = $(document.createElement('div'));
-
-      $(buildElement).addClass('current_build');
-      $(nameElement).addClass('name').text(projectName);
-      $(timeElement).addClass('time');
-      $(clearingElement).addClass('clear');
-      $(buildElement).append(nameElement).append(timeElement).append(clearingElement);
-      $(projectSelector).append(buildElement);
+      $.tmpl('currentBuild', {projectName: projectName}).appendTo(projectSelector);
     },
 
     setStatus: function(newStatus) {
