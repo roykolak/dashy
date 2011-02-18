@@ -20,6 +20,10 @@ var config = {
       url:'http://phobos:8080/job/S2%20circuit/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
+      name:'Marlis',
+      url:'http://phobos:8080/job/Marlis/lastBuild/api/json?jsonp=?',
+      ci:'Hudson'
+    }, {
       name:'LibTdt',
       url:'http://phobos:8080/job/LibTdt/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
