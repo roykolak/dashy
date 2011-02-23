@@ -11,10 +11,6 @@ var config = {
       name:'ArlisWebsite',
       url:'http://builder.research/job/ArlisWebsite/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
-    },{
-      name:'Dashboard',
-      url:'http://builder.research/job/Dashboard/lastBuild/api/json?jsonp=?',
-      ci:'Hudson'
     }, {
       name:'S2 Circuit',
       url:'http://phobos:8080/job/S2%20circuit/lastBuild/api/json?jsonp=?',
