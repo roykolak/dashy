@@ -13,19 +13,19 @@ var config = {
       ci:'Hudson'
     }, {
       name:'S2 Circuit',
-      url:'http://phobos:8080/job/S2%20circuit/lastBuild/api/json?jsonp=?',
+      url:'http://usglvdt088:8080/job/S2%20circuit/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
       name:'Marlis',
-      url:'http://phobos:8080/job/Marlis/lastBuild/api/json?jsonp=?',
+      url:'http://usglvdt088:8080/job/Marlis/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
       name:'LibTdt',
-      url:'http://phobos:8080/job/LibTdt/lastBuild/api/json?jsonp=?',
+      url:'http://usglvdt088:8080/job/LibTdt/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
       name:'CRTools',
-      url:'http://phobos:8080/job/CRTools/lastBuild/api/json?jsonp=?',
+      url:'http://usglvdt088:8080/job/CRTools/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
       name:'Eup',
