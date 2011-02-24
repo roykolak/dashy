@@ -16,7 +16,8 @@ function Project(config) {
     status: null,
 
     buildAndInsertElements: function() {
-      $.tmpl("project", {projectId: projectId}).appendTo('#projects');
+      var addingMethod = (config.url ? 'prependTo' : 'appendTo');
+      $.tmpl("project", {projectId: projectId})[addingMethod]('#projects');
       
       currentBuild.buildAndInsertElements();
       buildHistorian.buildAndInsertElements();
@@ -62,10 +63,12 @@ function Project(config) {
     },
 
     update: function(data) {
-      var self = this;
-      $.getJSON(config.url, function(data) {
-        self.responseHandler(statusParser.parse(data));
-      });
+      if(config.url != null) {
+        var self = this;
+        $.getJSON(config.url, function(data) {
+          self.responseHandler(statusParser.parse(data));
+        });
+      }
     },
 
     responseHandler: function(response) {

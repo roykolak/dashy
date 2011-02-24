@@ -180,9 +180,26 @@ describe("Project", function() {
       getSpy = spyOn($, 'getJSON');
     });
 
-    it("makes the request to the project url", function() {
-      project.update();
-      expect(getSpy.mostRecentCall.args[0]).toEqual(project_config.url);
+    describe("when a url is provided", function() {
+      it("makes the request to the project url", function() {
+        project.update();
+        expect(getSpy.mostRecentCall.args[0]).toEqual(project_config.url);
+      });
+    });
+    
+    describe("when a url is not provided", function() {
+      var projectWithNoUrl;
+      
+      beforeEach(function() {
+        config = project_config;
+        config.url = null;
+        projectWithNoUrl = new Project(config);
+      });
+      
+      it("doesn't makes a request", function() {
+        projectWithNoUrl.update();
+        expect(getSpy).not.toHaveBeenCalled();
+      });
     });
   });
 
