@@ -16,7 +16,7 @@ var config = {
       url:'http://usglvdt088:8080/job/S2%20circuit/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
-      name:'Arlis.Net',
+      name:'ArlisNet',
       url:'http://usglvdt088:8080/job/Arlis.Net/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
