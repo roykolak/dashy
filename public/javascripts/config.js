@@ -43,8 +43,8 @@ var config = {
       url:'http://builder.research/job/Ping%20Phobos/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
-      name:'Hermes',
-      url:'http://builder.research/job/Ping%20Hermes/lastBuild/api/json?jsonp=?',
+      name:'Code',
+      url:'http://builder.research/job/Ping%20Code/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
       name:'SB 0',
