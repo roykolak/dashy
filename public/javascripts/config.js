@@ -29,7 +29,7 @@ var config = {
       ci:'Hudson'
     }, {
       name:'Eup',
-      // url:'http://builder.research/job/Eup/lastBuild/api/json?jsonp=?',
+      url:'http://builder.research/job/Eup/lastBuild/api/json?jsonp=?',
       ci:'Hudson'
     }, {
       name:'Dispenser',
