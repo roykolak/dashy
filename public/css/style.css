@@ -75,6 +75,7 @@ h1, h2, h3, p, li, ul {
 
       .name { float:left; }
       .time { float:right; }
+      .message { display:none; }
     }
 
     .history {
