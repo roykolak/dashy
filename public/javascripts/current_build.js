@@ -1,12 +1,13 @@
 function CurrentBuild(projectSelector, projectName) {
   var currentBuildSelector = projectSelector + ' .current_build',
-      buildDurationSelector = projectSelector + ' .current_build .time';
+      buildDurationSelector = projectSelector + ' .current_build .time',
+      buildMessageSelector = projectSelector + ' .current_build .message';
 
   function convertDurationToSeconds(duration) {
     return Math.round(parseInt(duration) / 1000);
   }
-  
-  $.template("currentBuild", "<div class='current_build'><h3 class='name'>${projectName}</h3><p class='time'></p><div class='clear'></div>");
+
+  $.template("currentBuild", "<div class='current_build'><h3 class='name'>${projectName}</h3><p class='time'></p><div class='clear'></div><div class='message'></div></div>");
 
   return {
     buildAndInsertElements: function() {
@@ -22,6 +23,10 @@ function CurrentBuild(projectSelector, projectName) {
       duration = convertDurationToSeconds(duration);
       var durationText = (duration > 0 ? duration + ' sec' : '');
       $(buildDurationSelector).text(durationText);
+    },
+
+    setCommitMessage: function(commitMessage) {
+      $(buildMessageSelector).text(commitMessage);
     }
   };
 }

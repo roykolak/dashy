@@ -128,29 +128,29 @@ describe("Project", function() {
   });
 
   describe("#reactVisually", function() {
-    describe("when the new status is different from the past status", function() {
-      beforeEach(function() {
-        project.status = 'success';
-      });
-
-      it("calls to the ascend jQuery plugin", function() {
-        var ascendSpy = spyOn($.fn, 'ascend');
-        project.reactVisually('building');
-        expect(ascendSpy).toHaveBeenCalled();
-      });
-    });
-
-    describe("when the new status is the same as the past status", function() {
-      beforeEach(function() {
-        project.status = 'success';
-      });
-
-      it("does not call to the ascend jQuery plugin", function() {
-        var ascendSpy = spyOn($.fn, 'ascend');
-        project.reactVisually('success');
-        expect(ascendSpy).not.toHaveBeenCalled();
-      });
-    });
+    // describe("when the new status is different from the past status", function() {
+    //   beforeEach(function() {
+    //     project.status = 'success';
+    //   });
+    //
+    //   it("calls to the ascend jQuery plugin", function() {
+    //     var ascendSpy = spyOn($.fn, 'ascend');
+    //     project.reactVisually('building');
+    //     expect(ascendSpy).toHaveBeenCalled();
+    //   });
+    // });
+    //
+    // describe("when the new status is the same as the past status", function() {
+    //   beforeEach(function() {
+    //     project.status = 'success';
+    //   });
+    //
+    //   it("does not call to the ascend jQuery plugin", function() {
+    //     var ascendSpy = spyOn($.fn, 'ascend');
+    //     project.reactVisually('success');
+    //     expect(ascendSpy).not.toHaveBeenCalled();
+    //   });
+    // });
   });
 
   describe("#recordHistory", function() {
@@ -186,16 +186,16 @@ describe("Project", function() {
         expect(getSpy.mostRecentCall.args[0]).toEqual(project_config.url);
       });
     });
-    
+
     describe("when a url is not provided", function() {
       var projectWithNoUrl;
-      
+
       beforeEach(function() {
         config = project_config;
         config.url = null;
         projectWithNoUrl = new Project(config);
       });
-      
+
       it("doesn't makes a request", function() {
         projectWithNoUrl.update();
         expect(getSpy).not.toHaveBeenCalled();
@@ -204,12 +204,13 @@ describe("Project", function() {
   });
 
   describe("#responseHandler", function() {
-    var parsedResults = { status:'success', duration:10 },
-        setStatusSpy, setDurationSpy;
+    var parsedResults = { status:'success', duration:10, commitMessage:'This is the commit message' },
+        setStatusSpy, setDurationSpy, setCommitMessageSpy;
 
     beforeEach(function() {
       setStatusSpy = spyOn(project, 'setStatus');
       setDurationSpy = spyOn(project.currentBuild, 'setDuration');
+      setCommitMessageSpy = spyOn(project.currentBuild, 'setCommitMessage');
     });
 
     it("sets the status of the build to the parsed status", function() {
@@ -220,6 +221,11 @@ describe("Project", function() {
     it("calls to current build to set the parsed duration of the build", function() {
       project.responseHandler(parsedResults);
       expect(setDurationSpy).toHaveBeenCalledWith(parsedResults.duration);
+    });
+
+    it("calls to current build to set the commit message", function() {
+      project.responseHandler(parsedResults);
+      expect(setCommitMessageSpy).toHaveBeenCalledWith(parsedResults.commitMessage);
     });
   });
 });

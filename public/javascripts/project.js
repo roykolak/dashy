@@ -18,7 +18,7 @@ function Project(config) {
     buildAndInsertElements: function() {
       var addingMethod = (config.url ? 'prependTo' : 'appendTo');
       $.tmpl("project", {projectId: projectId})[addingMethod]('#projects');
-      
+
       currentBuild.buildAndInsertElements();
       buildHistorian.buildAndInsertElements();
     },
@@ -56,8 +56,11 @@ function Project(config) {
 
     reactVisually: function(newStatus) {
       if(this.status != newStatus) {
-        $(projectSelector).ascend(function() {
-          $(projectSelector).twinkle();
+        $(projectSelector).find('.message').slideDown("fast", function() {
+          $(projectSelector).ascend(function() {
+            $(projectSelector).find('.message').slideUp("fast");
+            $(projectSelector).twinkle();
+          });
         });
       }
     },
@@ -74,6 +77,7 @@ function Project(config) {
     responseHandler: function(response) {
       this.setStatus(response.status);
       this.currentBuild.setDuration(response.duration);
+      this.currentBuild.setCommitMessage(response.commitMessage);
     }
   };
 }
