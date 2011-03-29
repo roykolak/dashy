@@ -58,7 +58,9 @@ function Project(config) {
       if(this.status != newStatus) {
         $(projectSelector).find('.message').slideDown("fast", function() {
           $(projectSelector).ascend(function() {
-            $(projectSelector).find('.message').slideUp("fast");
+            if(newStatus != 'building') {
+              $(projectSelector).find('.message').slideUp("fast");
+            }
             $(projectSelector).twinkle();
           });
         });
