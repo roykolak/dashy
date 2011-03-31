@@ -55,14 +55,13 @@ function Project(config) {
     },
 
     reactVisually: function(newStatus) {
+      var visuability = (newStatus != 'building' ? 'hide' : 'show');
+      $(projectSelector).find('.message')[visuability]();
+      
       if(this.status != newStatus) {
-        $(projectSelector).find('.message').show();
         $(projectSelector).ascend(function() {
           $(projectSelector).twinkle();
         });
-      }
-      if(newStatus != 'building') {
-        $(projectSelector).find('.message').hide();
       }
     },
 
