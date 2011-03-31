@@ -7,7 +7,9 @@ function StatusParser(ci) {
     } else {
       result.status = (data.result == 'SUCCESS' ? 'success' : 'failure');
     }
-    result.commitMessage = (data.changeSet['items'][0]? data.changeSet['items'][0].msg : '');
+    
+    var lastCommit = data.changeSet['items'].length - 1;
+    result.commitMessage = (data.changeSet['items'][lastCommit] ? data.changeSet['items'][lastCommit].msg : 'No commit message. :(');
     result.duration = data.duration
     return result;
   }

@@ -21,13 +21,21 @@ describe("StatusParser", function() {
             expect(result.commitMessage).toEqual('changed checkbox observer to click');
           });
         });
+        
+        describe("when many commits are being built", function() {
+          it("returns the most recent commit message", function() {
+            var result = statusParser.parse({"actions":[{"causes":[{"shortDescription":"Started by an SCM change"}]},{},{},{}],"artifacts":[],"building":false,"description":null,"duration":150457,"fullDisplayName":"ArlisWebsite #188","id":"2010-12-28_11-01-08","keepLog":false,"number":188,"result":"SUCCESS","timestamp":1293555668000,"url":"http://builder.research/job/ArlisWebsite/188/","builtOn":"","changeSet":{"items":[{"date":"2010-12-28T15:34:49.960481Z","msg":"changed checkbox observer to click","paths":[{"editType":"edit","file":"/applications/development/arlis_website/trunk/public/javascripts/application.js"}],"revision":2732,"user":"rkolak"},{"date":"2010-12-28T15:34:49.960481Z","msg":"This is the last commit message","paths":[{"editType":"edit","file":"/applications/development/arlis_website/trunk/public/javascripts/application.js"}],"revision":2732,"user":"rkolak"}],"kind":"svn","revisions":[{"module":"https://svn.research/applications/development/arlis_website/trunk","revision":2732}]},"culprits":[{"absoluteUrl":"http://builder.research/user/rkolak","fullName":"rkolak"}]})
+            expect(result.commitMessage).toEqual('This is the last commit message');
+          });
+        });
 
         describe("when a commit message is not available", function() {
           it("returns an empty string", function() {
             var result = statusParser.parse({"actions":[{"causes":[{"shortDescription":"Started by an SCM change"}]},{},{},{}],"artifacts":[],"building":false,"description":null,"duration":150457,"fullDisplayName":"ArlisWebsite #188","id":"2010-12-28_11-01-08","keepLog":false,"number":188,"result":"SUCCESS","timestamp":1293555668000,"url":"http://builder.research/job/ArlisWebsite/188/","builtOn":"","changeSet":{"items":[],"kind":"svn","revisions":[{"module":"https://svn.research/applications/development/arlis_website/trunk","revision":2732}]},"culprits":[{"absoluteUrl":"http://builder.research/user/rkolak","fullName":"rkolak"}]})
-            expect(result.commitMessage).toEqual('changed checkbox observer to click');
+            expect(result.commitMessage).toEqual('No commit message. :(');
           });
         });
+      });
 
       describe("build states", function() {
         describe("when the build was successful", function() {
