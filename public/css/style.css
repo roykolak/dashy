@@ -76,8 +76,7 @@ h1, h2, h3, p, li, ul {
       .name { float:left; }
       .time { float:right; }
       .message {
-        background:#FFF;
-        opacity:0.7;
+        background:rgba(255,255,255,.5);
         .rounded_corners(10px);
         margin:20px 0 0;
         padding:10px;

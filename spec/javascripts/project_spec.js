@@ -128,29 +128,46 @@ describe("Project", function() {
   });
 
   describe("#reactVisually", function() {
-    // describe("when the new status is different from the past status", function() {
-    //   beforeEach(function() {
-    //     project.status = 'success';
-    //   });
-    //
-    //   it("calls to the ascend jQuery plugin", function() {
-    //     var ascendSpy = spyOn($.fn, 'ascend');
-    //     project.reactVisually('building');
-    //     expect(ascendSpy).toHaveBeenCalled();
-    //   });
-    // });
-    //
-    // describe("when the new status is the same as the past status", function() {
-    //   beforeEach(function() {
-    //     project.status = 'success';
-    //   });
-    //
-    //   it("does not call to the ascend jQuery plugin", function() {
-    //     var ascendSpy = spyOn($.fn, 'ascend');
-    //     project.reactVisually('success');
-    //     expect(ascendSpy).not.toHaveBeenCalled();
-    //   });
-    // });
+    var ascendSpy;
+    
+    beforeEach(function() {
+      ascendSpy = spyOn($.fn, 'ascend');
+      project.buildAndInsertElements();
+    });
+    
+    describe("when the new status is different from the past status", function() {
+      beforeEach(function() {
+        project.status = 'success';
+      });
+
+      it("calls to the ascend jQuery plugin", function() {
+        project.reactVisually('building');
+        expect(ascendSpy).toHaveBeenCalled();
+      });
+    });
+    
+    describe("when the new status is 'building'", function() {
+      it("shows the commit message", function() {
+        project.reactVisually('building');
+        expect($('#Sample_Build .message')).toBeVisible();
+      });
+    });
+
+    describe("when the new status is the same as the past status", function() {
+      beforeEach(function() {
+        project.status = 'success';
+      });
+
+      it("does not call to the ascend jQuery plugin", function() {
+        project.reactVisually('success');
+        expect(ascendSpy).not.toHaveBeenCalled();
+      });
+
+      it("does not show the commit message", function() {
+        project.reactVisually('success');
+        expect($('#Sample_Build .message')).toBeHidden();
+      });
+    });
   });
 
   describe("#recordHistory", function() {

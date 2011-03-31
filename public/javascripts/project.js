@@ -56,14 +56,13 @@ function Project(config) {
 
     reactVisually: function(newStatus) {
       if(this.status != newStatus) {
-        $(projectSelector).find('.message').slideDown("fast", function() {
-          $(projectSelector).ascend(function() {
-            if(newStatus != 'building') {
-              $(projectSelector).find('.message').slideUp("fast");
-            }
-            $(projectSelector).twinkle();
-          });
+        $(projectSelector).find('.message').show();
+        $(projectSelector).ascend(function() {
+          $(projectSelector).twinkle();
         });
+      }
+      if(newStatus != 'building') {
+        $(projectSelector).find('.message').hide();
       }
     },
 
