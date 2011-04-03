@@ -4,13 +4,10 @@ describe("CurrentBuild", function() {
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/project.html');
     currentBuild = new CurrentBuild('#project_name', 'project name');
+    currentBuild.buildAndInsertElements();
   });
 
   describe("#buildAndInsertElements", function() {
-    beforeEach(function() {
-      currentBuild.buildAndInsertElements();
-    });
-
     it("inserts a new project html block", function() {
       expect($('.project .current_build .name, .project .current_build .time, .project .current_build .message')).toExist();
     });
@@ -19,12 +16,30 @@ describe("CurrentBuild", function() {
       expect($('.project .current_build .name')).toHaveText('project name');
     });
   });
+  
+  describe("#refresh", function() {
+    var parsedResults = { status:'success', duration:10, commitMessage:'This is the commit message' };
+    
+    it("calls setStatus with new status", function() {
+      var setStatusSpy = spyOn(currentBuild, 'setStatus');
+      currentBuild.refresh(parsedResults);
+      expect(setStatusSpy).toHaveBeenCalledWith(parsedResults.status);
+    });
+    
+    it("calls setDuration with new duration", function() {
+      var setDurationSpy = spyOn(currentBuild, 'setDuration');
+      currentBuild.refresh(parsedResults);
+      expect(setDurationSpy).toHaveBeenCalledWith(parsedResults.duration);
+    });
+    
+    it("calls setCommitMessage with new commit message", function() {
+      var setCommitMessageSpy = spyOn(currentBuild, 'setCommitMessage');
+      currentBuild.refresh(parsedResults);
+      expect(setCommitMessageSpy).toHaveBeenCalledWith(parsedResults.commitMessage);
+    });
+  });
 
   describe("#setStatus", function() {
-    beforeEach(function() {
-      currentBuild.buildAndInsertElements();
-    });
-
     it("removes 'failure', 'building', and 'success' classes from the project", function() {
       currentBuild.setStatus('failure');
       currentBuild.setStatus('building');
@@ -40,10 +55,6 @@ describe("CurrentBuild", function() {
   });
 
   describe("#setDuration", function() {
-    beforeEach(function() {
-      currentBuild.buildAndInsertElements();
-    });
-
     it("inserts the passed time into the time div and appends time label", function() {
       currentBuild.setDuration(5000);
       expect($('.current_build .time')).toHaveText('5 sec');
@@ -57,10 +68,6 @@ describe("CurrentBuild", function() {
 
   describe("#setCommitMessage", function() {
     var commitMessage = "This is the commit message";
-
-    beforeEach(function() {
-      currentBuild.buildAndInsertElements();
-    });
 
     it("inserts the passed commit message into the commit message div", function() {
       currentBuild.setCommitMessage(commitMessage);

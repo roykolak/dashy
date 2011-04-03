@@ -197,28 +197,12 @@ describe("Project", function() {
   });
 
   describe("#responseHandler", function() {
-    var parsedResults = { status:'success', duration:10, commitMessage:'This is the commit message' },
-        setDurationSpy, setCommitMessageSpy;
+    var parsedResults = { status:'success', duration:10, commitMessage:'This is the commit message' };
 
-    beforeEach(function() {
-      setDurationSpy = spyOn(project.currentBuild, 'setDuration');
-      setCommitMessageSpy = spyOn(project.currentBuild, 'setCommitMessage');
-    });
-
-    it("calls to current build to set the parsed duration of the build", function() {
+    it("calls to current build to update the the most recent build information", function() {
+      var refreshSpy = spyOn(project.currentBuild, 'refresh');
       project.responseHandler(parsedResults);
-      expect(setDurationSpy).toHaveBeenCalledWith(parsedResults.duration);
-    });
-
-    it("calls to current build to set the commit message", function() {
-      project.responseHandler(parsedResults);
-      expect(setCommitMessageSpy).toHaveBeenCalledWith(parsedResults.commitMessage);
-    });
-    
-    it("calls to setStatus on currentBuild with the new status", function() {
-      var setStatusSpy = spyOn(project.currentBuild, 'setStatus');
-      project.responseHandler(parsedResults);
-      expect(setStatusSpy).toHaveBeenCalledWith('success');
+      expect(refreshSpy).toHaveBeenCalledWith(parsedResults);
     });
 
     it("calls to recordHistory with the new status", function() {

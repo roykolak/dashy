@@ -14,6 +14,12 @@ function CurrentBuild(projectSelector, projectName) {
       $.tmpl('currentBuild', {projectName: projectName}).appendTo(projectSelector);
     },
 
+    refresh: function(parsedResults) {
+      this.setStatus(parsedResults.status);
+      this.setDuration(parsedResults.duration);
+      this.setCommitMessage(parsedResults.commitMessage);
+    },
+
     setStatus: function(newStatus) {
       $(currentBuildSelector).removeClass('failure building success');
       $(currentBuildSelector).addClass(newStatus);

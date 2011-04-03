@@ -66,9 +66,7 @@ function Project(config) {
         this.status = response.status;
       }
       
-      this.currentBuild.setDuration(response.duration);
-      this.currentBuild.setCommitMessage(response.commitMessage);
-      this.currentBuild.setStatus(response.status);
+      this.currentBuild.refresh(response);
       
       this.recordHistory(response.status);
       this.reactVisually(response.status);
