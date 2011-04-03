@@ -23,19 +23,6 @@ function Project(config) {
       buildHistorian.buildAndInsertElements();
     },
 
-    setStatus: function(newStatus) {
-      if(this.status == null) {
-        this.status = newStatus;
-      }
-
-      this.currentBuild.setStatus(newStatus);
-      this.recordHistory(newStatus);
-      this.reactVisually(newStatus);
-      this.playSound(newStatus);
-
-      this.status = newStatus;
-    },
-
     recordHistory: function(newStatus) {
       if(this.status == 'success' && newStatus != 'success') {
         this.buildHistorian.addState('success');
@@ -74,10 +61,20 @@ function Project(config) {
       }
     },
 
-    responseHandler: function(response) {
-      this.setStatus(response.status);
+    responseHandler: function(response) {    
+      if(this.status == null) {
+        this.status = response.status;
+      }
+      
       this.currentBuild.setDuration(response.duration);
       this.currentBuild.setCommitMessage(response.commitMessage);
+      this.currentBuild.setStatus(response.status);
+      
+      this.recordHistory(response.status);
+      this.reactVisually(response.status);
+      this.playSound(response.status);
+
+      this.status = response.status;
     }
   };
 }

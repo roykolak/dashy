@@ -79,30 +79,6 @@ describe("Project", function() {
     });
   });
 
-  describe("#setStatus", function() {
-    beforeEach(function() {
-      project.buildAndInsertElements();
-    });
-
-    it("calls to setStatus on currentBuild with the new status", function() {
-      var setStatusSpy = spyOn(project.currentBuild, 'setStatus');
-      project.setStatus('success');
-      expect(setStatusSpy).toHaveBeenCalledWith('success');
-    });
-
-    it("calls to recordHistory with the new status", function() {
-      var recordHistorySpy = spyOn(project, 'recordHistory');
-      project.setStatus('building');
-      expect(recordHistorySpy).toHaveBeenCalledWith('building');
-    });
-
-    it("calls to reactVisually with the new status", function() {
-      var reactVisuallySpy = spyOn(project, 'reactVisually');
-      project.setStatus('building');
-      expect(reactVisuallySpy).toHaveBeenCalledWith('building');
-    });
-  });
-
   describe("#playSound", function() {
     it("plays the success sound when the status is 'success' and the previous status was not success", function() {
       var successAudioSpy = spyOn(Audio.success, 'play');
@@ -222,17 +198,11 @@ describe("Project", function() {
 
   describe("#responseHandler", function() {
     var parsedResults = { status:'success', duration:10, commitMessage:'This is the commit message' },
-        setStatusSpy, setDurationSpy, setCommitMessageSpy;
+        setDurationSpy, setCommitMessageSpy;
 
     beforeEach(function() {
-      setStatusSpy = spyOn(project, 'setStatus');
       setDurationSpy = spyOn(project.currentBuild, 'setDuration');
       setCommitMessageSpy = spyOn(project.currentBuild, 'setCommitMessage');
-    });
-
-    it("sets the status of the build to the parsed status", function() {
-      project.responseHandler(parsedResults);
-      expect(setStatusSpy).toHaveBeenCalledWith(parsedResults.status);
     });
 
     it("calls to current build to set the parsed duration of the build", function() {
@@ -243,6 +213,24 @@ describe("Project", function() {
     it("calls to current build to set the commit message", function() {
       project.responseHandler(parsedResults);
       expect(setCommitMessageSpy).toHaveBeenCalledWith(parsedResults.commitMessage);
+    });
+    
+    it("calls to setStatus on currentBuild with the new status", function() {
+      var setStatusSpy = spyOn(project.currentBuild, 'setStatus');
+      project.responseHandler(parsedResults);
+      expect(setStatusSpy).toHaveBeenCalledWith('success');
+    });
+
+    it("calls to recordHistory with the new status", function() {
+      var recordHistorySpy = spyOn(project, 'recordHistory');
+      project.responseHandler(parsedResults);
+      expect(recordHistorySpy).toHaveBeenCalledWith('success');
+    });
+
+    it("calls to reactVisually with the new status", function() {
+      var reactVisuallySpy = spyOn(project, 'reactVisually');
+      project.responseHandler(parsedResults);
+      expect(reactVisuallySpy).toHaveBeenCalledWith('success');
     });
   });
 });
