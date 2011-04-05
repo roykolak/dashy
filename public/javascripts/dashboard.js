@@ -24,7 +24,7 @@ function Dashboard(config) {
       var self = this;
       $.each(config.projects, function(i, v) {
         var project = new Project(v);
-        project.buildAndInsertElements();
+        project.render();
         self.projects.push(project);
       });
     },

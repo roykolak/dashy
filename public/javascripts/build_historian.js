@@ -13,7 +13,7 @@ function BuildHistorian(projectSelector) {
   $.template('buildState', "<li class='status ${state}'>${state}</li>");
 
   return {
-    buildAndInsertElements: function() {
+    render: function() {
       $.tmpl('buildHistorian').appendTo(projectSelector);
     },
 

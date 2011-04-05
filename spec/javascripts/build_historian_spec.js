@@ -6,16 +6,16 @@ describe("BuildHistorian", function() {
     buildHistorian = new BuildHistorian('.project');
   });
 
-  describe("#buildAndInsertElements", function() {
+  describe("#render", function() {
     it("inserts a build history list", function() {
-      buildHistorian.buildAndInsertElements();
+      buildHistorian.render();
       expect($('.history')).toExist();
     });
   });
 
   describe("removeOldestBuildResult", function() {
     beforeEach(function() {
-      buildHistorian.buildAndInsertElements();
+      buildHistorian.render();
       buildHistorian.addState('success');
     });
 
@@ -28,7 +28,7 @@ describe("BuildHistorian", function() {
 
   describe("#addState", function() {
     beforeEach(function() {
-      buildHistorian.buildAndInsertElements();
+      buildHistorian.render();
       buildHistorian.addState('success');
     });
 

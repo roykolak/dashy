@@ -31,51 +31,27 @@ describe("Project", function() {
     });
   });
 
-  describe("#buildAndInsertElements", function() {
-    beforeEach(function() {
-      project.buildAndInsertElements();
-    });
-
+  describe("#render", function() {
     it("inserts a new project html block", function() {
+      project.render();
       expect($('.project .frame')).toExist();
     });
 
     it("inserts an underscore separated project id", function() {
+      project.render();
       expect($('#Sample_Build')).toExist();
     });
 
-    describe("building and inserting build historian", function() {
-      var buildAndInsertForHistorianSpy;
-
-      beforeEach(function() {
-        // TODO: wow, there's alot of spying here...
-        var buildHistorian = new BuildHistorian('#project_build');
-        buildAndInsertForHistorianSpy = spyOn(buildHistorian, 'buildAndInsertElements');
-        spyOn(window, 'BuildHistorian').andReturn(buildHistorian);
-        var project = new Project(project_config);
-        project.buildAndInsertElements();
-      });
-
-      it("builds and inserts the build historian", function() {
-        expect(buildAndInsertForHistorianSpy).toHaveBeenCalled();
-      });
+    it("renders the current build", function() {
+      var currentBuildRenderSpy = spyOn(project.currentBuild, 'render');
+      project.render();
+      expect(currentBuildRenderSpy).toHaveBeenCalled();
     });
 
-    describe("building and inserting current build", function() {
-      var buildAndInsertForCurrentBuildSpy;
-
-      beforeEach(function() {
-        // TODO: wow, there's alot of spying here...
-        var currentBuild = new CurrentBuild('#project_build', project_config.name);
-        buildAndInsertForCurrentBuildSpy = spyOn(currentBuild, 'buildAndInsertElements');
-        spyOn(window, 'CurrentBuild').andReturn(currentBuild);
-        var project = new Project(project_config);
-        project.buildAndInsertElements();
-      });
-
-      it("builds and inserts the current build", function() {
-        expect(buildAndInsertForCurrentBuildSpy).toHaveBeenCalled();
-      });
+    it("renders the build historian", function() {
+      var buildHistorianRenderSpy = spyOn(project.buildHistorian, 'render');
+      project.render();
+      expect(buildHistorianRenderSpy).toHaveBeenCalled();
     });
   });
 
@@ -108,7 +84,7 @@ describe("Project", function() {
     
     beforeEach(function() {
       ascendSpy = spyOn($.fn, 'ascend');
-      project.buildAndInsertElements();
+      project.render();
     });
     
     describe("when the new status is different from the past status", function() {

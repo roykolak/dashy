@@ -10,7 +10,7 @@ function CurrentBuild(projectSelector, projectName) {
   $.template("currentBuild", "<div class='current_build'><h3 class='name'>${projectName}</h3><p class='time'></p><div class='clear'></div><div class='message'></div></div>");
 
   return {
-    buildAndInsertElements: function() {
+    render: function() {
       $.tmpl('currentBuild', {projectName: projectName}).appendTo(projectSelector);
     },
 

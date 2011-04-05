@@ -52,20 +52,19 @@ describe("Dashboard", function() {
   });
 
   describe("#loadProjects", function() {
-    var buildAndInsertSpy;
-
     beforeEach(function() {
       project = new Project(config.projects[0]);
-      buildAndInsertSpy = spyOn(project, 'buildAndInsertElements');
       spyOn(window, 'Project').andReturn(project);
-      dashboard.loadProjects();
     });
 
-    it("builds and inserts the project HTML", function() {
-      expect(buildAndInsertSpy).toHaveBeenCalled();
+    it("renders the project HTML", function() {
+      var renderSpy = spyOn(project, 'render');
+      dashboard.loadProjects();
+      expect(renderSpy).toHaveBeenCalled();
     });
 
     it("stores the initialized projects", function() {
+      dashboard.loadProjects();
       expect(dashboard.projects.length).toBe(1);
     });
   });

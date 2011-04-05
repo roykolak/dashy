@@ -15,12 +15,12 @@ function Project(config) {
     statusParser: statusParser,
     status: null,
 
-    buildAndInsertElements: function() {
+    render: function() {
       var addingMethod = (config.url ? 'prependTo' : 'appendTo');
       $.tmpl("project", {projectId: projectId})[addingMethod]('#projects');
 
-      currentBuild.buildAndInsertElements();
-      buildHistorian.buildAndInsertElements();
+      currentBuild.render();
+      buildHistorian.render();
     },
 
     recordHistory: function(newStatus) {
