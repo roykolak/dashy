@@ -1,6 +1,7 @@
 function BuildHistorian(projectSelector) {
   var historySelector = projectSelector + ' .history',
-      states = [];
+      states = [],
+      continuingSuccessThreshold = 5;
 
   function checkIfOutOfRoom() {
     if(jQuery.fx.off) {
@@ -37,8 +38,8 @@ function BuildHistorian(projectSelector) {
     },
 
     continuingSuccess: function() {
-      if(states.length >= 5) {
-        return states.slice(0, 5).every(function(build) {
+      if(states.length >= continuingSuccessThreshold) {
+        return states.slice(0, continuingSuccessThreshold).every(function(build) {
           return build == "success";
         });
       } else {
