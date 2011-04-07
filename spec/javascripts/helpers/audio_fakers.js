@@ -2,9 +2,9 @@ var Audio = {
   success: { 
     play:function() {} 
   },
-	continuingSuccess: {
-		play:function() {}
-	},
+  continuingSuccess: {
+    play:function() {}
+  },
   building: { 
     play:function() {} 
   },

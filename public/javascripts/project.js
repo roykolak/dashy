@@ -34,10 +34,10 @@ function Project(config) {
     playSound: function(newStatus) {
       if(this.status != 'success' && newStatus == 'success') {
         if(buildHistorian.continuingSuccess()) {
-					Audio.continuingSuccess.play();
-				} else {
-					Audio.success.play();
-				}
+          Audio.continuingSuccess.play();
+        } else {
+          Audio.success.play();
+        }
       } else if(this.status != 'building' && newStatus == 'building') {
         Audio.building.play();
       } else if(this.status != 'failure' && newStatus == 'failure') {

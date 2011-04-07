@@ -4,7 +4,7 @@ var config = {
   title: "Dashy, he's always watching",
   refreshInterval:5000,
   sounds: {
-		continuingSuccess:'sounds/continuing_success.mp3',
+    continuingSuccess:'sounds/continuing_success.mp3',
     success:'sounds/success.mp3',
     building:'sounds/building.mp3',
     failure:'sounds/failure.mp3'

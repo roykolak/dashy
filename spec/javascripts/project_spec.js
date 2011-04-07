@@ -56,26 +56,26 @@ describe("Project", function() {
   });
 
   describe("#playSound", function() {
-		describe("when there have not been 5 successfully builds in a row", function() {
-			it("plays the success sound when the status is 'success' and the previous status was not success", function() {
-				var successAudioSpy = spyOn(Audio.success, 'play');
-				project.status = 'failure';
-				project.playSound('success');
+    describe("when there have not been 5 successfully builds in a row", function() {
+      it("plays the success sound when the status is 'success' and the previous status was not success", function() {
+        var successAudioSpy = spyOn(Audio.success, 'play');
+        project.status = 'failure';
+        project.playSound('success');
 
-				expect(successAudioSpy).toHaveBeenCalled();
-			});
-		});
+        expect(successAudioSpy).toHaveBeenCalled();
+      });
+    });
 
-		describe("when there have been 5 success builds in a row", function() {
-			it("plays the continuing success sound when the new status is 'success'", function() {
-				var continuingSuccessAudioSpy = spyOn(Audio.continuingSuccess, 'play');
-				$.each([1, 2, 3, 4, 5, 6], function() {
-					project.responseHandler({ status:'building', commitMessage:'', duration:'3000'});
-					project.responseHandler({ status:'success', commitMessage:'', duration:'3000'});
-				});
-				expect(continuingSuccessAudioSpy.callCount).toEqual(1);
-			});
-		});
+    describe("when there have been 5 success builds in a row", function() {
+      it("plays the continuing success sound when the new status is 'success'", function() {
+        var continuingSuccessAudioSpy = spyOn(Audio.continuingSuccess, 'play');
+        $.each([1, 2, 3, 4, 5, 6], function() {
+          project.responseHandler({ status:'building', commitMessage:'', duration:'3000'});
+          project.responseHandler({ status:'success', commitMessage:'', duration:'3000'});
+        });
+        expect(continuingSuccessAudioSpy.callCount).toEqual(1);
+      });
+    });
 
     it("plays the building sound when the status is 'building' and the previous status was not building", function() {
       var buildingAudioSpy = spyOn(Audio.building, 'play');
