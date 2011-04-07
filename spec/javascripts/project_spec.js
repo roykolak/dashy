@@ -11,13 +11,13 @@ describe("Project", function() {
     it("initializes a BuildHistorian", function() {
       buildHistorianSpy = spyOn(window, 'BuildHistorian');
       new Project(project_config);
-      expect(buildHistorianSpy).toHaveBeenCalledWith('#Sample_Build .frame');
+      expect(buildHistorianSpy).toHaveBeenCalledWith('#Android_app .frame');
     });
 
     it("initializes a CurrentBuild", function() {
       currentBuildSpy = spyOn(window, 'CurrentBuild');
       new Project(project_config);
-      expect(currentBuildSpy).toHaveBeenCalledWith('#Sample_Build .frame', project_config.name);
+      expect(currentBuildSpy).toHaveBeenCalledWith('#Android_app .frame', project_config.name);
     });
 
     it("initializes a StatusParser", function() {
@@ -39,7 +39,7 @@ describe("Project", function() {
 
     it("inserts an underscore separated project id", function() {
       project.render();
-      expect($('#Sample_Build')).toExist();
+      expect($('#Android_app')).toExist();
     });
 
     it("renders the current build", function() {
@@ -114,7 +114,7 @@ describe("Project", function() {
     describe("when the new status is 'building'", function() {
       it("shows the commit message", function() {
         project.reactVisually('building');
-        expect($('#Sample_Build .message')).toBeVisible();
+        expect($('#Android_app .message')).toBeVisible();
       });
     });
 
@@ -130,7 +130,7 @@ describe("Project", function() {
 
       it("does not show the commit message", function() {
         project.reactVisually('success');
-        expect($('#Sample_Build .message')).toBeHidden();
+        expect($('#Android_app .message')).toBeHidden();
       });
     });
   });

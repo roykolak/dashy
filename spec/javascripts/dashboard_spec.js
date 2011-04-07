@@ -51,7 +51,7 @@ describe("Dashboard", function() {
     });
 
     it("stores the initialized pings", function() {
-      expect(dashboard.pings.length).toBe(1);
+      expect(dashboard.pings.length > 0) .toBeTruthy();
     });
   });
 
@@ -69,7 +69,7 @@ describe("Dashboard", function() {
 
     it("stores the initialized projects", function() {
       dashboard.loadProjects();
-      expect(dashboard.projects.length).toBe(1);
+      expect(dashboard.projects.length > 0).toBeTruthy();
     });
   });
 
