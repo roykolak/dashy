@@ -56,8 +56,8 @@ describe("Project", function() {
   });
 
   describe("#playSound", function() {
-    describe("when there have not been 5 successfully builds in a row", function() {
-      it("plays the success sound when the status is 'success' and the previous status was not success", function() {
+    describe("when there has not been continuing success", function() {
+      it("plays the standard success sound when the status is 'success' and the previous status was not 'success'", function() {
         var successAudioSpy = spyOn(Audio.success, 'play');
         project.status = 'failure';
         project.playSound('success');
@@ -66,25 +66,26 @@ describe("Project", function() {
       });
     });
 
-    describe("when there have been 5 success builds in a row", function() {
+    describe("when there has been continuing success", function() {
       it("plays the continuing success sound when the new status is 'success'", function() {
         var continuingSuccessAudioSpy = spyOn(Audio.continuingSuccess, 'play');
         $.each([1, 2, 3, 4, 5, 6], function() {
           project.responseHandler({ status:'building', commitMessage:'', duration:'3000'});
           project.responseHandler({ status:'success', commitMessage:'', duration:'3000'});
         });
+
         expect(continuingSuccessAudioSpy.callCount).toEqual(1);
       });
     });
 
-    it("plays the building sound when the status is 'building' and the previous status was not building", function() {
+    it("plays the building sound when the status is 'building' and the previous status was not 'building'", function() {
       var buildingAudioSpy = spyOn(Audio.building, 'play');
       project.status = 'success';
       project.playSound('building');
       expect(buildingAudioSpy).toHaveBeenCalled();
     });
 
-    it("plays the failure sound when the status is 'failure' and the previous status was not failure", function() {
+    it("plays the failure sound when the status is 'failure' and the previous status was not 'failure'", function() {
       var failureAudioSpy = spyOn(Audio.failure, "play");
       project.status = 'success';
       project.playSound('failure');
@@ -142,13 +143,13 @@ describe("Project", function() {
       buildHistorianSpy = spyOn(project.buildHistorian, 'addState');
     });
 
-    it("calls to the build historian when the previous status is success and the new status is not success", function() {
+    it("calls to the build historian when the previous status is 'success' and the new status is not 'success'", function() {
       project.status = 'success'
       project.recordHistory('failure');
       expect(buildHistorianSpy).toHaveBeenCalledWith('success');
     });
 
-    it("calls to the build historian when the previous status is failure and the new status is not failure", function() {
+    it("calls to the build historian when the previous status is 'failure' and the new status is not 'failure'", function() {
       project.status = 'failure';
       project.recordHistory('success');
       expect(buildHistorianSpy).toHaveBeenCalledWith('failure');
