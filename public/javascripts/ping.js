@@ -9,7 +9,7 @@ function Ping(config) {
   return {
     ping: null,
 
-    buildAndInsertElements: function() {
+    render: function() {
       $.tmpl('ping', {pingId: pingId, name: config.name}).appendTo('#pings');
     },
 

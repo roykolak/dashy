@@ -16,7 +16,7 @@ function Dashboard(config) {
       var self = this;
       $.each(config.pings, function(i, v) {
         var ping = new Ping(v);
-        ping.buildAndInsertElements();
+        ping.render();
         self.pings.push(ping);
       });
     },

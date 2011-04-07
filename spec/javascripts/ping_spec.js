@@ -18,9 +18,9 @@ describe("Ping", function() {
     });
   });
 
-  describe("#buildAndInsertElements", function() {
+  describe("#render", function() {
     beforeEach(function() {
-      ping.buildAndInsertElements();
+      ping.render();
     });
 
     it("inserts a new ping html block", function() {
@@ -34,7 +34,7 @@ describe("Ping", function() {
 
   describe("#setStatus", function() {
     beforeEach(function() {
-      ping.buildAndInsertElements();
+      ping.render();
     });
 
     it("sets the ping status to the new status", function() {
@@ -63,7 +63,7 @@ describe("Ping", function() {
 
   describe("#updateElementClasses", function() {
     beforeEach(function() {
-      ping.buildAndInsertElements();
+      ping.render();
     });
 
     it("adds a 'success' class to a ping when it is successfully built", function() {

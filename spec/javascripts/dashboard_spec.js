@@ -37,21 +37,20 @@ describe("Dashboard", function() {
   });
 
   describe("#loadPings", function() {
-    var buildAndInsertSpy;
-
     beforeEach(function() {
       ping = new Ping(config.pings[0]);
-      buildAndInsertSpy = spyOn(ping, 'buildAndInsertElements');
       spyOn(window, 'Ping').andReturn(ping);
-      dashboard.loadPings();
     });
 
     it("builds and inserts the ping HTML", function() {
-      expect(buildAndInsertSpy).toHaveBeenCalled();
+      var renderSpy = spyOn(ping, 'render');
+      dashboard.loadPings();
+      expect(renderSpy).toHaveBeenCalled();
     });
 
     it("stores the initialized pings", function() {
-      expect(dashboard.pings.length > 0) .toBeTruthy();
+      dashboard.loadPings();
+      expect(dashboard.pings.length > 0).toBeTruthy();
     });
   });
 
