@@ -1,6 +1,7 @@
 describe("Config JSON", function() {
   it("contains a projects property of an array", function() {
     expect($.isArray(config.projects)).toBeTruthy();
+		console.log(config);
   });
 
   it("contains a default title property", function() {
@@ -23,8 +24,11 @@ describe("Config JSON", function() {
     it("contains the path to the default failure sound", function() {
       expect(config.sounds.failure).toEqual('sounds/failure.mp3');
     });
-  });
 
+		it("contains the path to the default continuing success sound", function() {
+			expect(config.sounds.continuingSuccess).toEqual('sounds/continuing_success.mp3');
+		});
+  });
 
   describe("the projects array", function() {
     it("contains a hash for each project", function() {

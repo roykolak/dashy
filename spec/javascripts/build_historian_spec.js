@@ -13,7 +13,7 @@ describe("BuildHistorian", function() {
     });
   });
 
-  describe("removeOldestBuildResult", function() {
+  describe("#removeOldestBuildResult", function() {
     beforeEach(function() {
       buildHistorian.render();
       buildHistorian.addState('success');
@@ -25,6 +25,42 @@ describe("BuildHistorian", function() {
       expect($('.status').length).toEqual(0);
     });
   });
+
+	describe("#continuingSuccess", function() {
+		beforeEach(function() {
+			buildHistorian.render();
+		});
+
+		describe("when there has not been 5 past builds", function() {
+			it("returns false", function() {
+				expect(buildHistorian.continuingSuccess()).toBeFalsy();
+			});
+		});
+		
+		describe("when there has been 5 past builds that were not success", function () {
+			beforeEach(function() {
+				$.each([1,2,3,4,5], function() {
+					buildHistorian.addState('failure');
+				});
+			});
+
+			it("returns false", function() {
+				expect(buildHistorian.continuingSuccess()).toBeFalsy();
+			});
+		});
+
+		describe("when there has been 5 past build that were all successful", function() {
+			beforeEach(function() {
+				$.each([1,2,3,4,5], function() {
+					buildHistorian.addState("success");
+				});				
+			});
+
+			it("returns true", function() {
+				expect(buildHistorian.continuingSuccess()).toBeTruthy();
+			});
+		});
+	});
 
   describe("#addState", function() {
     beforeEach(function() {

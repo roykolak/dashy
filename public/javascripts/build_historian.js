@@ -1,12 +1,17 @@
 function BuildHistorian(projectSelector) {
-  var historySelector =  projectSelector + ' .history';
+  var historySelector = projectSelector + ' .history',
+			states = [];
 
   function checkIfOutOfRoom() {
-    var stateWidth = $('.status').outerWidth(true),
-        numberOfStates = $(historySelector).children().length,
-        historyWidth = $(historySelector).width();
+		if(jQuery.fx.off) {
+			return false;
+		} else {
+			var stateWidth = $('.status').outerWidth(true),
+					numberOfStates = $(historySelector).children().length,
+					historyWidth = $(historySelector).width();
 
-    return (numberOfStates >= Math.floor(historyWidth/stateWidth) ? true : false);
+			return (numberOfStates >= Math.floor(historyWidth/stateWidth) ? true : false);
+		}
   }
   
   $.template('buildHistorian', "<ol class='history'></ol>");
@@ -22,11 +27,23 @@ function BuildHistorian(projectSelector) {
         this.removeOldestBuildState();
       }
 
+		  states.unshift(state);
       $.tmpl('buildState', {state: state}).prependTo(historySelector);
     },
 
     removeOldestBuildState: function() {
       $(historySelector).children().last().remove();
-    }
+			states.pop();
+    },
+
+		continuingSuccess: function() {
+			if(states.length >= 5) {
+				return states.slice(0, 5).every(function(build) {
+					return build == "success";
+				});
+			} else {
+				return false;
+			}
+		}
   }
 }
