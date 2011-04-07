@@ -12,6 +12,7 @@
       <p>This is a demo, play with the buttons!
         <a id="random_failure" class="button" href="#">Random failure</a>
         <a id="random_success" class="button" href="#">Random success</a>
+        <a id="random_continuing_success" class="button" href="#">Random Continuing Success</a>
       </p>
     </div>
     <div id="progress"></div>
@@ -61,20 +62,52 @@
         $('#random_failure').click(function(ev) {
           ev.preventDefault();
           var project = getRandomProject();
-          project.setStatus('building');
+          project.responseHandler({ 
+            status:'building',
+            commitMessage:'Added that killer new feature... Really hope it doesn\'t break'
+          });
+
           setTimeout(function() {
-            project.currentBuild.setDuration(Math.floor(Math.random()*1000000));
-            project.setStatus('failure');
+            project.responseHandler({
+              status:'failure',
+              duration:Math.floor(Math.random()*1000000)
+            });
           }, 5000);
         });
 
         $('#random_success').click(function(ev) {
           ev.preventDefault();
           var project = getRandomProject();
-          project.setStatus('building');
+          project.responseHandler({
+            status:'building',
+            commitMessage:'Finally finishing up mega feature. This one is solid.'
+          });
+
           setTimeout(function() {
-            project.currentBuild.setDuration(Math.floor(Math.random()*1000000));
-            project.setStatus('success');
+            project.responseHandler({
+              status:'success',
+              duration:Math.floor(Math.random()*1000000)
+            });
+          }, 5000);
+        });
+
+        $('#random_continuing_success').click(function(ev) {
+          ev.preventDefault();
+          var project = getRandomProject();
+          $.each([1,2,3,4], function() {
+            project.buildHistorian.addState('success');
+          });
+
+          project.responseHandler({
+            status:'building',
+            commitMessage:'We are seriously on a roll with this project. Another feature down!'
+          });
+
+          setTimeout(function() {
+            project.responseHandler({
+              status:'success',
+              duration:Math.floor(Math.random()*1000000)
+            });
           }, 5000);
         });
       </script>
