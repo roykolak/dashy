@@ -8,6 +8,13 @@
     <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   </head>
   <body>
+    <div id="demo">
+      <p>This is a demo, play with the buttons!
+        <a id="random_failure" class="button" href="#">Random failure</a>
+        <a id="random_success" class="button" href="#">Random success</a>
+        <a id="random_continuing_success" class="button" href="#">Random Continuing Success</a>
+      </p>
+    </div>
     <div id="progress"></div>
     <div class="dashboard">
       <h1 id="title"></h1>
@@ -44,9 +51,65 @@
         dashboard.loadProjects();
         dashboard.refresh();
 
-        setInterval(function() {
-          dashboard.refresh();
-        }, dashboard.refreshInterval);
+        // setInterval(function() {
+        //   dashboard.refresh();
+        // }, dashboard.refreshInterval);
+
+        function getRandomProject() {
+          return dashboard.projects[Math.floor(Math.random()*5)];
+        }
+
+        $('#random_failure').click(function(ev) {
+          ev.preventDefault();
+          var project = getRandomProject();
+          project.responseHandler({ 
+            status:'building',
+            commitMessage:'Added that killer new feature... Really hope it doesn\'t break'
+          });
+
+          setTimeout(function() {
+            project.responseHandler({
+              status:'failure',
+              duration:Math.floor(Math.random()*1000000)
+            });
+          }, 5000);
+        });
+
+        $('#random_success').click(function(ev) {
+          ev.preventDefault();
+          var project = getRandomProject();
+          project.responseHandler({
+            status:'building',
+            commitMessage:'Finally finishing up mega feature. This one is solid.'
+          });
+
+          setTimeout(function() {
+            project.responseHandler({
+              status:'success',
+              duration:Math.floor(Math.random()*1000000)
+            });
+          }, 5000);
+        });
+
+        $('#random_continuing_success').click(function(ev) {
+          ev.preventDefault();
+          var project = getRandomProject();
+          $.each([1,2,3,4], function() {
+            project.buildHistorian.addState('success');
+          });
+
+          project.responseHandler({
+            status:'building',
+            commitMessage:'We are seriously on a roll with this project. Another feature down!'
+          });
+
+          setTimeout(function() {
+            project.responseHandler({
+              status:'success',
+              duration:Math.floor(Math.random()*1000000)
+            });
+          }, 5000);
+        });
       </script>
     </div>
   </body>
