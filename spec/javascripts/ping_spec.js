@@ -71,7 +71,7 @@ describe("Ping", function() {
       expect($('.current_build').hasClass('success')).toBeTruthy();
     });
 
-    it("adds a 'failure' class to a project when it failed to build", function() {
+    it("adds a 'failure' class to a ping when it failed to build", function() {
       ping.updateElementClasses('failure');
       expect($('.current_build').hasClass('failure')).toBeTruthy();
     });
@@ -84,19 +84,19 @@ describe("Ping", function() {
       failureAudioSpy = spyOn(Audio.failure, "play");
     });
 
-    it("plays the failure sound when the status is 'failure' and the previous status was not failure", function() {
+    it("plays the failure sound when the status is 'failure' and the previous status was not 'failure'", function() {
       ping.setStatus('success');
       ping.setStatus('failure');
       expect(failureAudioSpy).toHaveBeenCalled();
     });
 
-    it("does not play the failure sound when the status is 'failure' and the previous status was failure", function() {
+    it("does not play the failure sound when the status is 'failure' and the previous status was 'failure'", function() {
       ping.setStatus('failure');
       ping.setStatus('failure');
       expect(failureAudioSpy).not.toHaveBeenCalled();
     });
 
-    it("does not play the failure sound when the status is 'failure' and the previous status was building", function() {
+    it("does not play the failure sound when the status is 'failure' and the previous status was 'building'", function() {
       ping.setStatus('failure');
       ping.setStatus('building');
       ping.setStatus('failure');
