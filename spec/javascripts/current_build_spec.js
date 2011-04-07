@@ -1,9 +1,10 @@
 describe("CurrentBuild", function() {
-  var currentBuild, options;
+  var currentBuild, options,
+      projectName = 'Android app';
 
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/project.html');
-    currentBuild = new CurrentBuild('#project_name', 'project name');
+    currentBuild = new CurrentBuild('#project_name', projectName);
   });
 
   describe("#render", function() {
@@ -14,7 +15,7 @@ describe("CurrentBuild", function() {
 
     it("inserts the build name in the header", function() {
       currentBuild.render();
-      expect($('.project .current_build .name')).toHaveText('project name');
+      expect($('.project .current_build .name')).toHaveText(projectName);
     });
   });
   
@@ -68,7 +69,7 @@ describe("CurrentBuild", function() {
       currentBuild.render();
     });
     
-    it("inserts the passed time into the time div and appends time label", function() {
+    it("parses and inserts the passed time into the time div and appends time label", function() {
       currentBuild.setDuration(5000);
       expect($('.current_build .time')).toHaveText('5 sec');
     });
