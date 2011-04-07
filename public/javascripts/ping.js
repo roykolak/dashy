@@ -4,7 +4,7 @@ function Ping(config) {
 
   var statusParser = new StatusParser(config.ci);
 
-  $.template("ping", "<li id='${pingId}' class='ping'><div class='wrapper'><div class='current_build'></div><h3 class='name'>${name}</h3></div></li>")
+  $.template("ping", "<li id='${pingId}' class='ping'><div class='wrapper'><div class='current_build'></div><h3 class='name'>${name}</h3></div></li>");
 
   return {
     ping: null,
@@ -41,7 +41,7 @@ function Ping(config) {
     reactVisually: function(newStatus) {
       if (this.status != newStatus) {
         $(currentBuild).twinkle();
-      };
+      }
     },
 
     playSound: function(newStatus) {

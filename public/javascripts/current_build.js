@@ -4,7 +4,7 @@ function CurrentBuild(projectSelector, projectName) {
       buildMessageSelector = projectSelector + ' .current_build .message';
 
   function convertDurationToSeconds(duration) {
-    return Math.round(parseInt(duration) / 1000);
+    return Math.round(parseInt(duration, 10) / 1000);
   }
 
   $.template("currentBuild", "<div class='current_build'><h3 class='name'>${projectName}</h3><p class='time'></p><div class='clear'></div><div class='message'></div></div>");

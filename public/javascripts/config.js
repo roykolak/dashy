@@ -21,4 +21,4 @@ var config = {
       ci:'Hudson'
     }
   ]
-}
+};

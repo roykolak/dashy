@@ -84,5 +84,5 @@ function Dashboard(config) {
         location.reload();
       });
     }
-  }
+  };
 }

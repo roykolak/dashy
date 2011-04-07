@@ -57,7 +57,7 @@ function Project(config) {
     },
 
     update: function(data) {
-      if(config.url != null) {
+      if(config.url !== null) {
         var self = this;
         $.getJSON(config.url, function(data) {
           self.responseHandler(statusParser.parse(data));
@@ -66,7 +66,7 @@ function Project(config) {
     },
 
     responseHandler: function(response) {    
-      if(this.status == null) {
+      if(this.status === null) {
         this.status = response.status;
       }
       

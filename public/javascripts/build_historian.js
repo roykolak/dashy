@@ -46,5 +46,5 @@ function BuildHistorian(projectSelector) {
         return false;
       }
     }
-  }
+  };
 }

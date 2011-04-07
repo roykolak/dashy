@@ -6,18 +6,20 @@
           element = this,
           defaultOpacity = $(this).css('opacity');
 
+      var updateOpacity = function(i, percentage) {
+        $(element).animate({ opacity:percentage }, duration);
+      };
+
       for(iterations; iterations > 0; iterations--) {
-        $.each([1, defaultOpacity], function(i, percentage) {
-          $(element).animate({ opacity:percentage }, duration);
-        });
+        $.each([1, defaultOpacity], updateOpacity);
       }
     });
-  }
+  };
 
   var moving = false;
   $.fn.ascend = function(callback) {
     $(this).each(function() {
-      if(moving == false) {
+      if(moving === false) {
         moving = true;
         var clone = $('.projects').clone(),
             index = $('.projects li').index($(this));
@@ -31,5 +33,5 @@
         });
       }
     });
-  }
+  };
 })(jQuery);
