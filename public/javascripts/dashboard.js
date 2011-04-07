@@ -6,6 +6,7 @@ function Dashboard(config) {
     applyConfigSettings: function() {
       this.refreshInterval = config.refreshInterval;
       $('#title').text(config.title);
+      $('#continuing_success').attr('src', config.sounds.continuingSuccess);
       $('#success').attr('src', config.sounds.success);
       $('#building').attr('src', config.sounds.building);
       $('#failure').attr('src', config.sounds.failure);

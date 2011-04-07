@@ -15,6 +15,10 @@ describe("Dashboard", function() {
       expect($('#title')).toHaveText(config.title);
     });
 
+    it("sets the continuing success audio tag's src to the continuing success sound path from the config", function() {
+      expect($('#continuing_success').attr('src')).toEqual(config.sounds.continuingSuccess);
+    });
+
     it("sets the success audio tag's src to the success sound path from the config", function() {
       expect($('#success').attr('src')).toEqual(config.sounds.success);
     });
