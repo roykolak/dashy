@@ -104,6 +104,20 @@ h1, h2, h3, p, li, ul {
   }
 }
 
+.tickets {
+  display:none;
+  margin:20px -10px 0;
+  .ticket {
+    .rounded_corners(10px);
+    .gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .3);
+    border:6px solid rgba(0, 0, 0, .4);
+    display:inline-block;
+    font-size:35px;
+    margin:0 10px 0 0;
+    padding:9px 15px;
+  }
+}
+
 #pings {
   margin-top:50px;
   position:fixed;

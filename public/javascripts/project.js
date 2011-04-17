@@ -47,7 +47,7 @@ function Project(config) {
 
     reactVisually: function(newStatus) {
       var visuability = (newStatus != 'building' ? 'hide' : 'show');
-      $(projectSelector).find('.message')[visuability]();
+      $(projectSelector).find('.message, .tickets')[visuability]();
       
       if(this.status != newStatus) {
         $(projectSelector).ascend(function() {

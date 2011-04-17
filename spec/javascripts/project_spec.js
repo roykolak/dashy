@@ -117,6 +117,11 @@ describe("Project", function() {
         project.reactVisually('building');
         expect($('#Android_app .message')).toBeVisible();
       });
+
+      it("shows the referenced tickets", function() {
+        project.reactVisually('building');
+        expect($('#Android_app .tickets')).toBeVisible();
+      });
     });
 
     describe("when the new status is the same as the past status", function() {
@@ -132,6 +137,11 @@ describe("Project", function() {
       it("does not show the commit message", function() {
         project.reactVisually('success');
         expect($('#Android_app .message')).toBeHidden();
+      });
+
+      it("does not show the referenced tickets", function() {
+        project.reactVisually('success');
+        expect($('#Android_app .tickets')).toBeHidden();
       });
     });
   });
