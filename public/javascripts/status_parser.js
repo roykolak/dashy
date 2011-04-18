@@ -9,7 +9,7 @@ function StatusParser(ci) {
       result.status = (data.result == 'SUCCESS' ? 'success' : 'failure');
     }
     
-    result.commitMessage = (data.changeSet.items.length > 0 ? data.changeSet.items.last().msg : 'No commit message. :(');
+    result.commitMessage = (data.changeSet.items.length > 0 ? data.changeSet.items.last().comment : 'No commit message. :(');
     result.duration = data.duration;
     return result;
   }
