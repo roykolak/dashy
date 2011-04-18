@@ -1,7 +1,6 @@
 describe("Config JSON", function() {
   it("contains a projects property of an array", function() {
     expect($.isArray(config.projects)).toBeTruthy();
-    console.log(config);
   });
 
   it("contains a default title property", function() {
