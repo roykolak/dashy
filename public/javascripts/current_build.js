@@ -33,10 +33,14 @@ function CurrentBuild(projectSelector, projectName) {
     },
 
     setCommitMessage: function(commitMessage) {
-      $(buildMessageSelector).text(commitMessage);
-      var tickets = this.findTicketReferences(commitMessage);
-      if(tickets.length > 0) {
-        this.setTicketReferences(tickets);
+      if(typeof(commitMessage) === 'undefined') {
+        return false;
+      } else {
+        $(buildMessageSelector).text(commitMessage);
+        var tickets = this.findTicketReferences(commitMessage);
+        if(tickets.length > 0) {
+          this.setTicketReferences(tickets);
+        }
       }
     },
 

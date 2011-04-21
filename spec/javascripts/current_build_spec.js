@@ -95,6 +95,12 @@ describe("CurrentBuild", function() {
       expect($('.current_build .message')).toHaveText(commitMessage);
     });
 
+    describe("When the message is undefined", function() {
+      it("returns false", function() {
+        var result = currentBuild.setCommitMessage(undefined);
+        expect(result).toBeFalsy();
+      });
+    });
 
     describe("handling ticket references", function() {
       var setTicketReferencesSpy;
