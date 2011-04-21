@@ -89,16 +89,24 @@ describe("CurrentBuild", function() {
     beforeEach(function() {
       currentBuild.render();
     });
-    
-    it("inserts the passed commit message into the commit message div", function() {
-      currentBuild.setCommitMessage(commitMessage);
-      expect($('.current_build .message')).toHaveText(commitMessage);
+
+    it("clears past ticket references", function() {
+      currentBuild.setCommitMessage('#120 #44');
+      currentBuild.setCommitMessage('#44');
+      expect($('.current_build .ticket').html()).toEqual('#44');
     });
 
     describe("When the message is undefined", function() {
       it("returns false", function() {
         var result = currentBuild.setCommitMessage(undefined);
         expect(result).toBeFalsy();
+      });
+    });
+
+    describe("When the message is defined", function() {
+      it("inserts the passed commit message into the commit message div", function() {
+        currentBuild.setCommitMessage(commitMessage);
+        expect($('.current_build .message')).toHaveText(commitMessage);
       });
     });
 
@@ -158,13 +166,6 @@ describe("CurrentBuild", function() {
       });
     });
 
-    describe("when ticket references are set multiple times", function() {
-      it("clears past ticket references before inserting new references", function() {
-        currentBuild.setTicketReferences(['#54', '#43']);
-        currentBuild.setTicketReferences(['#44']);
-        expect($('.current_build .ticket').length).toEqual(1);
-      });
-    });
   });
 
   describe("#findTicketReferences", function() {

@@ -33,6 +33,7 @@ function CurrentBuild(projectSelector, projectName) {
     },
 
     setCommitMessage: function(commitMessage) {
+      $(buildTicketsSelector).html('');
       if(typeof(commitMessage) === 'undefined') {
         return false;
       } else {
@@ -45,7 +46,6 @@ function CurrentBuild(projectSelector, projectName) {
     },
 
     setTicketReferences: function(tickets) {
-      $(buildTicketsSelector).html('');
       $.each(tickets, function(i, ticket) { 
         $(buildTicketsSelector).append("<li class='ticket'>" + ticket + "</li>");
       });
