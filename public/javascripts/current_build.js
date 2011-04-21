@@ -37,7 +37,7 @@ function CurrentBuild(projectSelector, projectName) {
       if(typeof(commitMessage) === 'undefined') {
         return false;
       } else {
-        $(buildMessageSelector).text(commitMessage);
+        $(buildMessageSelector).html(convert(commitMessage));
         var tickets = this.findTicketReferences(commitMessage);
         if(tickets.length > 0) {
           this.setTicketReferences(tickets);

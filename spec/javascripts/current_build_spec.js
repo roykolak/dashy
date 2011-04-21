@@ -106,7 +106,7 @@ describe("CurrentBuild", function() {
     describe("When the message is defined", function() {
       it("inserts the passed commit message into the commit message div", function() {
         currentBuild.setCommitMessage(commitMessage);
-        expect($('.current_build .message')).toHaveText(commitMessage);
+        expect($('.current_build .message').text()).toMatch(new RegExp(commitMessage));
       });
     });
 

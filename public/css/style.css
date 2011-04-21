@@ -79,9 +79,12 @@ h1, h2, h3, p, li, ul {
         background:rgba(255,255,255,.5);
         .rounded_corners(10px);
         margin:20px -10px 0;
-        padding:10px;
+        padding:10px 15px;
         font-size:45px;
         display:none;
+        
+        ul, ol { margin:15px 0 15px 45px; }
+        li { list-style-type:disc; }
       }
     }
 
