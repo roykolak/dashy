@@ -1,7 +1,7 @@
 function CurrentBuild(projectSelector, projectName) {
   var currentBuildSelector = projectSelector + ' .current_build',
       buildDurationSelector = projectSelector + ' .current_build .time',
-      buildMessageSelector = projectSelector + ' .current_build .message';
+      buildMessageSelector = projectSelector + ' .current_build .message',
       buildTicketsSelector = projectSelector + ' .current_build .tickets';
 
   function convertDurationToSeconds(duration) {
