@@ -112,12 +112,13 @@ h1, h2, h3, p, li, ul {
   margin:20px -10px 0;
   .ticket {
     .rounded_corners(10px);
-    .gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .3);
-    border:6px solid rgba(0, 0, 0, .4);
+    background:#504000;
+    color:#FFF;
+    opacity:0.7;
     display:inline-block;
-    font-size:35px;
+    font-size:45px;
     margin:0 10px 0 0;
-    padding:9px 15px;
+    padding:15px 22px;
   }
 }
 
