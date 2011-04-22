@@ -37,7 +37,7 @@ Here is a sample config.js file
       title:"Dashy, He's always watching",
       refreshInterval:5000,
       sounds: {
-        continuing_success:'sounds/continuing_success.mp3',
+        continuingSuccess:'sounds/continuing_success.mp3',
         success:'sounds/success.mp3',
         building:'sounds/building.mp3',
         failure:'sounds/failure.mp3'
