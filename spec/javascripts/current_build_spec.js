@@ -7,9 +7,8 @@ describe("CurrentBuild", function() {
     currentBuild = new CurrentBuild('#project_name', projectName);
   });
 
-  describe("#render", function() {
+  describe("#initialize", function() {
     it("inserts a new project html block", function() {
-      currentBuild.render();
       expect($('.current_build .name')).toExist();
       expect($('.current_build .time')).toExist();
       expect($('.current_build .message')).toExist();
@@ -17,30 +16,25 @@ describe("CurrentBuild", function() {
     });
 
     it("inserts the build name in the header", function() {
-      currentBuild.render();
       expect($('.project .current_build .name')).toHaveText(projectName);
     });
   });
-  
+
   describe("#refresh", function() {
     var parsedResults = { status:'success', duration:10, commitMessage:'This is the commit message' };
-    
-    beforeEach(function() {
-      currentBuild.render();
-    });
-    
+
     it("calls setStatus with new status", function() {
       var setStatusSpy = spyOn(currentBuild, 'setStatus');
       currentBuild.refresh(parsedResults);
       expect(setStatusSpy).toHaveBeenCalledWith(parsedResults.status);
     });
-    
+
     it("calls setDuration with new duration", function() {
       var setDurationSpy = spyOn(currentBuild, 'setDuration');
       currentBuild.refresh(parsedResults);
       expect(setDurationSpy).toHaveBeenCalledWith(parsedResults.duration);
     });
-    
+
     it("calls setCommitMessage with new commit message", function() {
       var setCommitMessageSpy = spyOn(currentBuild, 'setCommitMessage');
       currentBuild.refresh(parsedResults);
@@ -49,10 +43,6 @@ describe("CurrentBuild", function() {
   });
 
   describe("#setStatus", function() {
-    beforeEach(function() {
-      currentBuild.render();
-    });
-    
     it("removes 'failure', 'building', and 'success' classes from the project", function() {
       currentBuild.setStatus('failure');
       currentBuild.setStatus('building');
@@ -68,10 +58,6 @@ describe("CurrentBuild", function() {
   });
 
   describe("#setDuration", function() {
-    beforeEach(function() {
-      currentBuild.render();
-    });
-    
     it("parses and inserts the passed time into the time div and appends time label", function() {
       currentBuild.setDuration(5000);
       expect($('.current_build .time')).toHaveText('5 sec');
@@ -85,10 +71,6 @@ describe("CurrentBuild", function() {
 
   describe("#setCommitMessage", function() {
     var commitMessage = "This is the commit message";
-    
-    beforeEach(function() {
-      currentBuild.render();
-    });
 
     it("clears past ticket references", function() {
       currentBuild.setCommitMessage('#120 #44');
@@ -114,7 +96,7 @@ describe("CurrentBuild", function() {
       var setTicketReferencesSpy;
 
       beforeEach(function() {
-        setTicketReferencesSpy = spyOn(currentBuild, 'setTicketReferences');  
+        setTicketReferencesSpy = spyOn(currentBuild, 'setTicketReferences');
       });
 
       describe("when tickets are not referenced in a commit message", function() {
@@ -138,17 +120,13 @@ describe("CurrentBuild", function() {
   });
 
   describe("#setTicketReferences", function() {
-    beforeEach(function() {
-      currentBuild.render();
-    });
-  
     describe("when an empty array of ticket references are provided", function() {
       it("does not insert a ticket element", function() {
         currentBuild.setTicketReferences([]);
         expect($('.current_build .ticket')).not.toExist();
       });
     });
-    
+
     describe("when an array containing a referenced ticket is provided", function() {
       it("inserts a new ticket element containing the ticket number", function() {
         currentBuild.setTicketReferences(["#432"]);
@@ -177,9 +155,9 @@ describe("CurrentBuild", function() {
 
     describe("when a ticket is referenced in a commit", function() {
       var ticket, commitMessage;
-    
+
       beforeEach(function() {
-        ticket = "#453";    
+        ticket = "#453";
         commitMessage = "This commit references an important issue " + ticket;
       });
 
@@ -187,7 +165,7 @@ describe("CurrentBuild", function() {
         expect(currentBuild.findTicketReferences(commitMessage)).toEqual([ticket]);
       });
     });
-    
+
     describe("when multiple tickets are references in a commit", function() {
       var tickets, commitMessage;
 
@@ -198,10 +176,10 @@ describe("CurrentBuild", function() {
           commitMessage = commitMessage + " " + ticket;
         });
       });
-  
+
       it("returns an array containing all the referenced issue numbers", function() {
         expect(currentBuild.findTicketReferences(commitMessage)).toEqual(tickets);
-      });    
+      });
     });
   });
 });

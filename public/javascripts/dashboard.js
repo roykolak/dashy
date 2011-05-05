@@ -1,33 +1,31 @@
 function Dashboard(config) {
+  var pings = [], projects = [];
+
+  $('#title').text(config.title);
+  $('#continuing_success').attr('src', config.sounds.continuingSuccess);
+  $('#success').attr('src', config.sounds.success);
+  $('#building').attr('src', config.sounds.building);
+  $('#failure').attr('src', config.sounds.failure);
+
+  $.each(config.pings, function() {
+    pings.push(new Ping(this));
+  });
+
+  $.each(config.projects, function() {
+    projects.push(new Project(this));
+  });
+
   return {
-    projects: [],
-    pings: [],
+    projects: projects,
+    pings: pings,
 
-    applyConfigSettings: function() {
-      this.refreshInterval = config.refreshInterval;
-      $('#title').text(config.title);
-      $('#continuing_success').attr('src', config.sounds.continuingSuccess);
-      $('#success').attr('src', config.sounds.success);
-      $('#building').attr('src', config.sounds.building);
-      $('#failure').attr('src', config.sounds.failure);
-    },
+    start: function() {
+      this.refresh();
 
-    loadPings: function() {
       var self = this;
-      $.each(config.pings, function(i, v) {
-        var ping = new Ping(v);
-        ping.render();
-        self.pings.push(ping);
-      });
-    },
-
-    loadProjects: function() {
-      var self = this;
-      $.each(config.projects, function(i, v) {
-        var project = new Project(v);
-        project.render();
-        self.projects.push(project);
-      });
+      setInterval(function() {
+        //self.refresh();
+      }, config.refreshInterval);
     },
 
     getState: function() {

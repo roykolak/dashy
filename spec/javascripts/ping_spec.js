@@ -16,12 +16,6 @@ describe("Ping", function() {
     it("sets the default status to null", function() {
       expect(ping.status).toEqual(null);
     });
-  });
-
-  describe("#render", function() {
-    beforeEach(function() {
-      ping.render();
-    });
 
     it("inserts a new ping html block", function() {
       expect($('.ping .current_build, .ping .status')).toExist();
@@ -33,10 +27,6 @@ describe("Ping", function() {
   });
 
   describe("#setStatus", function() {
-    beforeEach(function() {
-      ping.render();
-    });
-
     it("sets the ping status to the new status", function() {
       ping.setStatus('success');
       expect(ping.status).toEqual('success');
@@ -62,10 +52,6 @@ describe("Ping", function() {
   });
 
   describe("#updateElementClasses", function() {
-    beforeEach(function() {
-      ping.render();
-    });
-
     it("adds a 'success' class to a ping when it is successfully built", function() {
       ping.updateElementClasses('success');
       expect($('.current_build').hasClass('success')).toBeTruthy();

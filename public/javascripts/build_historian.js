@@ -14,15 +14,12 @@ function BuildHistorian(projectSelector) {
       return (numberOfStates >= Math.floor(historyWidth/stateWidth) ? true : false);
     }
   }
-  
+
   $.template('buildHistorian', "<ol class='history'></ol>");
   $.template('buildState', "<li class='status ${state}'>${state}</li>");
+  $.tmpl('buildHistorian').appendTo(projectSelector);
 
   return {
-    render: function() {
-      $.tmpl('buildHistorian').appendTo(projectSelector);
-    },
-
     addState: function(state) {
       if(checkIfOutOfRoom()) {
         this.removeOldestBuildState();

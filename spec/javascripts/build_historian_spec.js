@@ -6,16 +6,14 @@ describe("BuildHistorian", function() {
     buildHistorian = new BuildHistorian('.project');
   });
 
-  describe("#render", function() {
+  describe("#initialize", function() {
     it("inserts a build history list", function() {
-      buildHistorian.render();
       expect($('.history')).toExist();
     });
   });
 
   describe("#removeOldestBuildResult", function() {
     beforeEach(function() {
-      buildHistorian.render();
       buildHistorian.addState('success');
     });
 
@@ -27,16 +25,12 @@ describe("BuildHistorian", function() {
   });
 
   describe("#continuingSuccess", function() {
-    beforeEach(function() {
-      buildHistorian.render();
-    });
-
     describe("when there has not been enough builds to satify the continuing success mark", function() {
       it("returns false", function() {
         expect(buildHistorian.continuingSuccess()).toBeFalsy();
       });
     });
-    
+
     describe("when there has been enough builds to satify the continuing success mark", function () {
       describe("and the builds within the mark were not all successful", function() {
         beforeEach(function() {
@@ -54,7 +48,7 @@ describe("BuildHistorian", function() {
         beforeEach(function() {
           $.each([1,2,3,4,5], function() {
             buildHistorian.addState("success");
-          });       
+          });
         });
 
         it("returns true", function() {
@@ -66,7 +60,6 @@ describe("BuildHistorian", function() {
 
   describe("#addState", function() {
     beforeEach(function() {
-      buildHistorian.render();
       buildHistorian.addState('success');
     });
 
@@ -75,7 +68,7 @@ describe("BuildHistorian", function() {
     });
 
     it("prepends a new state element", function() {
-      expect($('.status').length).toEqual(1)
+      expect($('.status').length).toEqual(1);
     });
   });
 });

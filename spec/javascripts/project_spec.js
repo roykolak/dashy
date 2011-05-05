@@ -29,29 +29,13 @@ describe("Project", function() {
     it("sets the default status to null", function() {
       expect(project.status).toEqual(null);
     });
-  });
 
-  describe("#render", function() {
     it("inserts a new project html block", function() {
-      project.render();
       expect($('.project .frame')).toExist();
     });
 
     it("inserts an underscore separated project id", function() {
-      project.render();
       expect($('#Android_app')).toExist();
-    });
-
-    it("renders the current build", function() {
-      var currentBuildRenderSpy = spyOn(project.currentBuild, 'render');
-      project.render();
-      expect(currentBuildRenderSpy).toHaveBeenCalled();
-    });
-
-    it("renders the build historian", function() {
-      var buildHistorianRenderSpy = spyOn(project.buildHistorian, 'render');
-      project.render();
-      expect(buildHistorianRenderSpy).toHaveBeenCalled();
     });
   });
 
@@ -95,12 +79,11 @@ describe("Project", function() {
 
   describe("#reactVisually", function() {
     var ascendSpy;
-    
+
     beforeEach(function() {
       ascendSpy = spyOn($.fn, 'ascend');
-      project.render();
     });
-    
+
     describe("when the new status is different from the past status", function() {
       beforeEach(function() {
         project.status = 'success';
@@ -111,7 +94,7 @@ describe("Project", function() {
         expect(ascendSpy).toHaveBeenCalled();
       });
     });
-    
+
     describe("when the new status is 'building'", function() {
       it("shows the commit message", function() {
         project.reactVisually('building');

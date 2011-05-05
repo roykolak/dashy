@@ -9,12 +9,9 @@ function CurrentBuild(projectSelector, projectName) {
   }
 
   $.template("currentBuild", "<div class='current_build'><h3 class='name'>${projectName}</h3><p class='time'></p><div class='clear'></div><div class='message'></div><ul class='tickets'></ul></div>");
+  $.tmpl('currentBuild', {projectName: projectName}).appendTo(projectSelector);
 
   return {
-    render: function() {
-      $.tmpl('currentBuild', {projectName: projectName}).appendTo(projectSelector);
-    },
-
     refresh: function(parsedResults) {
       this.setStatus(parsedResults.status);
       this.setDuration(parsedResults.duration);
@@ -46,7 +43,7 @@ function CurrentBuild(projectSelector, projectName) {
     },
 
     setTicketReferences: function(tickets) {
-      $.each(tickets, function(i, ticket) { 
+      $.each(tickets, function(i, ticket) {
         $(buildTicketsSelector).append("<li class='ticket'>" + ticket + "</li>");
       });
     },

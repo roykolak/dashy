@@ -2,15 +2,11 @@ describe("Dashboard", function() {
   var dashboard;
 
   beforeEach(function() {
+    loadFixtures('spec/javascripts/fixtures/configurable_elements.html');
     dashboard = new Dashboard(config);
   });
 
-  describe("#applyConfigSettings", function() {
-    beforeEach(function() {
-      loadFixtures('spec/javascripts/fixtures/configurable_elements.html');
-      dashboard.applyConfigSettings();
-    });
-
+  describe("#initialize", function() {
     it("sets the h1 title to the title in the config", function() {
       expect($('#title')).toHaveText(config.title);
     });
@@ -31,53 +27,31 @@ describe("Dashboard", function() {
       expect($('#failure').attr('src')).toEqual(config.sounds.failure);
     });
 
-    it("sets the refresh interval to interval from the config", function() {
-      expect(dashboard.refreshInterval).toEqual(config.refreshInterval);
-    });
-  });
-
-  describe("#loadPings", function() {
-    beforeEach(function() {
-      ping = new Ping(config.pings[0]);
-      spyOn(window, 'Ping').andReturn(ping);
-    });
-
-    it("builds and inserts the ping HTML", function() {
-      var renderSpy = spyOn(ping, 'render');
-      dashboard.loadPings();
-      expect(renderSpy).toHaveBeenCalled();
-    });
-
     it("stores the initialized pings", function() {
-      dashboard.loadPings();
       expect(dashboard.pings.length > 0).toBeTruthy();
-    });
-  });
-
-  describe("#loadProjects", function() {
-    beforeEach(function() {
-      project = new Project(config.projects[0]);
-      spyOn(window, 'Project').andReturn(project);
-    });
-
-    it("renders the project HTML", function() {
-      var renderSpy = spyOn(project, 'render');
-      dashboard.loadProjects();
-      expect(renderSpy).toHaveBeenCalled();
     });
 
     it("stores the initialized projects", function() {
-      dashboard.loadProjects();
       expect(dashboard.projects.length > 0).toBeTruthy();
     });
   });
 
-  describe("#getState", function() {
-    beforeEach(function() {
-      dashboard.loadProjects();
-      dashboard.loadPings();
+  describe("#start", function() {
+    it("calls refresh", function() {
+      var refreshSpy = spyOn(dashboard, 'refresh');
+      dashboard.start();
+      expect(refreshSpy).toHaveBeenCalled();
     });
 
+    it("sets a refresh interval", function() {
+      var setIntervalSpy = spyOn(window, 'setInterval');
+      dashboard.start();
+      expect(setIntervalSpy.argsForCall[0][0]).toBeTruthy();
+      expect(setIntervalSpy.argsForCall[0][1]).toEqual(config.refreshInterval);
+    });
+  });
+
+  describe("#getState", function() {
     describe("when everything is passing", function() {
       it("returns true", function() {
         dashboard.projects[0].status = 'success';

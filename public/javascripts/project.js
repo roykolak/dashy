@@ -3,25 +3,20 @@ function Project(config) {
       projectSelector = '#' + projectId,
       projectFrameSelector = projectSelector + ' .frame';
 
-  var buildHistorian = new BuildHistorian(projectFrameSelector),
-      currentBuild = new CurrentBuild(projectFrameSelector, config.name),
-      statusParser = new StatusParser(config.ci);
-
   $.template("project", "<li id='${projectId}' class='project'><div class='frame'></div></li>");
+
+  var addingMethod = (config.url ? 'prependTo' : 'appendTo');
+  $.tmpl("project", {projectId: projectId})[addingMethod]('#projects');
+
+  var currentBuild = new CurrentBuild(projectFrameSelector, config.name),
+      buildHistorian = new BuildHistorian(projectFrameSelector),
+      statusParser = new StatusParser(config.ci);
 
   return {
     currentBuild: currentBuild,
     buildHistorian: buildHistorian,
     statusParser: statusParser,
     status: null,
-
-    render: function() {
-      var addingMethod = (config.url ? 'prependTo' : 'appendTo');
-      $.tmpl("project", {projectId: projectId})[addingMethod]('#projects');
-
-      currentBuild.render();
-      buildHistorian.render();
-    },
 
     recordHistory: function(newStatus) {
       if(this.status == 'success' && newStatus != 'success') {
@@ -48,7 +43,7 @@ function Project(config) {
     reactVisually: function(newStatus) {
       var visuability = (newStatus != 'building' ? 'hide' : 'show');
       $(projectSelector).find('.message, .tickets')[visuability]();
-      
+
       if(this.status != newStatus) {
         $(projectSelector).ascend(function() {
           $(projectSelector).twinkle();
@@ -65,13 +60,13 @@ function Project(config) {
       }
     },
 
-    responseHandler: function(response) {    
+    responseHandler: function(response) {
       if(this.status === null) {
         this.status = response.status;
       }
-      
+
       this.currentBuild.refresh(response);
-      
+
       this.recordHistory(response.status);
       this.reactVisually(response.status);
       this.playSound(response.status);

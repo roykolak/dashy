@@ -5,13 +5,10 @@ function Ping(config) {
   var statusParser = new StatusParser(config.ci);
 
   $.template("ping", "<li id='${pingId}' class='ping'><div class='wrapper'><div class='current_build'></div><h3 class='name'>${name}</h3></div></li>");
+  $.tmpl('ping', {pingId: pingId, name: config.name}).appendTo('#pings');
 
   return {
     ping: null,
-
-    render: function() {
-      $.tmpl('ping', {pingId: pingId, name: config.name}).appendTo('#pings');
-    },
 
     setStatus: function(newStatus) {
       if(this.status == null) {
