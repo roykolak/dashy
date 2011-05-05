@@ -36,12 +36,6 @@ Here is a sample config.js file
     var config = {
       title:"Dashy, He's always watching",
       refreshInterval:5000,
-      sounds: {
-        continuingSuccess:'sounds/continuing_success.mp3',
-        success:'sounds/success.mp3',
-        building:'sounds/building.mp3',
-        failure:'sounds/failure.mp3'
-      },
       projects:[
         {
           name:'Android app',

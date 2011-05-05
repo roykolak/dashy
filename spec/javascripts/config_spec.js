@@ -11,24 +11,6 @@ describe("Config JSON", function() {
     expect(config.refreshInterval).toEqual(5000);
   });
 
-  describe("sounds", function() {
-    it("contains the path to the default success sound", function() {
-      expect(config.sounds.success).toEqual('sounds/success.mp3');
-    });
-
-    it("contains the path to the default building sound", function() {
-      expect(config.sounds.building).toEqual('sounds/building.mp3');
-    });
-
-    it("contains the path to the default failure sound", function() {
-      expect(config.sounds.failure).toEqual('sounds/failure.mp3');
-    });
-
-    it("contains the path to the default continuing success sound", function() {
-      expect(config.sounds.continuingSuccess).toEqual('sounds/continuing_success.mp3');
-    });
-  });
-
   describe("the projects array", function() {
     it("contains a hash for each project", function() {
       expect(config.projects[0]).toBeDefined();

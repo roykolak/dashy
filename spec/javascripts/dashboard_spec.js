@@ -11,20 +11,20 @@ describe("Dashboard", function() {
       expect($('#title')).toHaveText(config.title);
     });
 
-    it("sets the continuing success audio tag's src to the continuing success sound path from the config", function() {
-      expect($('#continuing_success').attr('src')).toEqual(config.sounds.continuingSuccess);
+    it("inserts an audio tag sourced to the continuing success sound file", function() {
+      expect($('#continuing_success').attr('src')).toEqual('sounds/continuing_success.mp3');
     });
 
-    it("sets the success audio tag's src to the success sound path from the config", function() {
-      expect($('#success').attr('src')).toEqual(config.sounds.success);
+    it("inserts an audio tag sourced to the success sound file", function() {
+      expect($('#success').attr('src')).toEqual('sounds/success.mp3');
     });
 
-    it("sets the building audio tag's src to the building sound path from the config", function() {
-      expect($('#building').attr('src')).toEqual(config.sounds.building);
+    it("inserts an audio tag sourced to the building sound file", function() {
+      expect($('#building').attr('src')).toEqual('sounds/building.mp3');
     });
 
-    it("sets the failure audio tag's src to the failure sound path from the config", function() {
-      expect($('#failure').attr('src')).toEqual(config.sounds.failure);
+    it("inserts an audio tag sourced to the failure sound file", function() {
+      expect($('#failure').attr('src')).toEqual('sounds/failure.mp3');
     });
 
     it("stores the initialized pings", function() {

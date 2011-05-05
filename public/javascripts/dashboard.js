@@ -2,10 +2,11 @@ function Dashboard(config) {
   var pings = [], projects = [];
 
   $('#title').text(config.title);
-  $('#continuing_success').attr('src', config.sounds.continuingSuccess);
-  $('#success').attr('src', config.sounds.success);
-  $('#building').attr('src', config.sounds.building);
-  $('#failure').attr('src', config.sounds.failure);
+
+  $.template("audioTag", "<audio src='${source}' id='${id}'></audio>");
+  $.each(['continuing_success', 'success', 'failure', 'building'], function() {
+    $.tmpl("audioTag", {'id':this, 'source':'sounds/' + this + '.mp3'}).appendTo('#audio');
+  });
 
   $.each(config.pings, function() {
     pings.push(new Ping(this));
@@ -24,7 +25,7 @@ function Dashboard(config) {
 
       var self = this;
       setInterval(function() {
-        //self.refresh();
+        self.refresh();
       }, config.refreshInterval);
     },
 
