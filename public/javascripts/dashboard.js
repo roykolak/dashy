@@ -73,7 +73,7 @@ function Dashboard(config) {
     },
 
     startProgressBarAnimation: function() {
-      $('#progress').animate({ width: '100%' }, this.refreshInterval - 1000, 'linear', function() {
+      $('#progress').animate({ width: '100%' }, config.refreshInterval - 1000, 'linear', function() {
         $(this).css('width', 0);
       });
     },

@@ -81,7 +81,8 @@ describe("Dashboard", function() {
     it("animates the progres bar", function() {
       var animateSpy = spyOn($.fn, 'animate');
       dashboard.startProgressBarAnimation();
-      expect(animateSpy).toHaveBeenCalled();
+      expect(animateSpy.mostRecentCall.args[0]).toEqual({width:'100%'});
+      expect(animateSpy.mostRecentCall.args[1]).toEqual(config.refreshInterval - 1000);
     });
   });
 
