@@ -12,7 +12,7 @@ describe("Dashboard", function() {
     });
 
     it("inserts an audio tag sourced to the continuing success sound file", function() {
-      expect($('#continuing_success').attr('src')).toEqual('sounds/continuing_success.mp3');
+      expect($('#continuingSuccess').attr('src')).toEqual('sounds/continuingSuccess.mp3');
     });
 
     it("inserts an audio tag sourced to the success sound file", function() {

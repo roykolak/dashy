@@ -1,11 +1,13 @@
+Audio = {};
 function Dashboard(config) {
   var pings = [], projects = [];
 
   $('#title').text(config.title);
 
   $.template("audioTag", "<audio src='${source}' id='${id}'></audio>");
-  $.each(['continuing_success', 'success', 'failure', 'building'], function() {
+  $.each(['continuingSuccess', 'success', 'failure', 'building'], function() {
     $.tmpl("audioTag", {'id':this, 'source':'sounds/' + this + '.mp3'}).appendTo('#audio');
+    Audio[this] = document.getElementById(this);
   });
 
   $.each(config.pings, function() {
