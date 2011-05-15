@@ -8,21 +8,26 @@ describe("Project", function() {
   });
 
   describe("#initialize", function() {
-    it("initializes a BuildHistorian", function() {
+    var buildHistorianSpy, currentBuildSpy, statusParserSpy;
+
+    beforeEach(function() {
       buildHistorianSpy = spyOn(window, 'BuildHistorian');
-      new Project(project_config);
+      currentBuildSpy = spyOn(window, 'CurrentBuild');
+      statusParserSpy = spyOn(window, 'StatusParser');
+    });
+
+    it("initializes a BuildHistorian", function() {
+      var a_project = new Project(project_config);
       expect(buildHistorianSpy).toHaveBeenCalledWith('#Android_app .frame');
     });
 
     it("initializes a CurrentBuild", function() {
-      currentBuildSpy = spyOn(window, 'CurrentBuild');
-      new Project(project_config);
+      var a_project = new Project(project_config);
       expect(currentBuildSpy).toHaveBeenCalledWith('#Android_app .frame', project_config.name);
     });
 
     it("initializes a StatusParser", function() {
-      statusParserSpy = spyOn(window, 'StatusParser');
-      new Project(project_config);
+      var a_project = new Project(project_config);
       expect(statusParserSpy).toHaveBeenCalledWith(project_config.ci);
     });
 
@@ -167,9 +172,7 @@ describe("Project", function() {
       var projectWithNoUrl;
 
       beforeEach(function() {
-        config = project_config;
-        config.url = null;
-        projectWithNoUrl = new Project(config);
+        projectWithNoUrl = new Project({ name:'the project', url:null });
       });
 
       it("doesn't makes a request", function() {

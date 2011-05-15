@@ -1,17 +1,18 @@
 function CurrentBuild(projectSelector, projectName) {
   var currentBuildSelector = projectSelector + ' .current_build',
       buildDurationSelector = projectSelector + ' .current_build .time',
-      buildMessageSelector = projectSelector + ' .current_build .message',
-      buildTicketsSelector = projectSelector + ' .current_build .tickets';
+      buildMessageSelector = projectSelector + ' .current_build .message';
 
   function convertDurationToSeconds(duration) {
     return Math.round(parseInt(duration, 10) / 1000);
   }
 
-  $.template("currentBuild", "<div class='current_build'><h3 class='name'>${projectName}</h3><p class='time'></p><div class='clear'></div><div class='message'></div><ul class='tickets'></ul></div>");
+  $.template("currentBuild", "<div class='current_build'><h3 class='name'>${projectName}</h3><p class='time'></p><div class='clear'></div><div class='message'></div></div>");
   $.tmpl('currentBuild', {projectName: projectName}).appendTo(projectSelector);
 
   return {
+    ticketReferencer: new TicketReferencer(currentBuildSelector),
+
     refresh: function(parsedResults) {
       this.setStatus(parsedResults.status);
       this.setDuration(parsedResults.duration);
@@ -30,27 +31,12 @@ function CurrentBuild(projectSelector, projectName) {
     },
 
     setCommitMessage: function(commitMessage) {
-      $(buildTicketsSelector).html('');
       if(typeof(commitMessage) === 'undefined') {
         return false;
       } else {
         $(buildMessageSelector).html(convert(commitMessage));
-        var tickets = this.findTicketReferences(commitMessage);
-        if(tickets.length > 0) {
-          this.setTicketReferences(tickets);
-        }
+        this.ticketReferencer.findAndInsert(commitMessage);
       }
-    },
-
-    setTicketReferences: function(tickets) {
-      $.each(tickets, function(i, ticket) {
-        $(buildTicketsSelector).append("<li class='ticket'>" + ticket + "</li>");
-      });
-    },
-
-    findTicketReferences: function(commitMessage) {
-      var result = commitMessage.match(/#\d*/g);
-      return (result ? result : []);
     }
   };
 }
