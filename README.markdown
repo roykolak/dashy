@@ -33,33 +33,34 @@ Here are a few tips:
 
 Here is a sample config.js file
 
-    var config = {
-      title:"Dashy, He's always watching",
-      refreshInterval:5000,
-      projects:[
-        {
-          name:'Android app',
-          url:'http://builder/job/AndroidApp/lastBuild/api/json?jsonp=?',
-          ci:'Hudson'
-        },{
-          name:'iPhone app',
-          url:'http://builder/job/iPhoneApp/lastBuild/api/json?jsonp=?',
-          ci:'Hudson'
-        }
-      ],
-      pings:[
-        {
-          name:'Builder',
-          url:'http://builder/job/PingBuilder/lastBuild/api/json?jsonp=?',
-          ci:'Hudson'
-        }, {
-          name:'Filestore',
-          url:'http://builder/job/PingFilestore/lastBuild/api/json?jsonp=?',
-          ci:'Hudson'
-        }
-      ]
+```javascript
+var config = {
+  title:"Dashy, He's always watching",
+  refreshInterval:5000,
+  projects:[
+    {
+      name:'Android app',
+      url:'http://builder/job/AndroidApp/lastBuild/api/json?jsonp=?',
+      ci:'Hudson'
+    },{
+      name:'iPhone app',
+      url:'http://builder/job/iPhoneApp/lastBuild/api/json?jsonp=?',
+      ci:'Hudson'
     }
-
+  ],
+  pings:[
+    {
+      name:'Builder',
+      url:'http://builder/job/PingBuilder/lastBuild/api/json?jsonp=?',
+      ci:'Hudson'
+    }, {
+      name:'Filestore',
+      url:'http://builder/job/PingFilestore/lastBuild/api/json?jsonp=?',
+      ci:'Hudson'
+    }
+  ]
+}
+```
 # Trouble? Help out?
 
 Send any feedback you have. Want to help? Fork!
