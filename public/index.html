@@ -9,13 +9,11 @@
   </head>
   <body>
     <div id="progress"></div>
-    <div class="dashboard">
-      <h1 id="title"></h1>
-      <ul id="projects" class="projects"></ul>
-      <ul id="pings"></ul>
-    </div>
+    <div class="dashboard"> </div>
     <div id="audio"></div>
     <div id="scripts">
+      <script src="javascripts/frameworks/underscore-1.1.7.min.js"></script>
+      <script src="javascripts/frameworks/backbone-0.5.3.min.js"></script>
       <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
       <script src="javascripts/frameworks/jquery-1.5.min.js"></script>
       <script src="javascripts/frameworks/jquery-css-transform.js"></script>
@@ -35,7 +33,11 @@
       <script src="javascripts/dashboard.js"></script>
       <script src="javascripts/status_parser.js"></script>
       <script src="javascripts/ticket_referencer.js"></script>
+      <script src="javascripts/collections/pings.js"></script>
       <script>
+        var pings = new Pings(config.pings),
+            projects = new Projects(config.projects);
+
         dashboard = new Dashboard(config);
         dashboard.start();
       </script>

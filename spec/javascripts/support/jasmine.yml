@@ -11,7 +11,17 @@
 #   - dist/**/*.js
 #
 src_files:
-    - public/javascripts/**/*.js
+    - public/javascripts/frameworks/jquery-1.5.min.js
+    - public/javascripts/frameworks/jquery-ui-1.8.5.custom.min.js
+    - public/javascripts/frameworks/jquery.tmpl.min.js
+    - public/javascripts/frameworks/jquery.quicksand.min.js
+    - public/javascripts/frameworks/textile.js
+    - public/javascripts/frameworks/underscore-1.1.7.min.js
+    - public/javascripts/frameworks/backbone-0.5.3.min.js
+    - public/javascripts/*.js
+    - public/javascripts/models/*.js
+    - public/javascripts/collections/*.js
+    - public/javascripts/views/*.js
 
 # stylesheets
 #
