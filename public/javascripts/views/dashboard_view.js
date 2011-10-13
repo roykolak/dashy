@@ -10,11 +10,13 @@ var DashboardView = Backbone.View.extend({
 
   renderProjects: function() {
     this.projectsView = new ProjectsView({collection: projects});
+    this.projectsView.bind();
     $(this.projectsView.render().el).appendTo(this.el);
   },
 
   renderPings: function() {
     this.pingsView = new PingsView({collection: pings});
+    this.pingsView.bind();
     $(this.pingsView.render().el).appendTo(this.el);
   },
 

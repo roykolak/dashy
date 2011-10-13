@@ -11,7 +11,6 @@
     <!-- Templates Start -->
 
 
-    <li class="project"></li>
     <script id="dashboardTemplate" type="text/x-jquery-tmpl">
       <div class="progress"></div>
       <h1 class="title">${title}</h1>
@@ -44,8 +43,6 @@
         </div>
       </li>
     </script>
-
-    <div class="current_build"></div>
 
 
     <!-- Templates End -->
@@ -82,7 +79,9 @@
       <script src="javascripts/config.js"></script>
       <script>
         var pings = new Pings(config.pings),
-            projects = new Projects(config.projects);
+            projects = new Projects();
+
+        projects.fetch();
 
         dashboardView = new DashboardView({
           el: $('.dashboard'),

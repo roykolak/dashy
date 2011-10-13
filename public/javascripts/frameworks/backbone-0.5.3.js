@@ -1078,6 +1078,13 @@
       params.processData = false;
     }
 
+    console.log(params);
+    console.log(params.error)
+      params.success = function (resp, status, xhr) {
+        console.log(options.add);
+                collection[options.add ? 'add' : 'reset'](collection.parse(resp, xhr), options);
+                        if (success) success(collection, resp);
+                              }
     // Make the request.
     return $.ajax(params);
   };

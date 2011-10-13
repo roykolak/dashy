@@ -1,3 +1,4 @@
 var Projects = Backbone.Collection.extend({
-  model: Project
+  model: Project,
+  url: 'http://localhost/~roykolak/sample/jobs'
 });

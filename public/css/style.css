@@ -59,6 +59,7 @@ h1, h2, h3, p, li, ul {
 .projects_view {
   font-size:60px;
   margin:20px 0 0 0;
+  color:#FFF;
   .project_view {
     margin-bottom:10px;
     width:100%;
