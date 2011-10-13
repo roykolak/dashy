@@ -8,10 +8,6 @@ describe('ProjectView', function() {
   });
 
   describe('#initialize', function() {
-    it('defines the tag', function() {
-      expect(projectView.tagName).toEqual('div');
-    });
-
     it('defines the class name', function() {
       expect(projectView.className).toEqual('project_view');
     });

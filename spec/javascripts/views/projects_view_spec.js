@@ -26,7 +26,7 @@ describe('ProjectsView', function() {
   describe('#render', function() {
     it('renders all the projects in the collection', function() {
       projectsView.render();
-      expect($('.project', projectsView.el).length).toEqual(2);
+      expect($('.project_view', projectsView.el).length).toEqual(2);
     });
   });
 });

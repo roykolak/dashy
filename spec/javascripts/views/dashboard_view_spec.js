@@ -1,5 +1,5 @@
 describe('DashboardView', function() {
-  var dashboardView;
+  var dashboardView, dashboard;
 
   beforeEach(function() {
     loadFixtures(
@@ -9,30 +9,50 @@ describe('DashboardView', function() {
       'spec/javascripts/fixtures/pings.html',
       'spec/javascripts/fixtures/ping.html'
     );
-    dashboardView = new DashboardView();
+
+    dashboard = new Dashboard({title: 'dashy!', refresh: 5000});
     projects = new Projects([{name: 'project one'}, {name: 'project two'}]);
     pings = new Pings([{name: 'project one'}, {name: 'project two'}]);
+
+    dashboardView = new DashboardView({model: dashboard});
   });
 
-  describe('#initialize', function() {
-    it('defines a tag', function() {
-      expect(dashboardView.tagName).toEqual('div');
-    });
-
-    it('defined a class', function() {
-      expect(dashboardView.className).toEqual('dashboard_view');
-    });
+  it('defined a class', function() {
+    expect(dashboardView.className).toEqual('dashboard_view');
   });
 
   describe('#render', function() {
+    it('inserts the title', function() {
+      dashboardView.render();
+      expect($('.title', dashboardView.el)).toHaveText(dashboard.get('title'));
+    });
+
     it('renders the projects', function() {
       dashboardView.render();
-      expect($('.projects', dashboardView.el).length).toEqual(1);
+      expect($('.projects_view', dashboardView.el)).toExist();
     });
 
     it('renders the pings', function() {
       dashboardView.render();
-      expect($('.pings', dashboardView.el).length).toEqual(1);
+      expect($('.pings_view', dashboardView.el)).toExist();
+    });
+
+    it('returns the instance', function() {
+      expect(dashboardView.render()).toEqual(dashboardView);
+    });
+  });
+
+  describe('#refresh', function() {
+    it('animates the progress bar', function() {
+      spyOn($.fn, 'animate');
+      dashboardView.refresh();
+      expect($.fn.animate).toHaveBeenCalledWith({width: '100%'}, 4000, 'linear', jasmine.any(Function));
+    });
+
+    it('checks for refresh.txt', function() {
+      spyOn($, 'get');
+      dashboardView.checkForDashboardChanges();
+      expect($.get).toHaveBeenCalledWith('refresh.txt', jasmine.any(Function));
     });
   });
 });

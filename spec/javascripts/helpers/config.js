@@ -1,6 +1,8 @@
 var config = {
-  title:"Dashy, he's always watching",
-  refreshInterval:5000,
+  dashboard: {
+    title:"Dashy, he's always watching",
+    refresh:5000,
+  },
   projects:[
     {
       name:'Android app',

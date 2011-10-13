@@ -1,5 +1,4 @@
 var ProjectView = Backbone.View.extend({
-  tagName: 'div',
   className: 'project_view',
 
   render: function() {

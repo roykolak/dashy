@@ -1,0 +1,2 @@
+Dashboard = Backbone.Model.extend({
+});

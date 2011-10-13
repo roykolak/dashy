@@ -1,14 +1,12 @@
 var PingsView = Backbone.View.extend({
-  tagName: 'div',
+  tagName: 'ul',
   className: 'pings_view',
 
   render: function() {
-    $('#pingsTemplate').tmpl().appendTo(this.el);
-
     var self = this;
     $.each(this.collection.models, function(i, ping) {
-      var pingView = new PingView({model: ping});
-      $(pingView.render().el).appendTo(self.el);
+      var pingView = new PingView({model: ping, el: self.el});
+      pingView.render();
     });
 
     return this;

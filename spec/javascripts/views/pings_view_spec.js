@@ -15,7 +15,7 @@ describe('PingsView', function() {
 
   describe('#initialize', function() {
     it('defines a tag', function() {
-      expect(pingsView.tagName).toEqual('div');
+      expect(pingsView.tagName).toEqual('ul');
     });
 
     it('defines a class', function() {

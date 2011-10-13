@@ -7,7 +7,7 @@ describe('Project', function() {
 
   describe('#initialize', function() {
     it('generates the dom id', function() {
-      expect(project.get('name')).toEqual('project_name');
+      expect(project.get('domId')).toEqual('project_name');
     });
   });
 });

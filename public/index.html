@@ -1,19 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dashboard</title>
+    <title>Dashy</title>
     <link rel="stylesheet/less" href="css/style.css" type="text/css" />
-    <link rel="icon" type="image/png" href="images/success.png" />
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <div id="progress"></div>
-    <div class="dashboard"> </div>
-    <div id="audio"></div>
+    <div class="dashboard"></div>
+    <!-- Templates Start -->
+
+
+    <li class="project"></li>
+    <script id="dashboardTemplate" type="text/x-jquery-tmpl">
+      <div class="progress"></div>
+      <h1 class="title">${title}</h1>
+      <div class="audio">
+        <audio src='sounds/continuing_success.mp3' id='continuing_success'></audio>
+        <audio src='sounds/success.mp3' id='success'></audio>
+        <audio src='sounds/building.mp3' id='building'></audio>
+        <audio src='sounds/failure.mp3' id='failure'></audio>
+      </div>
+    </script>
+
+    <script id='pingTemplate' type='text/x-jquery-tmpl'>
+      <li id='${domId}' class='ping'>
+        <div class='wrapper'>
+          <div class='current_build'></div>
+          <h3 class='name'>${name}</h3>
+        </div>
+      </li>
+    </script>
+
+    <script id="projectTemplate" type="text/x-jquery-tmpl">
+      <li id='${domId}' class='project_view'>
+        <div class='frame'>
+          <div class='current_build'>
+            <h3 class='name'>${name}</h3>
+            <p class='time'></p>
+            <div class='clear'></div>
+            <div class='message'></div>
+          </div>
+        </div>
+      </li>
+    </script>
+
+    <div class="current_build"></div>
+
+
+    <!-- Templates End -->
     <div id="scripts">
       <script src="javascripts/frameworks/underscore-1.1.7.min.js"></script>
-      <script src="javascripts/frameworks/backbone-0.5.3.min.js"></script>
       <script src="javascripts/frameworks/less-1.0.18.min.js"></script>
       <script src="javascripts/frameworks/jquery-1.5.min.js"></script>
       <script src="javascripts/frameworks/jquery-css-transform.js"></script>
@@ -21,25 +58,37 @@
       <script src="javascripts/frameworks/jquery-ui-1.8.5.custom.min.js"></script>
       <script src="javascripts/frameworks/jquery.quicksand.min.js"></script>
       <script src="javascripts/frameworks/jquery.tmpl.min.js"></script>
+      <script src="javascripts/frameworks/backbone-0.5.3.js"></script>
       <script src="javascripts/frameworks/textile.js"></script>
+
+      <!-- Models -->
+      <script src="javascripts/models/ping.js"></script>
+      <script src="javascripts/models/project.js"></script>
+      <script src="javascripts/models/dashboard.js"></script>
+
+      <!-- Collections -->
+      <script src="javascripts/collections/projects.js"></script>
+      <script src="javascripts/collections/pings.js"></script>
+
+      <!-- Views -->
+      <script src="javascripts/views/dashboard_view.js"></script>
+      <script src="javascripts/views/project_view.js"></script>
+      <script src="javascripts/views/ping_view.js"></script>
+      <script src="javascripts/views/projects_view.js"></script>
+      <script src="javascripts/views/pings_view.js"></script>
+
       <script src="javascripts/helpers.js"></script>
       <script src="javascripts/jquery_plugins.js"></script>
-      <script src="javascripts/audio.js"></script>
-      <script src="javascripts/ping.js"></script>
-      <script src="javascripts/project.js"></script>
-      <script src="javascripts/current_build.js"></script>
-      <script src="javascripts/build_historian.js"></script>
       <script src="javascripts/config.js"></script>
-      <script src="javascripts/dashboard.js"></script>
-      <script src="javascripts/status_parser.js"></script>
-      <script src="javascripts/ticket_referencer.js"></script>
-      <script src="javascripts/collections/pings.js"></script>
       <script>
         var pings = new Pings(config.pings),
             projects = new Projects(config.projects);
 
-        dashboard = new Dashboard(config);
-        dashboard.start();
+        dashboardView = new DashboardView({
+          el: $('.dashboard'),
+          model: new Dashboard(config.dashboard)
+        });
+        dashboardView.render();
       </script>
     </div>
   </body>

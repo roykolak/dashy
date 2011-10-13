@@ -1,4 +1,10 @@
 <script id="dashboardTemplate" type="text/x-jquery-tmpl">
-  <h1 id="title"></h1>
-  <ul id="pings"></ul>
+  <div class="progress"></div>
+  <h1 class="title">${title}</h1>
+  <div class="audio">
+    <audio src='sounds/continuing_success.mp3' id='continuing_success'></audio>
+    <audio src='sounds/success.mp3' id='success'></audio>
+    <audio src='sounds/building.mp3' id='building'></audio>
+    <audio src='sounds/failure.mp3' id='failure'></audio>
+  </div>
 </script>

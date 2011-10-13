@@ -29,7 +29,7 @@
 
 
 body {
-  background:#000;
+  background:url(../public/images/background.png);
   margin:0;
   padding:0;
   font-family: 'Droid Sans', arial, serif;
@@ -42,24 +42,24 @@ h1, h2, h3, p, li, ul {
 }
 
 
-#progress {
+.progress {
   background:#36689b;
   width:0;
   height:10px;
 }
-#title {
+.title {
   color:#FFF;
   font-size:70px;
   font-family:"Lobster";
   padding:10px 10px 10px 20px;
   text-shadow: 4px 4px #b457b7;
   margin:0 0 50px;
-  background:#333;
+  background:rgba(0, 0, 0, 0.3);
 }
-.projects {
+.projects_view {
   font-size:60px;
   margin:20px 0 0 0;
-  .project {
+  .project_view {
     margin-bottom:10px;
     width:100%;
     display:block;
@@ -82,7 +82,7 @@ h1, h2, h3, p, li, ul {
         padding:10px 15px;
         font-size:45px;
         display:none;
-        
+
         ul, ol { margin:15px 0 15px 45px; }
         li { list-style-type:disc; }
       }
@@ -122,12 +122,12 @@ h1, h2, h3, p, li, ul {
   }
 }
 
-#pings {
+.pings_view {
   margin-top:50px;
   position:fixed;
   width:100%;
   bottom:0px;
-  background:#111;
+  background:rgba(0, 0, 0, 0.9);
   .ping {
     display:inline-block;
     width:20%;
