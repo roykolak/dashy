@@ -1,9 +1,15 @@
 describe('ProjectView', function() {
-  var projectView;
+  var projectView, project;
 
   beforeEach(function() {
     loadFixtures('spec/javascripts/fixtures/project.html');
-    var project = new Project({name: 'project name'});
+    project = new Project({
+      name: 'project name',
+      email: 'roy.kolak@gmail.com',
+      status: 'success',
+      time: '100',
+      message: 'commit message'
+    });
     projectView = new ProjectView({model: project});
   });
 
@@ -14,10 +20,29 @@ describe('ProjectView', function() {
   });
 
   describe('#render', function() {
-    it('generates the html', function() {
+    it('inserts the name', function() {
       projectView.render();
-      console.log(projectView.el);
-      expect(projectView.el).not.toBeEmpty();
+      expect($('.name', projectView.el)).toHaveText(project.get('name'));
+    });
+
+    it('inserts the message', function() {
+      projectView.render();
+      expect($('.message', projectView.el)).toHaveText(project.get('message'));
+    });
+
+    it('inserts the gravatar url', function() {
+      projectView.render();
+      expect($('.gravatar', projectView.el).attr('src')).toEqual(project.get('gravatarUrl'));
+    });
+
+    it('inserts the time', function() {
+      projectView.render();
+      expect($('.time', projectView.el)).toHaveText(project.get('time'));
+    });
+
+    it('inserts the status', function() {
+      projectView.render();
+      expect($('.status.success', projectView.el)).toExist();
     });
   });
 });

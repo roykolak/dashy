@@ -11,8 +11,15 @@ describe('DashboardView', function() {
     );
 
     dashboard = new Dashboard({title: 'dashy!', refresh: 5000});
-    projects = new Projects([{name: 'project one'}, {name: 'project two'}]);
-    pings = new Pings([{name: 'project one'}, {name: 'project two'}]);
+    projects = new Projects();
+    pings = new Pings();
+
+    spyOn(projects, 'fetch').andCallFake(function(options) {
+      options.success();
+    });
+    spyOn(pings, 'fetch').andCallFake(function(options) {
+      options.success();
+    });
 
     dashboardView = new DashboardView({model: dashboard});
   });

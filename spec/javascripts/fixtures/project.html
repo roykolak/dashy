@@ -1,11 +1,14 @@
 <script id="projectTemplate" type="text/x-jquery-tmpl">
   <li id='${domId}' class='project_view'>
     <div class='frame'>
-      <div class='current_build'>
+      <div class='status ${status}'>
         <h3 class='name'>${name}</h3>
-        <p class='time'></p>
+        <p class='build_time'><span class="time">${time}</span> sec</p>
         <div class='clear'></div>
-        <div class='message'></div>
+        <div class="commit">
+          <img class="gravatar" src="${gravatarUrl}" />
+          <p class='message'>${message}</p>
+        </div>
       </div>
     </div>
   </li>

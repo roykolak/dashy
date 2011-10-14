@@ -17,15 +17,15 @@
 .clear { clear:both; }
 
 .success, .failure, .building { opacity:0.7; }
-.current_build { .gradient(#DDD, #BBB); }
+.status { .gradient(#DDD, #BBB); }
 .success { .gradient(#4afd4a, #04eb04); }
 .failure { .gradient(#fd6c6c, #ec1f1f); }
 .building { .gradient(#fffd42, #e0dd00); }
 
-.current_build { border:4px solid #DDD; }
-.current_build.success { border-color:#a1ffa1; }
-.current_build.failure { border-color:#ff9696; }
-.current_build.building { border-color:#ffeca0; }
+.status { border:4px solid #DDD; }
+.status.success { border-color:#a1ffa1; }
+.status.failure { border-color:#ff9696; }
+.status.building { border-color:#ffeca0; }
 
 
 body {
@@ -70,22 +70,27 @@ h1, h2, h3, p, li, ul {
       padding:10px;
       .rounded_corners;
     }
-    .current_build {
+    .status {
       .rounded_corners;
       padding:20px 30px;
 
       .name { float:left; }
-      .time { float:right; }
-      .message {
+      .build_time { float:right; }
+      .commit {
         background:rgba(255,255,255,.5);
         .rounded_corners(10px);
         margin:20px -10px 0;
-        padding:10px 15px;
+        padding:10px;
         font-size:45px;
-        display:none;
 
         ul, ol { margin:15px 0 15px 45px; }
         li { list-style-type:disc; }
+        .gravatar {
+          border-radius:8px;
+          display:inline;
+          vertical-align:top;
+        }
+        .message { display:inline; }
       }
     }
 
@@ -140,7 +145,7 @@ h1, h2, h3, p, li, ul {
       background:#333;
     }
 
-    .current_build {
+    .status {
       .rounded_corners(50px);
       width:80px;
       height:80px;

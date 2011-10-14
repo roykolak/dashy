@@ -3,21 +3,24 @@ var DashboardView = Backbone.View.extend({
 
   render: function() {
     $('#dashboardTemplate').tmpl(this.model.toJSON()).appendTo(this.el);
-    this.renderProjects();
-    this.renderPings();
+
+    var self = this;
+    projects.fetch({success: function() { self.renderProjects(); }});
+    pings.fetch({success: function() { self.renderPings(); }});
+
     return this;
   },
 
   renderProjects: function() {
-    this.projectsView = new ProjectsView({collection: projects});
-    this.projectsView.bind();
-    $(this.projectsView.render().el).appendTo(this.el);
+    var projectsView = new ProjectsView({collection: projects});
+    projectsView.bind();
+    $(projectsView.render().el).appendTo(this.el);
   },
 
   renderPings: function() {
-    this.pingsView = new PingsView({collection: pings});
-    this.pingsView.bind();
-    $(this.pingsView.render().el).appendTo(this.el);
+    var pingsView = new PingsView({collection: pings});
+    pingsView.bind();
+    $(pingsView.render().el).appendTo(this.el);
   },
 
   checkForDashboardChanges: function() {

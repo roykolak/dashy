@@ -34,11 +34,14 @@
     <script id="projectTemplate" type="text/x-jquery-tmpl">
       <li id='${domId}' class='project_view'>
         <div class='frame'>
-          <div class='current_build'>
+          <div class='status ${status}'>
             <h3 class='name'>${name}</h3>
-            <p class='time'></p>
+            <p class='build_time'><span class="time">${time}</span> sec</p>
             <div class='clear'></div>
-            <div class='message'></div>
+            <div class="commit">
+              <img class="gravatar" src="${gravatarUrl}" />
+              <p class='message'>${message}</p>
+            </div>
           </div>
         </div>
       </li>
@@ -74,14 +77,15 @@
       <script src="javascripts/views/projects_view.js"></script>
       <script src="javascripts/views/pings_view.js"></script>
 
+      <!-- Lib -->
+      <script src="javascripts/lib/gravatar.js"></script>
+
       <script src="javascripts/helpers.js"></script>
       <script src="javascripts/jquery_plugins.js"></script>
       <script src="javascripts/config.js"></script>
       <script>
         var pings = new Pings(config.pings),
             projects = new Projects();
-
-        projects.fetch();
 
         dashboardView = new DashboardView({
           el: $('.dashboard'),

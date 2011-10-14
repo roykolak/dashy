@@ -6,7 +6,10 @@ describe('ProjectsView', function() {
       'spec/javascripts/fixtures/projects.html',
       'spec/javascripts/fixtures/project.html'
     );
-    projects = new Projects([{name: 'project one'}, {name: 'project two'}]);
+    projects = new Projects([
+      {name: 'project one', email: 'roy.kolak@gmail.com'},
+      {name: 'project two', email: 'roy.kolak@gmail.com'}
+    ]);
     projectsView = new ProjectsView({collection: projects});
   });
 
