@@ -22,6 +22,7 @@ src_files:
     - public/javascripts/models/*.js
     - public/javascripts/collections/*.js
     - public/javascripts/views/*.js
+    - public/javascripts/lib/*.js
 
 # stylesheets
 #
